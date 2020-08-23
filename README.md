@@ -43,14 +43,14 @@ DTExtended is a collection of advanced modules including __UnitConverter__ and _
 
 
 ## Important Namespaces and Classes
-[Visit the Wiki](https://github.com/nmoschkin/dtlib/wiki)
+**[Visit the Wiki](https://github.com/nmoschkin/dtlib/wiki)**
 
  - **[DataTools.Memory Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Memory)**
    - **[Blob Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_Blob)**
    - **[MemPtr Structure](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_MemPtr)**
    - **[SafePtr Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_SafePtr)**
  - **[DataTools.BitStream Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_BitStream)**
-   - [Crc32 Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_BitStream_Crc32)
+   - **[Crc32 Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_BitStream_Crc32)**
  - **[DataTools.Interop Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop)**
    - **[DevEnumPublic Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_DevEnumPublic)**
  - **[DataTools.Interop.Desktop Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Desktop)**
