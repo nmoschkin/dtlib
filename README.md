@@ -41,6 +41,7 @@ Other independent subsystems include **[Desktop and Shell](https://github.com/nm
 
 ## Important Namespaces and Classes
 **[Visit the Wiki](https://github.com/nmoschkin/dtlib/wiki)**
+
 **[Complete Namespace Map](NamespaceMap)**
 
  - **[DataTools.Memory Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Memory)**
