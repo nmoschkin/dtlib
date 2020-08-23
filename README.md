@@ -4,9 +4,9 @@
 
 An extensive low-level and hardware utility library featuring a number of useful classes and structures built in Visual Basic .NET and MSIL.
 
-#### The Pieces
+## The Pieces
 
-__DTCore__ 
+### __DTCore__ 
 
 DTCore is heavily coded in IL on the backend, with VB.NET on the front using __ILSupport__.
 
@@ -17,19 +17,19 @@ These classes **CAN** be used in C#, but since the C# language does not support 
 These classes were written with VB.NET developers in mind, since the VB.NET language specification does not define any method by which to utilize pointers or unsafe calls.
 These classes help VB.NET developers do with greater ease things that C# developers take for granted, often more conveniently so.  Some of the features of these classes may also be of interest to C# and F# developers because they make working with unmanaged memory (and memory buffers, in general) a bit more concise and monolithic.
 
-__DTInterop__ 
+### __DTInterop__ 
 
 DTInterop is an extensive OS and hardware library for Windows Desktop, written in VB.NET using __DTCore__ as the backbone for its many interop functions.
 
 This module is of more universal appeal to all .NET developers, regardless of the language used.
  
-__DTMath__
+### __DTMath__
 
 DTMath is an extended miscellaneous mathemetics library, including working with polar coordinates and an extensive color space math calculation library. 
 This module is a bit outdated and some parts that were unfinished will probably never be finished or will be done a different way, so components may be added or removed
 from this library, in the near future.
   
-__DTExtended__
+### __DTExtended__
 
 DTExtended is a collection of advanced modules including __UnitConverter__ and __BinarySearcher__.  This project is actually do for an intense overhaul as many of its features have become obsoleted or outdated, as well.
 
