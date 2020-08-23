@@ -14,7 +14,7 @@ Imports System.ComponentModel
 Imports System.Drawing
 Imports DataTools.Interop.Native
 Imports Microsoft.Win32
-
+Imports DataTools.Interop.Native.Menu
 
 Namespace Desktop
 
