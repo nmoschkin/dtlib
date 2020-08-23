@@ -4,7 +4,40 @@
 
 An extensive low-level and hardware utility library featuring a number of useful classes and structures built in Visual Basic .NET and MSIL.
 
-### [Visit the Wiki](https://github.com/nmoschkin/dtlib/wiki)
+## Important Namespaces and Classes:
+
+ ### [Visit the Wiki](https://github.com/nmoschkin/dtlib/wiki)
+
+ - **[DataTools.Memory Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Memory)**
+   - **[Blob Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_Blob)**
+   - **[MemPtr Structure](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_MemPtr)**
+   - **[SafePtr Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_SafePtr)**
+ - **[DataTools.BitStream Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_BitStream)**
+   - [Crc32 Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_BitStream_Crc32)
+ - **[DataTools.Interop Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop)**
+   - **[DevEnumPublic Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_DevEnumPublic)**
+ - **[DataTools.Interop.Desktop Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Desktop)**
+   - **[AllSystemFileTypes Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Desktop_AllSystemFileTypes)**
+   - **[FontInfo Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Desktop_FontInfo)**
+   - **[IconImage Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Desktop_IconImage)**
+   - **[Resources Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Desktop_Resources)**
+ - **[DataTools.Interop.Disk Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Disk)**
+   - **[DiskDeviceInfo Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Disk_DiskDeviceInfo)**
+   - **[FSMonitor Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Disk_FSMonitor)**
+   - **[VirtualDisk Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Disk_VirtualDisk)**
+ - **[DataTools.Interop.Display Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Display)**
+   - **[MonitorInfo Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Display_MonitorInfo)**
+ - **[DataTools.Interop.Network Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Network)**
+   - **[AdapterWrap.AdaptersCollection Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Network_AdapterWrap_AdaptersCollection)**
+ - **[DataTools.Interop.Printers Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Printers)**
+   - **[PrinterDeviceInfo Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Printers_PrinterDeviceInfo)**
+ - **[DataTools.Interop.Usb Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Usb)**
+   - **[HidDeviceInfo Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Usb_HidDeviceInfo)**
+ - **[DataTools.Strings Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Strings)**
+ - **[DataTools.SystemInfo Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_SystemInfo)**
+   - **[OSVERSIONINFOEX Structure](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_SystemInfo_OSVERSIONINFOEX)**
+
+
 
 ## The Pieces
 
@@ -28,17 +61,6 @@ This module is of more universal appeal to all .NET developers, regardless of th
 See much more information about this module on the [Wiki](https://github.com/nmoschkin/dtlib/wiki).
 
 The best place to start for this namespace is the **[DevEnumPublic](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_DevEnumPublic)** class.
-
- ### Quick Links:
- 
- - **[DataTools.Interop Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop)**
-   - **[DataTools.Interop.DevEnumPublic Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_DevEnumPublic)**
- - **[DataTools.Interop.Desktop Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Desktop)**
- - **[DataTools.Interop.Disk Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Disk)**
- - **[DataTools.Interop.Display Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Display)**
- - **[DataTools.Interop.Network Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Network)**
- - **[DataTools.Interop.Printers Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Printers)**
- - **[DataTools.Interop.Usb Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Usb)**
  
 ### __DTMath__
 
