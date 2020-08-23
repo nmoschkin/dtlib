@@ -12,7 +12,7 @@ Visit [The Wiki](https://github.com/nmoschkin/dtlib/wiki).
 
 DTCore is heavily coded in IL on the backend, with VB.NET on the front using __ILSupport__.
 
-This module features VB.NET language-specific indexed accessor properties for **[MemPtr](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_MemPtr)**, **[SafePtr](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_SafePtr)**, and **[Blob](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_Blob)**.  These tools can directly interface with unmanaged memory and pinned GCHandles to quickly manipulate data at the byte-level for just about any kind of blittable object.  
+This library features VB.NET language-specific indexed accessor properties for **[MemPtr](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_MemPtr)**, **[SafePtr](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_SafePtr)**, and **[Blob](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_Blob)**.  These tools can directly interface with unmanaged memory and pinned GCHandles to quickly manipulate data at the byte-level for just about any kind of blittable object.  
 
 These classes **CAN** be used in C#, but since the C# language does not support properties with indexers, the functions will appear in Intellisense by their internal 'magic' names.  For example, a property called __ByteAt(index As Integer)__ will appear in C# as two separate functions: __byte get_ByteAt(int index)__ and __void set_ByteAt(int index, byte value)__.
 
@@ -21,13 +21,15 @@ These classes help VB.NET developers do with greater ease things that C# develop
 
 ### __DTInterop__ 
 
-DTInterop is an extensive OS and hardware library for Windows Desktop, written in VB.NET using __DTCore__ as the backbone for its many interop functions.
+DTInterop is an extensive OS and hardware abstraction and wrapper library for systems running on native Windows platofrms.
 
-This module is of more universal appeal to all .NET developers, regardless of the language used.
+This library was written entirely in in VB.NET using **[DTCore](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Memory)** as the backbone for system interop.
 
-See much more information about this module on the [Wiki](https://github.com/nmoschkin/dtlib/wiki).
+This library is not specific to VB.NET, and works well in all .NET languages, including **C#** and **F#**.
 
-The best place to start for this namespace is the **[DevEnumPublic](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_DevEnumPublic)** class.
+**[DevEnumPublic](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_DevEnumPublic)** is the jump-off point for the computer hardware information and manipulation portion of this library.
+
+Other independent subsystems include **[Desktop and Shell](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Desktop)**, **[Virtual Media Control](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Disk_VirtualDisk)**, **[Networking](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Network)**, and **[System Information](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_SystemInfo)**, and others.  See below, or see the [Wiki](https://github.com/nmoschkin/dtlib/wiki) for more details.
  
 ### __DTMath__
 
