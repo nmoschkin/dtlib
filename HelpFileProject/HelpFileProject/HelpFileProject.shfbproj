@@ -31,7 +31,7 @@
     <IndentHtml>False</IndentHtml>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
-    <HelpTitle>DataTools.MessageBoxEx User Guide</HelpTitle>
+    <HelpTitle>DataTools API Reference</HelpTitle>
     <HelpFileVersion>1.0.0.0</HelpFileVersion>
     <NamingMethod>MemberName</NamingMethod>
     <ContentPlacement>BelowNamespaces</ContentPlacement>
@@ -42,8 +42,6 @@
     <SdkLinkTarget>Blank</SdkLinkTarget>
     <WarnOnMissingSourceContext>False</WarnOnMissingSourceContext>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\..\MessageBoxEx\MessageBoxEx.xml" />
-      <DocumentationSource sourceFile="..\..\MessageBoxEx\MessageBoxEx.csproj" />
     </DocumentationSources>
     <HtmlSdkLinkType>Msdn</HtmlSdkLinkType>
     <BinaryTOC>True</BinaryTOC>
@@ -57,7 +55,8 @@
     </PlugInConfigurations>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="DataTools.MessageBoxEx" isDocumented="True" />
-<NamespaceSummaryItem name="(global)" isDocumented="False">DataTools.MessageBoxEx namespace.</NamespaceSummaryItem></NamespaceSummaries>
+      <NamespaceSummaryItem name="(global)" isDocumented="False">DataTools.MessageBoxEx namespace.</NamespaceSummaryItem>
+    </NamespaceSummaries>
     <ProjectSummary>DataTools.MessageBoxEx is a highly customizable replacement for the system MessageBox class for both WPF and WinForms applications.
 
 It is intended to look and behave as closely as possible to the native MessageBox.</ProjectSummary>
