@@ -40,7 +40,8 @@ DTExtended is a collection of advanced modules including __UnitConverter__ and _
   * Note, running the examples **will** require you to run Visual Studio as Administrator.
 
 
-## Important Namespaces and Classes — [Visit the Wiki](https://github.com/nmoschkin/dtlib/wiki)
+## Important Namespaces and Classes
+[Visit the Wiki](https://github.com/nmoschkin/dtlib/wiki)
 
  - **[DataTools.Memory Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Memory)**
    - **[Blob Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_Blob)**
