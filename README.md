@@ -4,9 +4,9 @@
 
 An extensive low-level and hardware utility library featuring a number of useful classes and structures built in Visual Basic .NET and MSIL.
 
-## Important Namespaces and Classes:
+## [Visit the Wiki](https://github.com/nmoschkin/dtlib/wiki)
 
- ### [Visit the Wiki](https://github.com/nmoschkin/dtlib/wiki)
+ ### Important Namespaces and Classes:
 
  - **[DataTools.Memory Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Memory)**
    - **[Blob Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_Blob)**
