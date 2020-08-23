@@ -26,11 +26,11 @@ These classes help VB.NET developers do with greater ease things that **C#** dev
 
 ### __DTInterop__ 
 
-DTInterop is an extensive OS and hardware abstraction and wrapper library for systems running on native Windows platofrms.
+DTInterop is an OS and hardware abstraction and wrapper library for systems running on native Windows platforms.
 
-This library was written entirely in in VB.NET using **[DTCore](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Memory)** as the backbone for system interop.
+This library was written entirely in in VB.NET using **[DTCore](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Memory)** as the backbone for easily manipulating unmanaged memory in **VB.NET**.
 
-This library is not specific to VB.NET, and works well in all .NET languages, including **C#** and **F#**.
+***This library is not specific to VB.NET, and works well in all .NET languages, including **C#** and **F#**.***
 
 **[DevEnumPublic](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_DevEnumPublic)** is the jump-off point for the computer hardware information and manipulation portion of this library.
 
