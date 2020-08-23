@@ -2,7 +2,7 @@
 
 **Memory and Hardware Interop Library**
 
-**Version 4.2**
+**Version 3.2**
 
 An extensive memory and hardware abstraction and wrapper library featuring a number of unique and useful classes and structures built in **Visual Basic .NET** and **[CIL](https://en.wikipedia.org/wiki/Common_Intermediate_Language)** for native Windows operating systems.
 
