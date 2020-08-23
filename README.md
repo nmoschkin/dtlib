@@ -4,6 +4,12 @@
 
 An extensive memory and hardware abstraction and wrapper library featuring a number of unique and useful classes and structures built in Visual Basic .NET and MSIL for native Windows operating systems.
 
+### Quick Links
+
+- [Important Namespaces and Classes](#important-classes)
+- [The Wiki](https://github.com/nmoschkin/dtlib/wiki)
+
+
 ## The Pieces
 
 ### __DTCore__ 
@@ -40,7 +46,7 @@ DTExtended is a collection of advanced modules including __UnitConverter__ and _
   * Note, running the examples **will** require you to run Visual Studio as Administrator.
 
 
-## Important Namespaces and Classes
+## Important Namespaces and Classes {#important-classes}
 [Visit the Wiki](https://github.com/nmoschkin/dtlib/wiki)
 
  - **[DataTools.Memory Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Memory)**
