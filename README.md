@@ -1,6 +1,8 @@
 # DataTools
-## Version 4.2
-### Memory and Hardware Interop Library
+
+**Memory and Hardware Interop Library**
+
+**Version 4.2**
 
 An extensive memory and hardware abstraction and wrapper library featuring a number of unique and useful classes and structures built in Visual Basic .NET and MSIL for native Windows operating systems.
 
@@ -30,8 +32,10 @@ This library is not specific to VB.NET, and works well in all .NET languages, in
 
 **[DevEnumPublic](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_DevEnumPublic)** is the jump-off point for the computer hardware information and manipulation portion of this library.
 
-Other independent subsystems include **[Desktop and Shell](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Desktop)**, **[Virtual Media Control](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Disk_VirtualDisk)**, **[Networking](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Network)**, and **[System Information](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_SystemInfo)**, and others.  See below, or see the [Wiki](https://github.com/nmoschkin/dtlib/wiki) for more details.
- 
+Other independent subsystems include **[Desktop and Shell](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Desktop)**, **[Virtual Media Control](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Disk_VirtualDisk)**, **[Networking](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Network)**, **[System Information](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_SystemInfo)**, and others.  See below, or see the [Wiki](https://github.com/nmoschkin/dtlib/wiki) for more details.
+
+## Temporarily Out Of Service Libraries
+
 ### __DTMath__
 
 DTMath is an extended miscellaneous mathemetics library, including working with polar coordinates and an extensive color space math calculation library. 
