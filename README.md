@@ -7,7 +7,7 @@ An extensive memory and hardware abstraction and wrapper library featuring a num
 Visit [The Wiki](https://github.com/nmoschkin/dtlib/wiki).
 _(See below for **important namespaces and classes**)_
 
-## The Pieces
+## Individual Libraries
 
 ### __DTCore__ 
 
@@ -43,7 +43,6 @@ from this library, in the near future.
 DTExtended is a collection of advanced modules including __UnitConverter__ and __BinarySearcher__.  This project is actually do for an intense overhaul as many of its features have become obsoleted or outdated, as well.
 
   * Note, running the examples **will** require you to run Visual Studio as Administrator.
-
 
 ## Important Namespaces and Classes
 **[Visit the Wiki](https://github.com/nmoschkin/dtlib/wiki)**
