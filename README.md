@@ -24,6 +24,19 @@ These classes help VB.NET developers do with greater ease things that C# develop
 DTInterop is an extensive OS and hardware library for Windows Desktop, written in VB.NET using __DTCore__ as the backbone for its many interop functions.
 
 This module is of more universal appeal to all .NET developers, regardless of the language used.
+
+See much more information about this module on the Wiki.
+
+ ### Quick Links:
+ 
+ - **[DataTools.Interop Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop)**
+ - **[DataTools.Interop.Desktop Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Desktop)**
+ - **[DataTools.Interop.Disk Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Disk)**
+ - **[DataTools.Interop.Display Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Display)**
+ - **[DataTools.Interop.Network Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Network)**
+ - **[DataTools.Interop.Printers Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Printers)**
+ - **[DataTools.Interop.Usb Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Usb)**
+
  
 ### __DTMath__
 
