@@ -4,7 +4,7 @@
 
 **Version 4.2**
 
-An extensive memory and hardware abstraction and wrapper library featuring a number of unique and useful classes and structures built in Visual Basic .NET and MSIL for native Windows operating systems.
+An extensive memory and hardware abstraction and wrapper library featuring a number of unique and useful classes and structures built in Visual Basic .NET and **CIL** for native Windows operating systems.
 
 Visit [The Wiki](https://github.com/nmoschkin/dtlib/wiki).
 _(See below for **important namespaces and classes**)_
@@ -14,7 +14,7 @@ _(See below for **important namespaces and classes**)_
 ### __DTCore__ 
 
 DTCore contains the core unmanaged memory manipulation structures and classes that **DTInterop** is built on. 
-It is heavily coded in IL on the backend, with **VB.NET** on the front using __ILSupport__.
+It is heavily coded in **[CIL](http://www.ecma-international.org/publications/standards/Ecma-335.htm)** on the backend, with **VB.NET** on the front using **[ILSupport](https://github.com/ins0mniaque/ILSupport)**.
 
 This library features *****VB.NET** language-specific*** indexed accessor properties for **[MemPtr](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_MemPtr)**, **[SafePtr](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_SafePtr)**, and **[Blob](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_Blob)**.  These tools can directly interface with unmanaged memory and pinned GCHandles to quickly manipulate data at the byte-level for just about any kind of blittable object.  
 
