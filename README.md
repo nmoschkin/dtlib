@@ -10,6 +10,9 @@ Visit [The Wiki](https://github.com/nmoschkin/dtlib/wiki).
 
 _(See below for **important namespaces and classes**)_
 
+
+_(Click Here For The [Unabridged Namespace Map](NamespaceMap))_
+
 ## Individual Libraries
 
 ### __DTCore__ 
@@ -42,7 +45,7 @@ Other independent subsystems include **[Desktop and Shell](https://github.com/nm
 ## Important Namespaces and Classes
 **[Visit the Wiki](https://github.com/nmoschkin/dtlib/wiki)**
 
-**[Complete Namespace Map](NamespaceMap)**
+**Click Here For The [Unabridged Namespace Map](NamespaceMap)**
 
  - **[DataTools.Memory Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Memory)**
    - **[Blob Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_Blob)**
