@@ -11,7 +11,7 @@ Visit [The Wiki](https://github.com/nmoschkin/dtlib/wiki).
 _(See below for **important namespaces and classes**)_
 
 
-_(Click Here For The [Unabridged Namespace Map](NamespaceMap))_
+_(Click Here For The [Unabridged Namespace Map](https://github.com/nmoschkin/dtlib/wiki/NamespaceMap))_
 
 ## Individual Libraries
 
