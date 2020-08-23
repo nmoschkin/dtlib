@@ -35,5 +35,5 @@ DTExtended is a collection of advanced modules including __UnitConverter__ and _
 
   * Note, running the examples **will** require you to run Visual Studio as Administrator.
 
-_More documentation and a wiki is forthcoming.  Stay tuned._
+
 
