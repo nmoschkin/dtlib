@@ -11,7 +11,7 @@
 '' Licensed Under the Microsoft Public License   
 '' ************************************************* ''
 
-Module BluetoothApi
+Friend Module BluetoothApi
     'TODO !!!
 
 

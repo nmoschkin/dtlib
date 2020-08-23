@@ -23,7 +23,7 @@ Imports DataTools.Memory
 Namespace Native
 
     <HideModuleName>
-    Module VDiskDecl
+    Friend Module VDiskDecl
 
         Public VIRTUAL_STORAGE_TYPE_VENDOR_UNKNOWN As New Guid(0, 0S, 0S, {0, 0, 0, 0, 0, 0, 0, 0})
         Public VIRTUAL_STORAGE_TYPE_VENDOR_MICROSOFT As New Guid("EC984AEC-A0F9-47e9-901F-71415A66345B")

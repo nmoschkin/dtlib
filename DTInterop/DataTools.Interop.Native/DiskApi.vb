@@ -26,7 +26,7 @@ Namespace Native
 
     <HideModuleName>
     <SecurityCritical()>
-    Module DiskApi
+    Friend Module DiskApi
 
 #Region "DeviceIoControl"
 
@@ -587,7 +587,7 @@ Namespace Native
     ''' <remarks></remarks>
     <HideModuleName>
     <SecurityCritical()>
-    Module RawDisk
+    Friend Module RawDisk
 
         ''' <summary>
         ''' Disk Geometry Media Types
@@ -950,7 +950,7 @@ Namespace Native
 
     <HideModuleName>
     <SecurityCritical()>
-    Module Partitioning
+    Friend Module Partitioning
 
         ''' <summary>
         ''' Windows system MBR partition information structure.

@@ -22,7 +22,7 @@ Namespace Native
 
 #Region "HID Subsystem"
 
-    Module UsbHid
+    Friend Module UsbHid
 
         Public Class hid_usage_info
 

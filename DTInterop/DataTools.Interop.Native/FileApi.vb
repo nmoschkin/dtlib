@@ -17,7 +17,7 @@ Imports Microsoft.VisualStudio.OLE.Interop
 Namespace Native
 
     <HideModuleName>
-    Module FileApi
+    Friend Module FileApi
 
 #Region "Constants"
 
@@ -990,7 +990,7 @@ Namespace Native
 
     End Module
 
-    Module IoControl
+    Friend Module IoControl
 
 #Region "File Device Constants"
 

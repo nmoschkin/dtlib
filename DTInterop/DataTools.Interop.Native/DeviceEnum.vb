@@ -29,7 +29,7 @@ Namespace Native
     ''' </summary>
     ''' <remarks></remarks>
     <HideModuleName, SecurityCritical>
-    Module DevEnumApi
+    Friend Module DevEnumApi
 
         Public Const DICLASSPROP_INTERFACE = 2
         Public Const DICLASSPROP_INSTALLER = 1

@@ -14,7 +14,7 @@
     <Name>HelpFileProject</Name>
     <!-- SHFB properties -->
     <FrameworkVersion>.NET Framework 4.7.2</FrameworkVersion>
-    <OutputPath>..\..\..\dtlib.wiki\</OutputPath>
+    <OutputPath>..\..\..\dtlib.wiki.staging\</OutputPath>
     <HtmlHelpName>HelpFileProject</HtmlHelpName>
     <Language>en-US</Language>
     <TransformComponentArguments>
@@ -59,8 +59,8 @@
       <NamespaceSummaryItem name="DataTools.MessageBoxEx" isDocumented="True" />
       <NamespaceSummaryItem name="(global)" isDocumented="False">DataTools.MessageBoxEx namespace.</NamespaceSummaryItem>
     </NamespaceSummaries>
-    <ProjectSummary>An extensive low-level and hardware utility library featuring a number of useful classes and structures built in Visual Basic .NET and MSIL.</ProjectSummary>
-    <VisibleItems>Attributes, ExplicitInterfaceImplementations, InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected, EditorBrowsableNever, NonBrowsable</VisibleItems>
+    <ProjectSummary>An extensive memory and hardware abstraction and wrapper library featuring a number of unique and useful classes and structures built in Visual Basic .NET and MSIL for native Windows operating systems.</ProjectSummary>
+    <VisibleItems>Attributes, ExplicitInterfaceImplementations, InheritedMembers, InheritedFrameworkMembers, Protected, ProtectedInternalAsProtected, NonBrowsable</VisibleItems>
     <MissingTags>Summary, Parameter, AutoDocumentCtors, TypeParameter, AutoDocumentDispose</MissingTags>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform

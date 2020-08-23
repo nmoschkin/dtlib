@@ -21,7 +21,7 @@ Namespace Native
     ''  Network Resources.
     ''
     <HideModuleName>
-    Module WNet
+    Friend Module WNet
 
         Public Const RESOURCE_CONNECTED = &H1
         Public Const RESOURCE_GLOBALNET = &H2

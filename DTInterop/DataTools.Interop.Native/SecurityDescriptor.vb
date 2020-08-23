@@ -24,7 +24,7 @@ Imports DataTools.Memory
 Namespace Native
 
     <HideModuleName()>
-    Module SecurityDescriptor
+    Friend Module SecurityDescriptor
 
         <StructLayout(LayoutKind.Sequential, Pack:=1)>
         Structure SECURITY_ATTRIBUTES

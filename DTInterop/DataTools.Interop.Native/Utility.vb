@@ -27,11 +27,23 @@ Imports Microsoft.Win32
 
 Namespace Native
 
+
+    ''' <summary>
+    ''' Public utility methods
+    ''' </summary>
     Public Module Utility
 
 
 #Region "Structure <-> Byte() Copy Utility"
 
+        ''' <summary>
+        ''' Convert an array of bytes to a structure
+        ''' </summary>
+        ''' <param name="input">An arrayou of bytes</param>
+        ''' <param name="output">A valid structure object (cannot be null)</param>
+        ''' <param name="startingIndex">the starting index in the array of bytes.</param>
+        ''' <param name="length">Length in the array of bytes.</param>
+        ''' <returns>True if successful</returns>
         Public Function BytesToStruct(input() As Byte, ByRef output As Object, Optional startingIndex As Integer = 0, Optional length As Integer = -1) As Boolean
 
             Try
@@ -51,6 +63,12 @@ Namespace Native
 
         End Function
 
+        ''' <summary>
+        ''' Writes a structure to a byte array
+        ''' </summary>
+        ''' <param name="input">Structure</param>
+        ''' <param name="output">Byte array</param>
+        ''' <returns>True if successful</returns>
         Public Function StructToBytes(input As Object, ByRef output() As Byte) As Boolean
             Try
                 Dim a As Integer = Marshal.SizeOf(input)
@@ -69,6 +87,11 @@ Namespace Native
 
         End Function
 
+        ''' <summary>
+        ''' Write a structure to a byte array, and return the byte array.
+        ''' </summary>
+        ''' <param name="input"></param>
+        ''' <returns><see cref="Byte()"/></returns>
         Public Function StructToBytes(input As Object) As Byte()
             Try
                 Dim a As Integer = Marshal.SizeOf(input)
@@ -92,6 +115,13 @@ Namespace Native
 
 #Region "Read Structure From Stream"
 
+        ''' <summary>
+        ''' Read a structure from a stream
+        ''' </summary>
+        ''' <param name="stream"><see cref="Stream"/> object</param>
+        ''' <param name="offset">Offset inside the stream to begin reading the struct.</param>
+        ''' <param name="struct">The output struct.</param>
+        ''' <returns>True if successful</returns>
         Public Function ReadStruct(stream As System.IO.Stream, offset As Integer, ByRef struct As Object) As Boolean
 
             Try
@@ -108,6 +138,12 @@ Namespace Native
 
         End Function
 
+        ''' <summary>
+        ''' Read a structure of type T from a stream
+        ''' </summary>
+        ''' <param name="stream"><see cref="Stream"/> object</param>
+        ''' <param name="struct">The output struct of type T</param>
+        ''' <returns>True if successful</returns>
         Public Function ReadStruct(Of T As Structure)(stream As System.IO.Stream, ByRef struct As T) As Boolean
 
             Try
@@ -129,6 +165,11 @@ Namespace Native
 
 #Region "Get Description"
 
+        ''' <summary>
+        ''' Gets a <see cref="DescriptionAttribute" /> value
+        ''' </summary>
+        ''' <param name="value">An object</param>
+        ''' <returns>A <see cref="DescriptionAttribute" /> value</returns>
         Public Function GetEnumDescription(value As Object) As String
 
             If value.GetType.BaseType <> GetType([Enum]) Then Return Nothing
@@ -144,6 +185,11 @@ Namespace Native
             Return Nothing
         End Function
 
+        ''' <summary>
+        ''' Gets a <see cref="DescriptionAttribute" /> value
+        ''' </summary>
+        ''' <param name="mi">A <see cref="MemberInfo"/> object</param>
+        ''' <returns>A <see cref="DescriptionAttribute" /> value</returns>
         Public Function GetDescription(mi As MemberInfo) As String
 
             Dim attr As DescriptionAttribute = mi.GetCustomAttribute(GetType(DescriptionAttribute))
@@ -152,6 +198,11 @@ Namespace Native
 
         End Function
 
+        ''' <summary>
+        ''' Gets a <see cref="DescriptionAttribute" /> value
+        ''' </summary>
+        ''' <param name="t">A <see cref="System.Type"/></param>
+        ''' <returns>A <see cref="DescriptionAttribute" /> value</returns>
         Public Function GetDescription(t As System.Type) As String
 
             Dim attr As DescriptionAttribute = t.GetCustomAttribute(GetType(DescriptionAttribute))

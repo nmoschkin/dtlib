@@ -21,6 +21,108 @@ Imports DataTools.Memory
 
 Namespace Native
 
+
+    ''' <summary>
+    ''' Bus types.
+    ''' </summary>
+    ''' <remarks></remarks>
+    Public Enum BusType
+
+        ''' <summary>
+        ''' Internal
+        ''' </summary>
+        Internal
+
+        ''' <summary>
+        ''' PCMCIA
+        ''' </summary>
+        PCMCIA
+
+        ''' <summary>
+        ''' PCI
+        ''' </summary>
+        PCI
+
+        ''' <summary>
+        ''' ISAPnP
+        ''' </summary>
+        ISAPnP
+
+        ''' <summary>
+        ''' EISA
+        ''' </summary>
+        EISA
+
+        ''' <summary>
+        ''' MCA
+        ''' </summary>
+        MCA
+
+        ''' <summary>
+        ''' Serenum
+        ''' </summary>
+        Serenum
+
+        ''' <summary>
+        ''' USB
+        ''' </summary>
+        USB
+
+        ''' <summary>
+        ''' Parallel Port
+        ''' </summary>
+        ParallelPort
+
+        ''' <summary>
+        ''' UsB Printer
+        ''' </summary>
+        USBPrinter
+
+        ''' <summary>
+        ''' DOT4 Dotmatrix Printer
+        ''' </summary>
+        DOT4Printer
+
+        ''' <summary>
+        ''' IEEE 1394 / Firewire
+        ''' </summary>
+        Bus1394
+
+        ''' <summary>
+        ''' Human Interface Device
+        ''' </summary>
+        HID
+
+        ''' <summary>
+        ''' AVC
+        ''' </summary>
+        AVC
+
+        ''' <summary>
+        ''' Infrared (IRDA) device
+        ''' </summary>
+        IRDA
+
+        ''' <summary>
+        ''' MicroSD card
+        ''' </summary>
+        SD
+
+        ''' <summary>
+        ''' ACPI
+        ''' </summary>
+        ACPI
+
+        ''' <summary>
+        ''' Software Device
+        ''' </summary>
+        SoftwareDevice
+
+    End Enum
+
+    ''' <summary>
+    ''' Device properties dialog
+    ''' </summary>
     Public Module DevPropDialog
 
         Declare Unicode Function DeviceProperties_RunDLL _
@@ -43,34 +145,7 @@ Namespace Native
 
         End Sub
 
-        ''' <summary>
-        ''' Bus types.
-        ''' </summary>
-        ''' <remarks></remarks>
-        Public Enum BusType
-
-            Internal
-            PCMCIA
-            PCI
-            ISAPnP
-            EISA
-            MCA
-            Serenum
-            USB
-            ParallelPort
-            USBPrinter
-            DOT4Printer
-            Bus1394
-            HID
-            AVC
-            IRDA
-            SD
-            ACPI
-            SoftwareDevice
-
-        End Enum
-
-        Function GuidToBusType(g As Guid) As BusType
+        Friend Function GuidToBusType(g As Guid) As BusType
 
             If g = GUID_BUS_TYPE_INTERNAL Then Return BusType.Internal
             If g = GUID_BUS_TYPE_PCMCIA Then Return BusType.PCMCIA
@@ -99,7 +174,7 @@ Namespace Native
 
     End Module
 
-    Module DevProp
+    Friend Module DevProp
 
         Public Const DIGCF_DEFAULT = &H1
         Public Const DIGCF_PRESENT = &H2

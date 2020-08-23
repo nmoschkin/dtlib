@@ -259,7 +259,7 @@ Namespace Disk
             End Set
         End Property
         ''' <summary>
-        ''' Contains a list of VHD/VHDX files that make up this virtual hard drive.
+        ''' Contains a list of VHD/VHDX files that make up a virtual hard drive.
         ''' </summary>
         ''' <remarks></remarks>
         Public Property BackingStore As String()

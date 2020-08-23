@@ -794,244 +794,6 @@ Namespace Printers
         Public Const PRINTER_ENUM_ICON8 = &H800000
         Public Const PRINTER_ENUM_HIDE = &H1000000
 
-        <Flags>
-        Public Enum PrinterAttributes As UInteger
-            Queued = &H1
-            Direct = &H2
-            [Default] = &H4
-            [Shared] = &H8
-            Network = &H10
-            Hidden = &H20
-            Local = &H40
-
-            EnableDevQ = &H80
-            KeepPrintedJobs = &H100
-            DoCompleteFirst = &H200
-
-            WorkOffline = &H400
-            EnableBIDI = &H800
-            RawOnly = &H1000
-            Published = &H2000
-
-            Reserved1 = &H4000
-            Reserved2 = &H8000
-            Reserved3 = &H10000
-
-        End Enum
-
-        <Flags>
-        Public Enum PrinterStatus As UInteger
-            ''' <summary>
-            '''  The printer is busy.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer is busy.")>
-            Busy = PRINTER_STATUS_BUSY
-
-            ''' <summary>
-            '''  The printer door is open.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer door is open.")>
-            DoorOpen = PRINTER_STATUS_DOOR_OPEN
-
-            ''' <summary>
-            '''  The printer is in an error state.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer is in an error state.")>
-            [Error] = PRINTER_STATUS_ERROR
-
-            ''' <summary>
-            '''  The printer is initializing.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer is initializing.")>
-            Initializing = PRINTER_STATUS_INITIALIZING
-
-            ''' <summary>
-            '''  The printer is in an active input/output state
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer is in an active input/output stat.")>
-            IoActive = PRINTER_STATUS_IO_ACTIVE
-
-            ''' <summary>
-            '''  The printer is in a manual feed state.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer is in a manual feed state.")>
-            ManualFeed = PRINTER_STATUS_MANUAL_FEED
-
-            ''' <summary>
-            '''  The printer is out of toner.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer is out of toner.")>
-            NoToner = PRINTER_STATUS_NO_TONER
-
-            ''' <summary>
-            '''  The printer is not available for printing.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer is not available for printing.")>
-            NotAvailable = PRINTER_STATUS_NOT_AVAILABLE
-
-            ''' <summary>
-            '''  The printer is offline.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer is offline.")>
-            Offline = PRINTER_STATUS_OFFLINE
-
-            ''' <summary>
-            '''  The printer has run out of memory.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer has run out of memory.")>
-            OutOfMemory = PRINTER_STATUS_OUT_OF_MEMORY
-
-            ''' <summary>
-            '''  The printer's output bin is full.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer's output bin is full.")>
-            OutputBinFull = PRINTER_STATUS_OUTPUT_BIN_FULL
-
-            ''' <summary>
-            '''  The printer cannot print the current page.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer cannot print the current page.")>
-            PagePunt = PRINTER_STATUS_PAGE_PUNT
-
-            ''' <summary>
-            '''  Paper is jammed in the printer
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("Paper is jammed in the printe.")>
-            PaperJam = PRINTER_STATUS_PAPER_JAM
-
-            ''' <summary>
-            '''  The printer is out of paper.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer is out of paper.")>
-            PaperOut = PRINTER_STATUS_PAPER_OUT
-
-            ''' <summary>
-            '''  The printer has a paper problem.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer has a paper problem.")>
-            PaperProblem = PRINTER_STATUS_PAPER_PROBLEM
-
-            ''' <summary>
-            '''  The printer is paused.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer is paused.")>
-            Paused = PRINTER_STATUS_PAUSED
-
-            ''' <summary>
-            '''  The printer is being deleted.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer is being deleted.")>
-            PendingDeletion = PRINTER_STATUS_PENDING_DELETION
-
-            ''' <summary>
-            '''  The printer is in power save mode.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer is in power save mode.")>
-            PowerSave = PRINTER_STATUS_POWER_SAVE
-
-            ''' <summary>
-            '''  The printer is printing.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer is printing.")>
-            Printing = PRINTER_STATUS_PRINTING
-
-            ''' <summary>
-            '''  The printer is processing a print job.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer is processing a print job.")>
-            Processing = PRINTER_STATUS_PROCESSING
-
-            ''' <summary>
-            '''  The printer status is unknown.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer status is unknown.")>
-            ServerUnknown = PRINTER_STATUS_SERVER_UNKNOWN
-
-            ''' <summary>
-            '''  The printer is low on toner.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer is low on toner.")>
-            TonerLow = PRINTER_STATUS_TONER_LOW
-
-            ''' <summary>
-            '''  The printer has an error that requires the user to do something.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer has an error that requires the user to do something.")>
-            UserIntervention = PRINTER_STATUS_USER_INTERVENTION
-
-            ''' <summary>
-            '''  The printer is waiting.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer is waiting.")>
-            Waiting = PRINTER_STATUS_WAITING
-
-            ''' <summary>
-            '''  The printer is warming up.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Description("The printer is warming up.")>
-            WarmingUp = PRINTER_STATUS_WARMING_UP
-
-        End Enum
-
-        <Flags>
-        Public Enum DeviceModeFields As UInteger
-
-            Orientation = &H1
-            PaperSize = &H2
-            PaperLength = &H4
-            PaperWidth = &H8
-            Scale = &H10
-            Position = &H20
-            Nup = &H40
-            DisplayOrientation = &H80
-            Copies = &H100
-            DefaultSource = &H200
-            PrintQuality = &H400
-            Color = &H800
-            Duplex = &H1000
-            YResolution = &H2000
-            TTOption = &H4000
-            Collate = &H8000
-            FormName = &H10000
-            LogPixels = &H20000
-            BitsPerPel = &H40000
-            PelsWidth = &H80000
-            PelsHeight = &H100000
-            DisplayFlags = &H200000
-            DisplayFrequency = &H400000
-            ICMMethod = &H800000UI
-            ICMIntent = &H1000000UI
-            MediaType = &H2000000UI
-            DitherType = &H4000000UI
-            PanningWidth = &H8000000UI
-            PanningHeight = &H10000000UI
-
-        End Enum
 
 #End Region
 
@@ -1131,16 +893,465 @@ Namespace Printers
 
     End Module
 
+#Region "Enums"
+
+
+    ''' <summary>
+    ''' Printer attributes flags
+    ''' </summary>
+    <Flags>
+    Public Enum PrinterAttributes As UInteger
+
+        ''' <summary>
+        ''' Queued printer
+        ''' </summary>
+        Queued = &H1
+
+        ''' <summary>
+        ''' Direct printer
+        ''' </summary>
+        Direct = &H2
+
+        ''' <summary>
+        ''' Is default printer
+        ''' </summary>
+        [Default] = &H4
+
+        ''' <summary>
+        ''' Is shared printer
+        ''' </summary>
+        [Shared] = &H8
+
+        ''' <summary>
+        ''' Is network printer
+        ''' </summary>
+        Network = &H10
+
+        ''' <summary>
+        ''' Is hidden
+        ''' </summary>
+        Hidden = &H20
+
+        ''' <summary>
+        ''' Is a local printer
+        ''' </summary>
+        Local = &H40
+
+        ''' <summary>
+        ''' Enable DevQ
+        ''' </summary>
+        EnableDevQ = &H80
+
+        ''' <summary>
+        ''' Keep printed jobs
+        ''' </summary>
+        KeepPrintedJobs = &H100
+
+        ''' <summary>
+        ''' Do complete first
+        ''' </summary>
+        DoCompleteFirst = &H200
+
+        ''' <summary>
+        ''' Work offline
+        ''' </summary>
+        WorkOffline = &H400
+
+        ''' <summary>
+        ''' Enable BIDI
+        ''' </summary>
+        EnableBIDI = &H800
+
+        ''' <summary>
+        ''' Raw mode only
+        ''' </summary>
+        RawOnly = &H1000
+
+        ''' <summary>
+        ''' Published
+        ''' </summary>
+        Published = &H2000
+
+        Reserved1 = &H4000
+        Reserved2 = &H8000
+        Reserved3 = &H10000
+
+    End Enum
+
+
+    ''' <summary>
+    ''' Printer status flags
+    ''' </summary>
+    <Flags>
+    Public Enum PrinterStatus As UInteger
+        ''' <summary>
+        '''  The printer is busy.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer is busy.")>
+        Busy = PRINTER_STATUS_BUSY
+
+        ''' <summary>
+        '''  The printer door is open.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer door is open.")>
+        DoorOpen = PRINTER_STATUS_DOOR_OPEN
+
+        ''' <summary>
+        '''  The printer is in an error state.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer is in an error state.")>
+        [Error] = PRINTER_STATUS_ERROR
+
+        ''' <summary>
+        '''  The printer is initializing.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer is initializing.")>
+        Initializing = PRINTER_STATUS_INITIALIZING
+
+        ''' <summary>
+        '''  The printer is in an active input/output state
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer is in an active input/output stat.")>
+        IoActive = PRINTER_STATUS_IO_ACTIVE
+
+        ''' <summary>
+        '''  The printer is in a manual feed state.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer is in a manual feed state.")>
+        ManualFeed = PRINTER_STATUS_MANUAL_FEED
+
+        ''' <summary>
+        '''  The printer is out of toner.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer is out of toner.")>
+        NoToner = PRINTER_STATUS_NO_TONER
+
+        ''' <summary>
+        '''  The printer is not available for printing.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer is not available for printing.")>
+        NotAvailable = PRINTER_STATUS_NOT_AVAILABLE
+
+        ''' <summary>
+        '''  The printer is offline.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer is offline.")>
+        Offline = PRINTER_STATUS_OFFLINE
+
+        ''' <summary>
+        '''  The printer has run out of memory.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer has run out of memory.")>
+        OutOfMemory = PRINTER_STATUS_OUT_OF_MEMORY
+
+        ''' <summary>
+        '''  The printer's output bin is full.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer's output bin is full.")>
+        OutputBinFull = PRINTER_STATUS_OUTPUT_BIN_FULL
+
+        ''' <summary>
+        '''  The printer cannot print the current page.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer cannot print the current page.")>
+        PagePunt = PRINTER_STATUS_PAGE_PUNT
+
+        ''' <summary>
+        '''  Paper is jammed in the printer
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("Paper is jammed in the printe.")>
+        PaperJam = PRINTER_STATUS_PAPER_JAM
+
+        ''' <summary>
+        '''  The printer is out of paper.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer is out of paper.")>
+        PaperOut = PRINTER_STATUS_PAPER_OUT
+
+        ''' <summary>
+        '''  The printer has a paper problem.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer has a paper problem.")>
+        PaperProblem = PRINTER_STATUS_PAPER_PROBLEM
+
+        ''' <summary>
+        '''  The printer is paused.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer is paused.")>
+        Paused = PRINTER_STATUS_PAUSED
+
+        ''' <summary>
+        '''  The printer is being deleted.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer is being deleted.")>
+        PendingDeletion = PRINTER_STATUS_PENDING_DELETION
+
+        ''' <summary>
+        '''  The printer is in power save mode.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer is in power save mode.")>
+        PowerSave = PRINTER_STATUS_POWER_SAVE
+
+        ''' <summary>
+        '''  The printer is printing.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer is printing.")>
+        Printing = PRINTER_STATUS_PRINTING
+
+        ''' <summary>
+        '''  The printer is processing a print job.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer is processing a print job.")>
+        Processing = PRINTER_STATUS_PROCESSING
+
+        ''' <summary>
+        '''  The printer status is unknown.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer status is unknown.")>
+        ServerUnknown = PRINTER_STATUS_SERVER_UNKNOWN
+
+        ''' <summary>
+        '''  The printer is low on toner.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer is low on toner.")>
+        TonerLow = PRINTER_STATUS_TONER_LOW
+
+        ''' <summary>
+        '''  The printer has an error that requires the user to do something.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer has an error that requires the user to do something.")>
+        UserIntervention = PRINTER_STATUS_USER_INTERVENTION
+
+        ''' <summary>
+        '''  The printer is waiting.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer is waiting.")>
+        Waiting = PRINTER_STATUS_WAITING
+
+        ''' <summary>
+        '''  The printer is warming up.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Description("The printer is warming up.")>
+        WarmingUp = PRINTER_STATUS_WARMING_UP
+
+    End Enum
+
+    ''' <summary>
+    ''' Device mode fields flags
+    ''' </summary>
+    <Flags>
+    Public Enum DeviceModeFields As UInteger
+
+        ''' <summary>
+        ''' Orientation
+        ''' </summary>
+        Orientation = &H1
+
+        ''' <summary>
+        ''' Paper size
+        ''' </summary>
+        PaperSize = &H2
+
+        ''' <summary>
+        ''' Paper length
+        ''' </summary>
+        PaperLength = &H4
+
+        ''' <summary>
+        ''' Paper width
+        ''' </summary>
+        PaperWidth = &H8
+
+        ''' <summary>
+        ''' Scale
+        ''' </summary>
+        Scale = &H10
+
+        ''' <summary>
+        ''' Position
+        ''' </summary>
+        Position = &H20
+
+        ''' <summary>
+        ''' Nup
+        ''' </summary>
+        Nup = &H40
+
+        ''' <summary>
+        ''' Display orientation
+        ''' </summary>
+        DisplayOrientation = &H80
+
+        ''' <summary>
+        ''' Copies
+        ''' </summary>
+        Copies = &H100
+
+        ''' <summary>
+        ''' Default source
+        ''' </summary>
+        DefaultSource = &H200
+
+        ''' <summary>
+        ''' Print quality
+        ''' </summary>
+        PrintQuality = &H400
+
+        ''' <summary>
+        ''' Color printer
+        ''' </summary>
+        Color = &H800
+
+        ''' <summary>
+        ''' Duplex support
+        ''' </summary>
+        Duplex = &H1000
+
+        ''' <summary>
+        ''' YR resolution
+        ''' </summary>
+        YResolution = &H2000
+
+        ''' <summary>
+        ''' TTOption
+        ''' </summary>
+        TTOption = &H4000
+
+        ''' <summary>
+        ''' Collate
+        ''' </summary>
+        Collate = &H8000
+
+        ''' <summary>
+        ''' Form name
+        ''' </summary>
+        FormName = &H10000
+
+        ''' <summary>
+        ''' Log pixels
+        ''' </summary>
+        LogPixels = &H20000
+
+        ''' <summary>
+        ''' Bits per pixel
+        ''' </summary>
+        BitsPerPel = &H40000
+
+        ''' <summary>
+        ''' Width in pixels
+        ''' </summary>
+        PelsWidth = &H80000
+
+        ''' <summary>
+        ''' Height in pixels
+        ''' </summary>
+        PelsHeight = &H100000
+
+        ''' <summary>
+        ''' Display flags
+        ''' </summary>
+        DisplayFlags = &H200000
+
+        ''' <summary>
+        ''' Display frequency
+        ''' </summary>
+        DisplayFrequency = &H400000
+
+        ''' <summary>
+        ''' ICM Method
+        ''' </summary>
+        ICMMethod = &H800000UI
+
+        ''' <summary>
+        ''' ICM Intent
+        ''' </summary>
+        ICMIntent = &H1000000UI
+
+        ''' <summary>
+        ''' Media type
+        ''' </summary>
+        MediaType = &H2000000UI
+
+        ''' <summary>
+        ''' Dither type
+        ''' </summary>
+        DitherType = &H4000000UI
+
+        ''' <summary>
+        ''' Panning width
+        ''' </summary>
+        PanningWidth = &H8000000UI
+
+        ''' <summary>
+        ''' Panning height
+        ''' </summary>
+        PanningHeight = &H10000000UI
+
+    End Enum
+
+#End Region
+
 #Region "System Paper Types"
 
+    ''' <summary>
+    ''' Paper nationalities
+    ''' </summary>
     Public Enum PaperNationalities
+
+        ''' <summary>
+        ''' American
+        ''' </summary>
         American
+
+        ''' <summary>
+        ''' ISO / International Standard
+        ''' </summary>
         Iso
+
+        ''' <summary>
+        ''' Japanese
+        ''' </summary>
         Japanese
+
+        ''' <summary>
+        ''' German
+        ''' </summary>
         German
+
+        ''' <summary>
+        ''' Chinese
+        ''' </summary>
         Chinese
     End Enum
 
+    ''' <summary>
+    ''' Represents a collection of all known system paper types
+    ''' </summary>
     Public Class SystemPaperTypes
 
         ''' <summary>
@@ -1153,106 +1364,106 @@ Namespace Printers
 
 #Region "Paper Size Data"
 
-        Private Shared ReadOnly _SizeDataString As String = _
-            "LETTER	1	US Letter 8 1/2 x 11 in" & vbCrLf & _
-            "LETTER_SMALL	2	US Letter Small 8 1/2 x 11 in" & vbCrLf & _
-            "TABLOID	3	US Tabloid 11 x 17 in" & vbCrLf & _
-            "LEDGER	4	US Ledger 17 x 11 in" & vbCrLf & _
-            "LEGAL	5	US Legal 8 1/2 x 14 in" & vbCrLf & _
-            "STATEMENT	6	US Statement 5 1/2 x 8 1/2 in" & vbCrLf & _
-            "EXECUTIVE	7	US Executive 7 1/4 x 10 1/2 in" & vbCrLf & _
-            "A3	8	A3 297 x 420 mm" & vbCrLf & _
-            "A4	9	A4 210 x 297 mm" & vbCrLf & _
-            "A4_SMALL	10	A4 Small 210 x 297 mm" & vbCrLf & _
-            "A5	11	A5 148 x 210 mm" & vbCrLf & _
-            "B4	12	B4 (JIS) 257 x 364 mm" & vbCrLf & _
-            "B5	13	B5 (JIS) 182 x 257 mm" & vbCrLf & _
-            "FOLIO	14	Folio 8 1/2 x 13 in" & vbCrLf & _
-            "QUARTO	15	Quarto 215 x 275 mm" & vbCrLf & _
-            "10X14	16	10 x 14 in" & vbCrLf & _
-            "11X17	17	11 x 17 in" & vbCrLf & _
-            "NOTE	18	US Note 8 1/2 x 11 in" & vbCrLf & _
-            "ENV_9	19	US Envelope #9 - 3 7/8 x 8 7/8" & vbCrLf & _
-            "ENV_10	20	US Envelope #10 - 4 1/8 x 9 1/2" & vbCrLf & _
-            "ENV_11	21	US Envelope #11 - 4 1/2 x 10 3/8" & vbCrLf & _
-            "ENV_12	22	US Envelope #12 - 4 3/4 x 11 in" & vbCrLf & _
-            "ENV_14	23	US Envelope #14 - 5 x 11 1/2" & vbCrLf & _
-            "ENV_DL	27	Envelope DL 110 x 220 mm" & vbCrLf & _
-            "ENV_C5	28	Envelope C5 - 162 x 229 mm" & vbCrLf & _
-            "ENV_C3	29	Envelope C3 - 324 x 458 mm" & vbCrLf & _
-            "ENV_C4	30	Envelope C4 - 229 x 324 mm" & vbCrLf & _
-            "ENV_C6	31	Envelope C6 - 114 x 162 mm" & vbCrLf & _
-            "ENV_C65	32	Envelope C65 - 114 x 229 mm" & vbCrLf & _
-            "ENV_B4	33	Envelope B4 - 250 x 353 mm" & vbCrLf & _
-            "ENV_B5	34	Envelope B5 - 176 x 250 mm" & vbCrLf & _
-            "ENV_B6	35	Envelope B6 - 176 x 125 mm" & vbCrLf & _
-            "ENV_ITALY	36	Envelope 110 x 230 mm" & vbCrLf & _
-            "ENV_MONARCH	37	US Envelope Monarch 3.875 x 7.5 in" & vbCrLf & _
-            "ENV_PERSONAL	38	6 3/4 US Envelope 3 5/8 x 6 1/2 in" & vbCrLf & _
-            "FANFOLD_US	39	US Std Fanfold 14 7/8 x 11 in" & vbCrLf & _
-            "FANFOLD_STD_GERMAN	40	German Std Fanfold 8 1/2 x 12 in" & vbCrLf & _
-            "FANFOLD_LGL_GERMAN	41	German Legal Fanfold 8 1/2 x 13 in" & vbCrLf & _
-            "ISO_B4	42	B4 (ISO) 250 x 353 mm" & vbCrLf & _
-            "JAPANESE_POSTCARD	43	Japanese Postcard 100 x 148 mm" & vbCrLf & _
-            "9X11	44	9 x 11 in" & vbCrLf & _
-            "10X11	45	10 x 11 in" & vbCrLf & _
-            "15X11	46	15 x 11 in" & vbCrLf & _
-            "ENV_INVITE	47	Envelope Invite 220 x 220 mm" & vbCrLf & _
-            "LETTER_EXTRA	50	US Letter Extra 9 1/2 x 12 in" & vbCrLf & _
-            "LEGAL_EXTRA	51	US Legal Extra 9 1/2 x 15 in" & vbCrLf & _
-            "TABLOID_EXTRA	52	US Tabloid Extra 11.69 x 18 in" & vbCrLf & _
-            "A4_EXTRA	53	A4 Extra 9.27 x 12.69 in" & vbCrLf & _
-            "LETTER_TRANSVERSE	54	Letter Transverse 8 1/2 x 11 in" & vbCrLf & _
-            "A4_TRANSVERSE	55	A4 Transverse 210 x 297 mm" & vbCrLf & _
-            "LETTER_EXTRA_TRANSVERSE	56	Letter Extra Transverse 9 1/2 x 12 in" & vbCrLf & _
-            "A_PLUS	57	SuperA/SuperA/A4 227 x 356 mm" & vbCrLf & _
-            "B_PLUS	58	SuperB/SuperB/A3 305 x 487 mm" & vbCrLf & _
-            "LETTER_PLUS	59	US Letter Plus 8.5 x 12.69 in" & vbCrLf & _
-            "A4_PLUS	60	A4 Plus 210 x 330 mm" & vbCrLf & _
-            "A5_TRANSVERSE	61	A5 Transverse 148 x 210 mm" & vbCrLf & _
-            "B5_TRANSVERSE	62	B5 (JIS) Transverse 182 x 257 mm" & vbCrLf & _
-            "A3_EXTRA	63	A3 Extra 322 x 445 mm" & vbCrLf & _
-            "A5_EXTRA	64	A5 Extra 174 x 235 mm" & vbCrLf & _
-            "B5_EXTRA	65	B5 (ISO) Extra 201 x 276 mm" & vbCrLf & _
-            "A2	66	A2 420 x 594 mm" & vbCrLf & _
-            "A3_TRANSVERSE	67	A3 Transverse 297 x 420 mm" & vbCrLf & _
-            "A3_EXTRA_TRANSVERSE	68	A3 Extra Transverse 322 x 445 mm" & vbCrLf & _
-            "DBL_JAPANESE_POSTCARD	69	Japanese Double Postcard 200 x 148 mm" & vbCrLf & _
-            "A6	70	A6 105 x 148 mm" & vbCrLf & _
-            "LETTER_ROTATED	75	Letter Rotated 11 x 8 1/2 11 in" & vbCrLf & _
-            "A3_ROTATED	76	A3 Rotated 420 x 297 mm" & vbCrLf & _
-            "A4_ROTATED	77	A4 Rotated 297 x 210 mm" & vbCrLf & _
-            "A5_ROTATED	78	A5 Rotated 210 x 148 mm" & vbCrLf & _
-            "B4_JIS_ROTATED	79	B4 (JIS) Rotated 364 x 257 mm" & vbCrLf & _
-            "B5_JIS_ROTATED	80	B5 (JIS) Rotated 257 x 182 mm" & vbCrLf & _
-            "JAPANESE_POSTCARD_ROTATED	81	Japanese Postcard Rotated 148 x 100 mm" & vbCrLf & _
-            "DBL_JAPANESE_POSTCARD_ROTATED	82	Double Japanese Postcard Rotated 148 x 200 mm" & vbCrLf & _
-            "A6_ROTATED	83	A6 Rotated 148 x 105 mm" & vbCrLf & _
-            "B6_JIS	88	B6 (JIS) 128 x 182 mm" & vbCrLf & _
-            "B6_JIS_ROTATED	89	B6 (JIS) Rotated 182 x 128 mm" & vbCrLf & _
-            "12X11	90	12 x 11 in" & vbCrLf & _
-            "P16K	93	PRC 16K 146 x 215 mm" & vbCrLf & _
-            "P32K	94	PRC 32K 97 x 151 mm" & vbCrLf & _
-            "P32KBIG	95	PRC 32K(Big) 97 x 151 mm" & vbCrLf & _
-            "PENV_1	96	PRC Envelope #1 - 102 x 165 mm" & vbCrLf & _
-            "PENV_2	97	PRC Envelope #2 - 102 x 176 mm" & vbCrLf & _
-            "PENV_3	98	PRC Envelope #3 - 125 x 176 mm" & vbCrLf & _
-            "PENV_4	99	PRC Envelope #4 - 110 x 208 mm" & vbCrLf & _
-            "PENV_5	100	PRC Envelope #5 - 110 x 220 mm" & vbCrLf & _
-            "PENV_6	101	PRC Envelope #6 - 120 x 230 mm" & vbCrLf & _
-            "PENV_7	102	PRC Envelope #7 - 160 x 230 mm" & vbCrLf & _
-            "PENV_8	103	PRC Envelope #8 - 120 x 309 mm" & vbCrLf & _
-            "PENV_9	104	PRC Envelope #9 - 229 x 324 mm" & vbCrLf & _
-            "PENV_10	105	PRC Envelope #10 - 324 x 458 mm" & vbCrLf & _
-            "PENV_1_ROTATED	109	PRC Envelope #1 Rotated 165 x 102 mm" & vbCrLf & _
-            "PENV_2_ROTATED	110	PRC Envelope #2 Rotated 176 x 102 mm" & vbCrLf & _
-            "PENV_3_ROTATED	111	PRC Envelope #3 Rotated 176 x 125 mm" & vbCrLf & _
-            "PENV_4_ROTATED	112	PRC Envelope #4 Rotated 208 x 110 mm" & vbCrLf & _
-            "PENV_5_ROTATED	113	PRC Envelope #5 Rotated 220 x 110 mm" & vbCrLf & _
-            "PENV_6_ROTATED	114	PRC Envelope #6 Rotated 230 x 120 mm" & vbCrLf & _
-            "PENV_7_ROTATED	115	PRC Envelope #7 Rotated 230 x 160 mm" & vbCrLf & _
-            "PENV_8_ROTATED	116	PRC Envelope #8 Rotated 309 x 120 mm" & vbCrLf & _
-            "PENV_9_ROTATED	117	PRC Envelope #9 Rotated 324 x 229 mm" & vbCrLf & _
+        Private Shared ReadOnly _SizeDataString As String =
+            "LETTER	1	US Letter 8 1/2 x 11 in" & vbCrLf &
+            "LETTER_SMALL	2	US Letter Small 8 1/2 x 11 in" & vbCrLf &
+            "TABLOID	3	US Tabloid 11 x 17 in" & vbCrLf &
+            "LEDGER	4	US Ledger 17 x 11 in" & vbCrLf &
+            "LEGAL	5	US Legal 8 1/2 x 14 in" & vbCrLf &
+            "STATEMENT	6	US Statement 5 1/2 x 8 1/2 in" & vbCrLf &
+            "EXECUTIVE	7	US Executive 7 1/4 x 10 1/2 in" & vbCrLf &
+            "A3	8	A3 297 x 420 mm" & vbCrLf &
+            "A4	9	A4 210 x 297 mm" & vbCrLf &
+            "A4_SMALL	10	A4 Small 210 x 297 mm" & vbCrLf &
+            "A5	11	A5 148 x 210 mm" & vbCrLf &
+            "B4	12	B4 (JIS) 257 x 364 mm" & vbCrLf &
+            "B5	13	B5 (JIS) 182 x 257 mm" & vbCrLf &
+            "FOLIO	14	Folio 8 1/2 x 13 in" & vbCrLf &
+            "QUARTO	15	Quarto 215 x 275 mm" & vbCrLf &
+            "10X14	16	10 x 14 in" & vbCrLf &
+            "11X17	17	11 x 17 in" & vbCrLf &
+            "NOTE	18	US Note 8 1/2 x 11 in" & vbCrLf &
+            "ENV_9	19	US Envelope #9 - 3 7/8 x 8 7/8" & vbCrLf &
+            "ENV_10	20	US Envelope #10 - 4 1/8 x 9 1/2" & vbCrLf &
+            "ENV_11	21	US Envelope #11 - 4 1/2 x 10 3/8" & vbCrLf &
+            "ENV_12	22	US Envelope #12 - 4 3/4 x 11 in" & vbCrLf &
+            "ENV_14	23	US Envelope #14 - 5 x 11 1/2" & vbCrLf &
+            "ENV_DL	27	Envelope DL 110 x 220 mm" & vbCrLf &
+            "ENV_C5	28	Envelope C5 - 162 x 229 mm" & vbCrLf &
+            "ENV_C3	29	Envelope C3 - 324 x 458 mm" & vbCrLf &
+            "ENV_C4	30	Envelope C4 - 229 x 324 mm" & vbCrLf &
+            "ENV_C6	31	Envelope C6 - 114 x 162 mm" & vbCrLf &
+            "ENV_C65	32	Envelope C65 - 114 x 229 mm" & vbCrLf &
+            "ENV_B4	33	Envelope B4 - 250 x 353 mm" & vbCrLf &
+            "ENV_B5	34	Envelope B5 - 176 x 250 mm" & vbCrLf &
+            "ENV_B6	35	Envelope B6 - 176 x 125 mm" & vbCrLf &
+            "ENV_ITALY	36	Envelope 110 x 230 mm" & vbCrLf &
+            "ENV_MONARCH	37	US Envelope Monarch 3.875 x 7.5 in" & vbCrLf &
+            "ENV_PERSONAL	38	6 3/4 US Envelope 3 5/8 x 6 1/2 in" & vbCrLf &
+            "FANFOLD_US	39	US Std Fanfold 14 7/8 x 11 in" & vbCrLf &
+            "FANFOLD_STD_GERMAN	40	German Std Fanfold 8 1/2 x 12 in" & vbCrLf &
+            "FANFOLD_LGL_GERMAN	41	German Legal Fanfold 8 1/2 x 13 in" & vbCrLf &
+            "ISO_B4	42	B4 (ISO) 250 x 353 mm" & vbCrLf &
+            "JAPANESE_POSTCARD	43	Japanese Postcard 100 x 148 mm" & vbCrLf &
+            "9X11	44	9 x 11 in" & vbCrLf &
+            "10X11	45	10 x 11 in" & vbCrLf &
+            "15X11	46	15 x 11 in" & vbCrLf &
+            "ENV_INVITE	47	Envelope Invite 220 x 220 mm" & vbCrLf &
+            "LETTER_EXTRA	50	US Letter Extra 9 1/2 x 12 in" & vbCrLf &
+            "LEGAL_EXTRA	51	US Legal Extra 9 1/2 x 15 in" & vbCrLf &
+            "TABLOID_EXTRA	52	US Tabloid Extra 11.69 x 18 in" & vbCrLf &
+            "A4_EXTRA	53	A4 Extra 9.27 x 12.69 in" & vbCrLf &
+            "LETTER_TRANSVERSE	54	Letter Transverse 8 1/2 x 11 in" & vbCrLf &
+            "A4_TRANSVERSE	55	A4 Transverse 210 x 297 mm" & vbCrLf &
+            "LETTER_EXTRA_TRANSVERSE	56	Letter Extra Transverse 9 1/2 x 12 in" & vbCrLf &
+            "A_PLUS	57	SuperA/SuperA/A4 227 x 356 mm" & vbCrLf &
+            "B_PLUS	58	SuperB/SuperB/A3 305 x 487 mm" & vbCrLf &
+            "LETTER_PLUS	59	US Letter Plus 8.5 x 12.69 in" & vbCrLf &
+            "A4_PLUS	60	A4 Plus 210 x 330 mm" & vbCrLf &
+            "A5_TRANSVERSE	61	A5 Transverse 148 x 210 mm" & vbCrLf &
+            "B5_TRANSVERSE	62	B5 (JIS) Transverse 182 x 257 mm" & vbCrLf &
+            "A3_EXTRA	63	A3 Extra 322 x 445 mm" & vbCrLf &
+            "A5_EXTRA	64	A5 Extra 174 x 235 mm" & vbCrLf &
+            "B5_EXTRA	65	B5 (ISO) Extra 201 x 276 mm" & vbCrLf &
+            "A2	66	A2 420 x 594 mm" & vbCrLf &
+            "A3_TRANSVERSE	67	A3 Transverse 297 x 420 mm" & vbCrLf &
+            "A3_EXTRA_TRANSVERSE	68	A3 Extra Transverse 322 x 445 mm" & vbCrLf &
+            "DBL_JAPANESE_POSTCARD	69	Japanese Double Postcard 200 x 148 mm" & vbCrLf &
+            "A6	70	A6 105 x 148 mm" & vbCrLf &
+            "LETTER_ROTATED	75	Letter Rotated 11 x 8 1/2 11 in" & vbCrLf &
+            "A3_ROTATED	76	A3 Rotated 420 x 297 mm" & vbCrLf &
+            "A4_ROTATED	77	A4 Rotated 297 x 210 mm" & vbCrLf &
+            "A5_ROTATED	78	A5 Rotated 210 x 148 mm" & vbCrLf &
+            "B4_JIS_ROTATED	79	B4 (JIS) Rotated 364 x 257 mm" & vbCrLf &
+            "B5_JIS_ROTATED	80	B5 (JIS) Rotated 257 x 182 mm" & vbCrLf &
+            "JAPANESE_POSTCARD_ROTATED	81	Japanese Postcard Rotated 148 x 100 mm" & vbCrLf &
+            "DBL_JAPANESE_POSTCARD_ROTATED	82	Double Japanese Postcard Rotated 148 x 200 mm" & vbCrLf &
+            "A6_ROTATED	83	A6 Rotated 148 x 105 mm" & vbCrLf &
+            "B6_JIS	88	B6 (JIS) 128 x 182 mm" & vbCrLf &
+            "B6_JIS_ROTATED	89	B6 (JIS) Rotated 182 x 128 mm" & vbCrLf &
+            "12X11	90	12 x 11 in" & vbCrLf &
+            "P16K	93	PRC 16K 146 x 215 mm" & vbCrLf &
+            "P32K	94	PRC 32K 97 x 151 mm" & vbCrLf &
+            "P32KBIG	95	PRC 32K(Big) 97 x 151 mm" & vbCrLf &
+            "PENV_1	96	PRC Envelope #1 - 102 x 165 mm" & vbCrLf &
+            "PENV_2	97	PRC Envelope #2 - 102 x 176 mm" & vbCrLf &
+            "PENV_3	98	PRC Envelope #3 - 125 x 176 mm" & vbCrLf &
+            "PENV_4	99	PRC Envelope #4 - 110 x 208 mm" & vbCrLf &
+            "PENV_5	100	PRC Envelope #5 - 110 x 220 mm" & vbCrLf &
+            "PENV_6	101	PRC Envelope #6 - 120 x 230 mm" & vbCrLf &
+            "PENV_7	102	PRC Envelope #7 - 160 x 230 mm" & vbCrLf &
+            "PENV_8	103	PRC Envelope #8 - 120 x 309 mm" & vbCrLf &
+            "PENV_9	104	PRC Envelope #9 - 229 x 324 mm" & vbCrLf &
+            "PENV_10	105	PRC Envelope #10 - 324 x 458 mm" & vbCrLf &
+            "PENV_1_ROTATED	109	PRC Envelope #1 Rotated 165 x 102 mm" & vbCrLf &
+            "PENV_2_ROTATED	110	PRC Envelope #2 Rotated 176 x 102 mm" & vbCrLf &
+            "PENV_3_ROTATED	111	PRC Envelope #3 Rotated 176 x 125 mm" & vbCrLf &
+            "PENV_4_ROTATED	112	PRC Envelope #4 Rotated 208 x 110 mm" & vbCrLf &
+            "PENV_5_ROTATED	113	PRC Envelope #5 Rotated 220 x 110 mm" & vbCrLf &
+            "PENV_6_ROTATED	114	PRC Envelope #6 Rotated 230 x 120 mm" & vbCrLf &
+            "PENV_7_ROTATED	115	PRC Envelope #7 Rotated 230 x 160 mm" & vbCrLf &
+            "PENV_8_ROTATED	116	PRC Envelope #8 Rotated 309 x 120 mm" & vbCrLf &
+            "PENV_9_ROTATED	117	PRC Envelope #9 Rotated 324 x 229 mm" & vbCrLf &
             "PENV_10_ROTATED	118	PRC Envelope #10 Rotated 458 x 324 mm"
 
 #End Region
@@ -1318,22 +1529,22 @@ Namespace Printers
             _PaperList = New ObjectModel.ReadOnlyCollection(Of SystemPaperType)(objOut)
         End Sub
 
-        ''' <summary>
-        ''' Parses a size from any kind of text.
-        ''' </summary>
-        ''' <param name="text">The text to parse.</param>
-        ''' <param name="isMM">Receives a value indicating metric system.</param>
-        ''' <param name="scanforDblQuote">Scan for double quotes as inches.</param>
-        ''' <param name="acceptComma">Accept a comma as a separator in addition to the 'x'.</param>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
+        '''' <summary>
+        '''' Parses a size from any kind of text.
+        '''' </summary>
+        '''' <param name="text">The text to parse.</param>
+        '''' <param name="isMM">Receives a value indicating metric system.</param>
+        '''' <param name="scanforDblQuote">Scan for double quotes as inches.</param>
+        '''' <param name="acceptComma">Accept a comma as a separator in addition to the 'x'.</param>
+        '''' <returns></returns>
+        '''' <remarks></remarks>
         Private Shared Function FindSize(text As String, ByRef isMM As Boolean, Optional scanforDblQuote As Boolean = False, Optional acceptComma As Boolean = False) As System.Windows.Size
 
             Dim ch() As Char
             Dim sOut As New System.Windows.Size
 
             Dim pastX As Boolean = False
-            Dim i As Integer, _
+            Dim i As Integer,
                 c As Integer
             Dim x As Integer = 0
 
@@ -1390,8 +1601,8 @@ Namespace Printers
 
             Dim sizes() As String = BatchParse(text, "x")
 
-            Dim d As Double, _
-                e As Double, _
+            Dim d As Double,
+                e As Double,
                 f As Double
 
             Dim sc As Integer = 0
@@ -1421,7 +1632,7 @@ Namespace Printers
 
         End Function
 
-        Public Shared Function TypeListFromCodes(list As IEnumerable(Of Short)) As List(Of SystemPaperType)
+        Friend Shared Function TypeListFromCodes(list As IEnumerable(Of Short)) As List(Of SystemPaperType)
             Dim o As New List(Of SystemPaperType)
             For Each p In _PaperList
 
@@ -1443,20 +1654,48 @@ Namespace Printers
 
     End Class
 
+    ''' <summary>
+    ''' IPaperType interface
+    ''' </summary>
     Public Interface IPaperType
 
+        ''' <summary>
+        ''' Paper type name
+        ''' </summary>
+        ''' <returns></returns>
         Property Name As String
 
+        ''' <summary>
+        ''' True if orientation is landscape
+        ''' </summary>
+        ''' <returns></returns>
         Property IsLandscape As Boolean
 
+        ''' <summary>
+        ''' If true, size is in metric units (millimeters).
+        ''' If false, size is in inches.
+        ''' </summary>
+        ''' <returns></returns>
         Property IsMetric As Boolean
 
+        ''' <summary>
+        ''' Paper size
+        ''' </summary>
+        ''' <returns></returns>
         Property Size As UniSize
 
+        ''' <summary>
+        ''' Compare one paper type to another paper type for equality
+        ''' </summary>
+        ''' <param name="other"></param>
+        ''' <returns></returns>
         Function Equals(other As IPaperType) As Boolean
 
     End Interface
 
+    ''' <summary>
+    ''' Encapsulates a system paper type
+    ''' </summary>
     Public Class SystemPaperType
         Implements IEquatable(Of SystemPaperType), IPaperType
 
@@ -1738,14 +1977,29 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' Convert inches to millimeters
+        ''' </summary>
+        ''' <param name="size">A <see cref="System.Windows.Size"/> structure</param>
+        ''' <returns></returns>
         Public Shared Function InchesToMillimeters(size As System.Windows.Size) As System.Windows.Size
             Return New System.Windows.Size(size.Width * 25.4, size.Height * 25.4)
         End Function
 
+        ''' <summary>
+        ''' Convert millimeters to inches
+        ''' </summary>
+        ''' <param name="size">A <see cref="System.Windows.Size"/> structure</param>
+        ''' <returns></returns>
         Public Shared Function MillimetersToInches(size As System.Windows.Size) As System.Windows.Size
             Return New System.Windows.Size(size.Width / 25.4, size.Height / 25.4)
         End Function
 
+
+        ''' <summary>
+        ''' Returns the <see cref="Description"/> property.
+        ''' </summary>
+        ''' <returns></returns>
         Public Overrides Function ToString() As String
             Return _Description
         End Function
@@ -1754,33 +2008,65 @@ Namespace Printers
 
         End Sub
 
+
+        ''' <summary>
+        ''' Explicit cast to <see cref="String"/>
+        ''' </summary>
+        ''' <param name="operand"></param>
+        ''' <returns></returns>
         Public Shared Narrowing Operator CType(operand As SystemPaperType) As String
             Return operand.Name
         End Operator
 
-        Public Shared Widening Operator CType(operand As String) As SystemPaperType
+        ''' <summary>
+        ''' Explicit cast to <see cref="SystemPaperType"/>
+        ''' </summary>
+        ''' <param name="operand"></param>
+        ''' <returns></returns>
+        Public Shared Narrowing Operator CType(operand As String) As SystemPaperType
             For Each t In SystemPaperTypes.PaperTypes
                 If t.Name.ToLower = operand.ToLower Then Return t
             Next
             Return Nothing
         End Operator
 
+        ''' <summary>
+        ''' Explicit cast to integer
+        ''' </summary>
+        ''' <param name="operand"></param>
+        ''' <returns></returns>
+
         Public Shared Narrowing Operator CType(operand As SystemPaperType) As Integer
             Return operand.Code
         End Operator
 
-        Public Shared Widening Operator CType(operand As Integer) As SystemPaperType
+        ''' <summary>
+        ''' Explicit cast to <see cref="SystemPaperType"/>
+        ''' </summary>
+        ''' <param name="operand"></param>
+        ''' <returns></returns>
+        Public Shared Narrowing Operator CType(operand As Integer) As SystemPaperType
             For Each t In SystemPaperTypes.PaperTypes
                 If t.Code = operand Then Return t
             Next
             Return Nothing
         End Operator
 
+        ''' <summary>
+        ''' Explicit cast to unsigned integer
+        ''' </summary>
+        ''' <param name="operand"></param>
+        ''' <returns></returns>
         Public Shared Narrowing Operator CType(operand As SystemPaperType) As UInteger
             Return operand.Code
         End Operator
 
-        Public Shared Widening Operator CType(operand As UInteger) As SystemPaperType
+        ''' <summary>
+        ''' Explicit cast to <see cref="SystemPaperType"/>
+        ''' </summary>
+        ''' <param name="operand"></param>
+        ''' <returns></returns>
+        Public Shared Narrowing Operator CType(operand As UInteger) As SystemPaperType
             For Each t In SystemPaperTypes.PaperTypes
                 If t.Code = operand Then Return t
             Next
@@ -1793,6 +2079,10 @@ Namespace Printers
 
 #Region "JobInfo Class"
 
+
+    ''' <summary>
+    ''' Information about a job in the print queue
+    ''' </summary>
     <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
     Public Class JobInfo
 
@@ -1801,7 +2091,7 @@ Namespace Printers
         Private _ptr As MemPtr
         Private _str As MemPtr
 
-        Public Sub New(ptr As IntPtr)
+        Friend Sub New(ptr As IntPtr)
             MyBase.New(0, True)
             _ptr = ptr
             _str = ptr + 4
@@ -1823,6 +2113,10 @@ Namespace Printers
             End Try
         End Function
 
+        ''' <summary>
+        ''' Job Id
+        ''' </summary>
+        ''' <returns></returns>
         Public Property JobId As UInteger
             Get
                 Return _ptr.UIntegerAt(0)
@@ -1832,6 +2126,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' The name of the printer printing this job
+        ''' </summary>
+        ''' <returns></returns>
         Public Property PrinterName As String
             Get
                 Return _str.StringIndirectAt(0)
@@ -1841,6 +2139,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' The name of the computer that owns this job
+        ''' </summary>
+        ''' <returns></returns>
         Public Property MachineName As String
             Get
                 Return _str.StringIndirectAt(1)
@@ -1850,6 +2152,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' The username of the user printing this job
+        ''' </summary>
+        ''' <returns></returns>
         Public Property UserName As String
             Get
                 Return _str.StringIndirectAt(2)
@@ -1859,6 +2165,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' The name of the document being printed
+        ''' </summary>
+        ''' <returns></returns>
         Public Property Document As String
             Get
                 Return _str.StringIndirectAt(3)
@@ -1868,6 +2178,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' Notification name
+        ''' </summary>
+        ''' <returns></returns>
         Public Property NotifyName As String
             Get
                 Return _str.StringIndirectAt(4)
@@ -1877,6 +2191,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' Data type
+        ''' </summary>
+        ''' <returns></returns>
         Public Property Datatype As String
             Get
                 Return _str.StringIndirectAt(5)
@@ -1886,6 +2204,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' Print processor
+        ''' </summary>
+        ''' <returns></returns>
         Public Property PrintProcessor As String
             Get
                 Return _str.StringIndirectAt(6)
@@ -1895,6 +2217,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' Parameters
+        ''' </summary>
+        ''' <returns></returns>
         Public Property Parameters As String
             Get
                 Return _str.StringIndirectAt(7)
@@ -1904,6 +2230,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' Driver name
+        ''' </summary>
+        ''' <returns></returns>
         Public Property DriverName As String
             Get
                 Return _str.StringIndirectAt(8)
@@ -1913,7 +2243,7 @@ Namespace Printers
             End Set
         End Property
 
-        Public Property DevMode As IntPtr
+        Friend Property DevMode As IntPtr
             Get
                 Return If(IntPtr.Size = 8, _str.LongAt(9), _str.IntegerAt(9))
             End Get
@@ -1926,6 +2256,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' Status message
+        ''' </summary>
+        ''' <returns></returns>
         Public Property StatusMessage As String
             Get
                 Return _str.StringIndirectAt(10)
@@ -1935,7 +2269,7 @@ Namespace Printers
             End Set
         End Property
 
-        Public Property SecurityDescriptor As IntPtr
+        Friend Property SecurityDescriptor As IntPtr
             Get
                 Return If(IntPtr.Size = 8, _str.LongAt(11), _str.IntegerAt(11))
             End Get
@@ -1948,6 +2282,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' Status code
+        ''' </summary>
+        ''' <returns></returns>
         Public Property StatusCode As UInteger
             Get
                 Dim i As Integer = 4 + (12 * IntPtr.Size)
@@ -1959,6 +2297,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' Print queue priority
+        ''' </summary>
+        ''' <returns></returns>
         Public Property Priority As UInteger
             Get
                 Dim i As Integer = 8 + (12 * IntPtr.Size)
@@ -1970,6 +2312,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' Print queue position
+        ''' </summary>
+        ''' <returns></returns>
         Public Property Position As UInteger
             Get
                 Dim i As Integer = 12 + (12 * IntPtr.Size)
@@ -1981,28 +2327,40 @@ Namespace Printers
             End Set
         End Property
 
-        Public Property StartTime As UInteger
+        ''' <summary>
+        ''' Job start time
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property StartTime As FriendlyUnixTime
             Get
                 Dim i As Integer = 16 + (12 * IntPtr.Size)
                 Return _ptr.UIntegerAtAbsolute(i)
             End Get
-            Set(value As UInteger)
+            Set(value As FriendlyUnixTime)
                 Dim i As Integer = 16 + (12 * IntPtr.Size)
                 _ptr.UIntegerAtAbsolute(i) = value
             End Set
         End Property
 
-        Public Property UntilTime As UInteger
+        ''' <summary>
+        ''' Job run unti time
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property UntilTime As FriendlyUnixTime
             Get
                 Dim i As Integer = 20 + (12 * IntPtr.Size)
                 Return _ptr.UIntegerAtAbsolute(i)
             End Get
-            Set(value As UInteger)
+            Set(value As FriendlyUnixTime)
                 Dim i As Integer = 20 + (12 * IntPtr.Size)
                 _ptr.UIntegerAtAbsolute(i) = value
             End Set
         End Property
 
+        ''' <summary>
+        ''' Total pages in job
+        ''' </summary>
+        ''' <returns></returns>
         Public Property TotalPages As UInteger
             Get
                 Dim i As Integer = 24 + (12 * IntPtr.Size)
@@ -2014,6 +2372,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' The job size
+        ''' </summary>
+        ''' <returns></returns>
         Public Property Size As UInteger
             Get
                 Dim i As Integer = 28 + (12 * IntPtr.Size)
@@ -2025,17 +2387,25 @@ Namespace Printers
             End Set
         End Property
 
-        Public Property Submitted As SYSTEMTIME
+        ''' <summary>
+        ''' The time the job was submitted
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property Submitted As Date
             Get
                 Dim i As Integer = 32 + (12 * IntPtr.Size)
                 Return Marshal.PtrToStructure(_ptr + i, GetType(SYSTEMTIME))
             End Get
-            Set(value As SYSTEMTIME)
+            Set(value As Date)
                 Dim i As Integer = 32 + (12 * IntPtr.Size)
                 Marshal.StructureToPtr(value, _ptr + i, False)
             End Set
         End Property
 
+        ''' <summary>
+        ''' Elapsed time (in seconds)
+        ''' </summary>
+        ''' <returns></returns>
         Public Property Time As UInteger
             Get
                 Dim i As Integer = 48 + (12 * IntPtr.Size)
@@ -2047,6 +2417,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' Page finished printing
+        ''' </summary>
+        ''' <returns></returns>
         Public Property PagePrinted As UInteger
             Get
                 Dim i As Integer = 52 + (12 * IntPtr.Size)
@@ -2064,6 +2438,9 @@ Namespace Printers
 
 #Region "Printer Object Collection"
 
+    ''' <summary>
+    ''' A collection of printers available to the machine
+    ''' </summary>
     Public Class PrinterObjects
         Inherits ObservableCollection(Of PrinterObject)
 
@@ -2088,12 +2465,20 @@ Namespace Printers
             Refresh()
         End Sub
 
-        Public Shared ReadOnly Property Printers As IEnumerable(Of PrinterObject)
+        ''' <summary>
+        ''' The collection of printers
+        ''' </summary>
+        ''' <returns></returns>
+        Public Shared ReadOnly Property Printers As PrinterObjects
             Get
                 Return _printers
             End Get
         End Property
 
+        ''' <summary>
+        ''' Refresh the available printers
+        ''' </summary>
+        ''' <returns></returns>
         Public Shared Function Refresh() As Boolean
 
             Dim mm As New MemPtr
@@ -2224,6 +2609,14 @@ Namespace Printers
 
 #Region "Shared Methods"
 
+        ''' <summary>
+        ''' Get the printable area of the page
+        ''' </summary>
+        ''' <param name="printer">The printer</param>
+        ''' <param name="paper">Paper type</param>
+        ''' <param name="resolution">Resolution</param>
+        ''' <param name="orientation">Orientation</param>
+        ''' <returns></returns>
         Public Shared Function GetPrintableArea(printer As PrinterObject, paper As SystemPaperType, resolution As UniSize, Optional orientation As Integer = 0) As UniRect
 
             Dim rc As New UniRect
@@ -2259,6 +2652,11 @@ Namespace Printers
             Return rc
         End Function
 
+        ''' <summary>
+        ''' Get <see cref="PrinterObject"/> by name
+        ''' </summary>
+        ''' <param name="name">The name of the printer</param>
+        ''' <returns></returns>
         Public Shared Function GetPrinterInfoObject(name As String) As PrinterObject
             GetPrinterInfoObject = Nothing
             internalGetPrinter(name, GetPrinterInfoObject)
@@ -2277,6 +2675,10 @@ Namespace Printers
             Return New PrinterObject(DefaultPrinterName)
         End Function
 
+        ''' <summary>
+        ''' Returns the name of the default printer
+        ''' </summary>
+        ''' <returns></returns>
         Public Shared ReadOnly Property DefaultPrinterName As String
             Get
                 Dim l As Integer = 0
@@ -3086,6 +3488,12 @@ Namespace Printers
 
 #Region "Operators"
 
+
+        ''' <summary>
+        ''' Explicitly cast string to <see cref="PrinterObject"/>
+        ''' </summary>
+        ''' <param name="operand"></param>
+        ''' <returns></returns>
         Public Shared Narrowing Operator CType(operand As String) As PrinterObject
             Try
                 Return New PrinterObject(operand)
@@ -3100,7 +3508,7 @@ Namespace Printers
 
 #End Region
 
-#Region "DEVMODE Structure"
+#Region "DeviceMode: DEVMODE Structure Wrapper Class"
 
     Public Class DeviceMode
         Inherits CriticalFinalizerObject
@@ -3114,6 +3522,10 @@ Namespace Printers
             _own = fOwn
         End Sub
 
+        ''' <summary>
+        ''' Device name
+        ''' </summary>
+        ''' <returns></returns>
         Public Property DeviceName As String
             Get
                 Return _ptr.GrabString(0, 32).Trim(ChrW(0))
@@ -3124,6 +3536,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' Spec version
+        ''' </summary>
+        ''' <returns></returns>
         Public Property SpecVersion As UShort
             Get
                 Return _ptr.UShortAtAbsolute(64)
@@ -3133,6 +3549,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' Driver version
+        ''' </summary>
+        ''' <returns></returns>
         Public Property DriverVersion As UShort
             Get
                 Return _ptr.UShortAtAbsolute(66)
@@ -3142,6 +3562,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' Size
+        ''' </summary>
+        ''' <returns></returns>
         Public Property Size As UShort
             Get
                 Return _ptr.UShortAtAbsolute(68)
@@ -3151,6 +3575,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' Driver Extra
+        ''' </summary>
+        ''' <returns></returns>
         Public Property DriverExtra As UShort
             Get
                 Return _ptr.UShortAtAbsolute(70)
@@ -3160,6 +3588,10 @@ Namespace Printers
             End Set
         End Property
 
+        ''' <summary>
+        ''' Device mode fields
+        ''' </summary>
+        ''' <returns></returns>
         Public Property Fields As DeviceModeFields
             Get
                 Return _ptr.UIntegerAtAbsolute(72)
@@ -3517,7 +3949,7 @@ Namespace Printers
         Public Overloads Function Equals(other As DeviceMode) As Boolean Implements IEquatable(Of DeviceMode).Equals
             Dim pi() As PropertyInfo = Me.GetType.GetProperties(BindingFlags.Public Or BindingFlags.Instance)
 
-            Dim o1 As Object, _
+            Dim o1 As Object,
                 o2 As Object
 
             For Each pe In pi

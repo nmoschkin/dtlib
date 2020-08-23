@@ -32,6 +32,10 @@ Imports DataTools.ExtendedMath.ColorMath
 
 Namespace Native
 
+    ''' <summary>
+    ''' A large cross-section of pInvoke-related items
+    ''' </summary>
+    ''' <remarks>This class is not well documented.</remarks>
     Public Module PInvoke
 
 #Region "Window Messages"
@@ -2998,28 +3002,28 @@ Public Const SHIL_LAST           SHIL_SYSSMALL
             ''' Required to delete the object.
             ''' </summary>
             <Description("Required to delete the object.")>
-            DELETE = &H00010000
+            DELETE = &H10000
             ''' <summary>
             ''' Required to read information in the security descriptor for the object, not including the information in the SACL. To read or write the SACL, you must request the ACCESS_SYSTEM_SECURITY access right. For more information, see SACL Access Right.
             ''' </summary>
             <Description("Required to read information in the security descriptor for the object, not including the information in the SACL. To read or write the SACL, you must request the ACCESS_SYSTEM_SECURITY access right. For more information, see SACL Access Right.")>
-            READ_CONTROL = &H00020000
+            READ_CONTROL = &H20000
             ''' <summary>
             ''' Not supported for desktop objects.
             ''' </summary>
             <Description("Not supported for desktop objects.")>
-            SYNCHRONIZE = &H00100000
+            SYNCHRONIZE = &H100000
             ''' <summary>
             ''' Required to modify the DACL in the security descriptor for the object.
             ''' </summary>
             <Description("Required to modify the DACL in the security descriptor for the object.")>
-            WRITE_DAC = &H00040000
+            WRITE_DAC = &H40000
 
             ''' <summary>
             ''' Required to change the owner in the security descriptor for the object.
             ''' </summary>
             <Description("Required to change the owner in the security descriptor for the object.")>
-            WRITE_OWNER = &H00080000
+            WRITE_OWNER = &H80000
 
             'The following table lists the object-specific access rights.
             'Access right	Description
@@ -3028,55 +3032,55 @@ Public Const SHIL_LAST           SHIL_SYSSMALL
             ''' Required to create a menu on the desktop.
             ''' </summary>
             <Description("Required to create a menu on the desktop.")>
-            DESKTOP_CREATEMENU = &H0004
+            DESKTOP_CREATEMENU = &H4
 
             ''' <summary>
             ''' Required to create a window on the desktop.
             ''' </summary>
             <Description("Required to create a window on the desktop.")>
-            DESKTOP_CREATEWINDOW = &H0002
+            DESKTOP_CREATEWINDOW = &H2
 
             ''' <summary>
             ''' Required for the desktop to be enumerated.
             ''' </summary>
             <Description("Required for the desktop to be enumerated.")>
-            DESKTOP_ENUMERATE = &H0040
+            DESKTOP_ENUMERATE = &H40
 
             ''' <summary>
             ''' Required to establish any of the window hooks.
             ''' </summary>
             <Description("Required to establish any of the window hooks.")>
-            DESKTOP_HOOKCONTROL = &H0008
+            DESKTOP_HOOKCONTROL = &H8
 
             ''' <summary>
             ''' Required to perform journal playback on a desktop.
             ''' </summary>
             <Description("Required to perform journal playback on a desktop.")>
-            DESKTOP_JOURNALPLAYBACK = &H0020
+            DESKTOP_JOURNALPLAYBACK = &H20
 
             ''' <summary>
             ''' Required to perform journal recording on a desktop.
             ''' </summary>
             <Description("Required to perform journal recording on a desktop.")>
-            DESKTOP_JOURNALRECORD = &H0010
+            DESKTOP_JOURNALRECORD = &H10
 
             ''' <summary>
             ''' Required to read objects on the desktop.
             ''' </summary>
             <Description("Required to read objects on the desktop.")>
-            DESKTOP_READOBJECTS = &H0001
+            DESKTOP_READOBJECTS = &H1
 
             ''' <summary>
             ''' Required to activate the desktop using the SwitchDesktop function.
             ''' </summary>
             <Description("Required to activate the desktop using the SwitchDesktop function.")>
-            DESKTOP_SWITCHDESKTOP = &H0100
+            DESKTOP_SWITCHDESKTOP = &H100
 
             ''' <summary>
             ''' Required to write objects on the desktop.
             ''' </summary>
             <Description("Required to write objects on the desktop.")>
-            DESKTOP_WRITEOBJECTS = &H0080
+            DESKTOP_WRITEOBJECTS = &H80
 
             'The following are the generic access rights for a desktop object contained in the interactive window station of the user's logon session.
             'Access right	Description

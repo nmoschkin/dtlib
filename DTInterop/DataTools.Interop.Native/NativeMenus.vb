@@ -36,7 +36,7 @@ Imports DataTools.Memory
 Imports DataTools.Interop.Desktop
 Imports System.Windows.Forms
 
-Namespace Native
+Namespace Native.Menu
 
 #Region "Native Menu Wrapper Classes"
 
@@ -1149,7 +1149,7 @@ Namespace Native
 
             mm.IsString = True
 
-            mii.dwTypeData = mm.Handle
+            mii.dwTypeData = mm.handle
 
             If GetMenuItemInfo(hMenu, itemId, byPos, mii) = 0 Then
                 Dim err As Integer = GetLastError,
@@ -1158,7 +1158,7 @@ Namespace Native
                 mm.Length = 1026
                 mm.ZeroMemory()
 
-                FormatMessage(&H1000, 0, err, 0, mm.Handle, 512, 0)
+                FormatMessage(&H1000, 0, err, 0, mm.handle, 512, 0)
 
                 MsgBox("Error " & err.ToString("X8") & " " & mm.ToString)
                 mm.Dispose()
@@ -1205,7 +1205,7 @@ Namespace Native
 
             mm.IsString = True
 
-            mii.dwTypeData = mm.Handle
+            mii.dwTypeData = mm.handle
 
             If GetMenuItemInfo(hMenu, itemId, byPos, mii) = 0 Then
                 Dim err As Integer = GetLastError,
@@ -1214,7 +1214,7 @@ Namespace Native
                 mm.Length = 1026
                 mm.ZeroMemory()
 
-                FormatMessage(&H1000, 0, err, 0, mm.Handle, 512, 0)
+                FormatMessage(&H1000, 0, err, 0, mm.handle, 512, 0)
 
                 MsgBox("Error " & err.ToString("X8") & " " & mm.ToString)
                 mm.Dispose()

@@ -19,7 +19,7 @@ Namespace Native
 
 #Region "USB Subsystem"
 
-    Module libusb
+    Friend Module libusb
 
         ''' <summary>
         ''' Pack 1 structures for USB.
@@ -1156,7 +1156,7 @@ Namespace Native
 
 #Region "Helper Functions"
 
-    Module UsbLibHelpers
+    Friend Module UsbLibHelpers
 
         Public busses() As usb_bus
         Public devices() As usb_device

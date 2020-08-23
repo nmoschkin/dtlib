@@ -19,7 +19,7 @@ Imports System.ComponentModel
 
 Namespace Native
 
-    Module Async
+    Friend Module Async
 
         Public Const STATUS_WAIT_0 = &H0
         Public Const STATUS_ABANDONED_WAIT_0 = &H80
