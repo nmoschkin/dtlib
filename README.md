@@ -1,6 +1,6 @@
-# The DataTools Desktop Utility Library
+# DataTools
 ## Version 4.2
-### A general memory, hardware, math, text and utility library.
+### Memory and Hardware Interop Library
 
 An extensive low-level and hardware utility library featuring a number of useful classes and structures built in Visual Basic .NET and MSIL.
 
