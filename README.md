@@ -12,7 +12,7 @@ An extensive low-level and hardware utility library featuring a number of useful
 
 DTCore is heavily coded in IL on the backend, with VB.NET on the front using __ILSupport__.
 
-This module features VB.NET language-specific indexed accessor properties for [__MemPtr__](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_MemPtr), [__SafePtr__](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_SafePtr)__, and [__Blob__](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_Blob).  These tools can directly interface with unmanaged memory and pinned GCHandles to quickly manipulate data at the byte-level for just about any kind of blittable object.  
+This module features VB.NET language-specific indexed accessor properties for **[MemPtr]**(https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_MemPtr), **[SafePtr]**(https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_SafePtr)__, and **[Blob]**(https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_Blob).  These tools can directly interface with unmanaged memory and pinned GCHandles to quickly manipulate data at the byte-level for just about any kind of blittable object.  
 
 These classes **CAN** be used in C#, but since the C# language does not support properties with indexers, the functions will appear in Intellisense by their internal 'magic' names.  For example, a property called __ByteAt(index As Integer)__ will appear in C# as two separate functions: __byte get_ByteAt(int index)__ and __void set_ByteAt(int index, byte value)__.
 
