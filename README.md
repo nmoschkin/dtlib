@@ -2,7 +2,7 @@
 ## Version 4.2
 ### Memory and Hardware Interop Library
 
-An extensive low-level and hardware utility library featuring a number of useful classes and structures built in Visual Basic .NET and MSIL.
+An extensive memory and hardware abstraction and wrapper library featuring a number of unique and useful classes and structures built in Visual Basic .NET and MSIL for native Windows operating systems.
 
 ## [Visit the Wiki](https://github.com/nmoschkin/dtlib/wiki)
 
