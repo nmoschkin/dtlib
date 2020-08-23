@@ -7,6 +7,7 @@
 An extensive memory and hardware abstraction and wrapper library featuring a number of unique and useful classes and structures built in **Visual Basic .NET** and **CIL** for native Windows operating systems.
 
 Visit [The Wiki](https://github.com/nmoschkin/dtlib/wiki).
+
 _(See below for **important namespaces and classes**)_
 
 ## Individual Libraries
