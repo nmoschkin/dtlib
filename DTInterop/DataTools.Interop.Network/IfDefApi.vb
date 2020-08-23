@@ -24,16 +24,13 @@ Imports DataTools.Memory
 
 Namespace Network
 
-    <HideModuleName>
-    Public Module IfDefApi
-
 #Region "Address Family"
 
-        ''' <summary>
-        ''' Network adapter address families.
-        ''' </summary>
-        ''' <remarks></remarks>
-        Public Enum AddressFamily As UInt16
+    ''' <summary>
+    ''' Network adapter address families.
+    ''' </summary>
+    ''' <remarks></remarks>
+    Public Enum AddressFamily As UInt16
 
             ''' <summary>
             ''' unspecified
@@ -422,8 +419,8 @@ Namespace Network
 
             Public ReadOnly Property AddressFamily As AddressFamily
                 Get
-                    If Handle.Handle = IntPtr.Zero Then Return IfDefApi.AddressFamily.AfUnspecified
-                    Return ToSockAddr.AddressFamily
+                If Handle.Handle = IntPtr.Zero Then Return AddressFamily.AfUnspecified
+                Return ToSockAddr.AddressFamily
                 End Get
             End Property
 
@@ -498,12 +495,7 @@ Namespace Network
 
 #Region "Address Structures"
 
-        '' A lot of creative marshaling is used here.
-
-        Public Const MAX_ADAPTER_ADDRESS_LENGTH = 8
-        Public Const MAX_DHCPV6_DUID_LENGTH = 130
-
-        Public Enum IpDadState
+    Public Enum IpDadState
             IpDadStateInvalid = 0
             IpDadStateTentative
             IpDadStateDuplicate
@@ -633,13 +625,21 @@ Namespace Network
         Public Structure IP_ADAPTER_HEADER_UNION
             Public Alignment As ULong
 
-            Public ReadOnly Property Length As UInteger
+        ''' <summary>
+        ''' Length of the structure
+        ''' </summary>
+        ''' <returns></returns>
+        Public ReadOnly Property Length As UInteger
                 Get
                     Return CUInt(Alignment And &HFFFFFFFFL)
                 End Get
             End Property
 
-            Public ReadOnly Property IfIndex As UInteger
+        ''' <summary>
+        ''' Interface index
+        ''' </summary>
+        ''' <returns></returns>
+        Public ReadOnly Property IfIndex As UInteger
                 Get
                     Return CUInt((Alignment >> 32) And &HFFFFFFFFL)
                 End Get
@@ -1849,14 +1849,31 @@ Namespace Network
         ''' </summary>
         ''' <remarks></remarks>
         Public Enum NET_IF_CONNECTION_TYPE
+
+            ''' <summary>
+            ''' Undefined
+            ''' </summary>
             Undefined = 0
+
             ''' <summary>
             ''' Dedicated connection.  This is a typical connection.
             ''' </summary>
             ''' <remarks></remarks>
             Dedicated = 1
+
+            ''' <summary>
+            ''' Passive
+            ''' </summary>
             Passive = 2
+
+            ''' <summary>
+            ''' On demand
+            ''' </summary>
             Demand = 3
+
+            ''' <summary>
+            ''' Maximum
+            ''' </summary>
             Maximum = 4
         End Enum
 
@@ -1865,12 +1882,40 @@ Namespace Network
         ''' </summary>
         ''' <remarks></remarks>
         Public Enum TUNNEL_TYPE
+
+            ''' <summary>
+            ''' None
+            ''' </summary>
             None = 0
+
+            ''' <summary>
+            ''' Other
+            ''' </summary>
             Other = 1
+
+            ''' <summary>
+            ''' Direct
+            ''' </summary>
             Direct = 2
+
+            ''' <summary>
+            ''' Ipv6 to Ipv4 tunnel
+            ''' </summary>
             IPv6ToIPv4 = 11
+
+            ''' <summary>
+            ''' ISATAP tunnel
+            ''' </summary>
             ISATAP = 13
+
+            ''' <summary>
+            ''' Teredo Ipv6 tunnel
+            ''' </summary>
             Teredo = 14
+
+            ''' <summary>
+            ''' IPHTTPS tunnel
+            ''' </summary>
             IPHTTPS = 15
         End Enum
 
@@ -1880,20 +1925,40 @@ Namespace Network
         ''' <remarks></remarks>
         Public Enum IF_OPER_STATUS
             ''' <summary>
-            ''' The network device is up.
+            ''' The network device is up
             ''' </summary>
             ''' <remarks></remarks>
             IfOperStatusUp = 1
 
             ''' <summary>
-            ''' The network device is down.
+            ''' The network device is down
             ''' </summary>
             ''' <remarks></remarks>
             IfOperStatusDown
+
+            ''' <summary>
+            ''' The network device is performing a self-test
+            ''' </summary>
             IfOperStatusTesting
+
+            ''' <summary>
+            ''' The state of the network device is unknown
+            ''' </summary>
             IfOperStatusUnknown
+
+            ''' <summary>
+            ''' The network device is asleep
+            ''' </summary>
             IfOperStatusDormant
+
+            ''' <summary>
+            ''' The network device is not present
+            ''' </summary>
             IfOperStatusNotPresent
+
+            ''' <summary>
+            ''' Network device lower-layer is down
+            ''' </summary>
             IfOperStatusLowerLayerDown
         End Enum
 
@@ -1921,229 +1986,309 @@ Namespace Network
 
 #Region "Original C Structure For Reference"
 
-        'typedef struct _IP_ADAPTER_ADDRESSES {
-        '  union {
-        '    ULONGLONG Alignment;
-        '    struct {
-        '      ULONG Length;
-        '      DWORD IfIndex;
-        '    };
-        '  };
-        '  struct _IP_ADAPTER_ADDRESSES  *Next;
-        '  PCHAR                              AdapterName;
-        '  PIP_ADAPTER_UNICAST_ADDRESS        FirstUnicastAddress;
-        '  PIP_ADAPTER_ANYCAST_ADDRESS        FirstAnycastAddress;
-        '  PIP_ADAPTER_MULTICAST_ADDRESS      FirstMulticastAddress;
-        '  PIP_ADAPTER_DNS_SERVER_ADDRESS     FirstDnsServerAddress;
-        '  PWCHAR                             DnsSuffix;
-        '  PWCHAR                             Description;
-        '  PWCHAR                             FriendlyName;
-        '  BYTE                               PhysicalAddress[MAX_ADAPTER_ADDRESS_LENGTH];
-        '  DWORD                              PhysicalAddressLength;
-        '  DWORD                              Flags;
-        '  DWORD                              Mtu;
-        '  DWORD                              IfType;
-        '  IF_OPER_STATUS                     OperStatus;
-        '  DWORD                              Ipv6IfIndex;
-        '  DWORD                              ZoneIndices[16];
-        '  PIP_ADAPTER_PREFIX                 FirstPrefix;
-        '  ULONG64                            TransmitLinkSpeed;
-        '  ULONG64                            ReceiveLinkSpeed;
-        '  PIP_ADAPTER_WINS_SERVER_ADDRESS_LH FirstWinsServerAddress;
-        '  PIP_ADAPTER_GATEWAY_ADDRESS_LH     FirstGatewayAddress;
-        '  ULONG                              Ipv4Metric;
-        '  ULONG                              Ipv6Metric;
-        '  IF_LUID                            Luid;
-        '  SOCKET_ADDRESS                     Dhcpv4Server;
-        '  NET_IF_COMPARTMENT_ID              CompartmentId;
-        '  NET_IF_NETWORK_GUID                NetworkGuid;
-        '  NET_IF_CONNECTION_TYPE             ConnectionType;
-        '  TUNNEL_TYPE                        TunnelType;
-        '  SOCKET_ADDRESS                     Dhcpv6Server;
-        '  BYTE                               Dhcpv6ClientDuid[MAX_DHCPV6_DUID_LENGTH];
-        '  ULONG                              Dhcpv6ClientDuidLength;
-        '  ULONG                              Dhcpv6Iaid;
-        '  PIP_ADAPTER_DNS_SUFFIX             FirstDnsSuffix;
-        '} IP_ADAPTER_ADDRESSES, *PIP_ADAPTER_ADDRESSES;
+    'typedef struct _IP_ADAPTER_ADDRESSES {
+    '  union {
+    '    ULONGLONG Alignment;
+    '    struct {
+    '      ULONG Length;
+    '      DWORD IfIndex;
+    '    };
+    '  };
+    '  struct _IP_ADAPTER_ADDRESSES  *Next;
+    '  PCHAR                              AdapterName;
+    '  PIP_ADAPTER_UNICAST_ADDRESS        FirstUnicastAddress;
+    '  PIP_ADAPTER_ANYCAST_ADDRESS        FirstAnycastAddress;
+    '  PIP_ADAPTER_MULTICAST_ADDRESS      FirstMulticastAddress;
+    '  PIP_ADAPTER_DNS_SERVER_ADDRESS     FirstDnsServerAddress;
+    '  PWCHAR                             DnsSuffix;
+    '  PWCHAR                             Description;
+    '  PWCHAR                             FriendlyName;
+    '  BYTE                               PhysicalAddress[MAX_ADAPTER_ADDRESS_LENGTH];
+    '  DWORD                              PhysicalAddressLength;
+    '  DWORD                              Flags;
+    '  DWORD                              Mtu;
+    '  DWORD                              IfType;
+    '  IF_OPER_STATUS                     OperStatus;
+    '  DWORD                              Ipv6IfIndex;
+    '  DWORD                              ZoneIndices[16];
+    '  PIP_ADAPTER_PREFIX                 FirstPrefix;
+    '  ULONG64                            TransmitLinkSpeed;
+    '  ULONG64                            ReceiveLinkSpeed;
+    '  PIP_ADAPTER_WINS_SERVER_ADDRESS_LH FirstWinsServerAddress;
+    '  PIP_ADAPTER_GATEWAY_ADDRESS_LH     FirstGatewayAddress;
+    '  ULONG                              Ipv4Metric;
+    '  ULONG                              Ipv6Metric;
+    '  IF_LUID                            Luid;
+    '  SOCKET_ADDRESS                     Dhcpv4Server;
+    '  NET_IF_COMPARTMENT_ID              CompartmentId;
+    '  NET_IF_NETWORK_GUID                NetworkGuid;
+    '  NET_IF_CONNECTION_TYPE             ConnectionType;
+    '  TUNNEL_TYPE                        TunnelType;
+    '  SOCKET_ADDRESS                     Dhcpv6Server;
+    '  BYTE                               Dhcpv6ClientDuid[MAX_DHCPV6_DUID_LENGTH];
+    '  ULONG                              Dhcpv6ClientDuidLength;
+    '  ULONG                              Dhcpv6Iaid;
+    '  PIP_ADAPTER_DNS_SUFFIX             FirstDnsSuffix;
+    '} IP_ADAPTER_ADDRESSES, *PIP_ADAPTER_ADDRESSES;
 
 #End Region
 
+    ''' <summary>
+    ''' The almighty IP_ADAPTER_ADDRESSES structure.
+    ''' </summary>
+    ''' <remarks>Do not use this structure with wanton abandon.</remarks>
+    <StructLayout(LayoutKind.Sequential), TypeConverter(GetType(ExpandableObjectConverter))>
+    Public Structure IP_ADAPTER_ADDRESSES
+
         ''' <summary>
-        ''' The almighty IP_ADAPTER_ADDRESSES structure.
+        ''' The header of type <see cref="IP_ADAPTER_HEADER_UNION"/>
         ''' </summary>
-        ''' <remarks>Do not use this structure with wanton abandon.</remarks>
-        <StructLayout(LayoutKind.Sequential), TypeConverter(GetType(ExpandableObjectConverter))>
-        Public Structure IP_ADAPTER_ADDRESSES
-            <MarshalAs(UnmanagedType.Struct), Browsable(True)>
-            Public Header As IP_ADAPTER_HEADER_UNION
-
-            ''' <summary>
-            ''' Pointer to the next IP_ADAPTER_ADDRESSES structure.
-            ''' </summary>
-            ''' <remarks></remarks>
-            Public [Next] As LPIP_ADAPTER_ADDRESSES
-
-            ''' <summary>
-            ''' The GUID name of the adapter.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <MarshalAs(UnmanagedType.LPStr), Browsable(True)>
-            Public AdapterName As String
-
-            ''' <summary>
-            ''' What most people think of as their IP address is stored here, in a chain of addresses.
-            ''' The element in the structure typically refers to an IPv6 address,
-            ''' while the next one in the chain (FirstUnicastAddress.Next) referers to
-            ''' your IPv4 address.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Browsable(True)>
-            Public FirstUnicastAddress As LPADAPTER_UNICAST_ADDRESS
-
-            <Browsable(True)>
-            Public FirstAnycastAddress As LPADAPTER_MULTICAST_ADDRESS
-
-            <Browsable(True)>
-            Public FirstMulticastAddress As LPADAPTER_MULTICAST_ADDRESS
-
-            <Browsable(True)>
-            Public FirstDnsServerAddress As LPADAPTER_MULTICAST_ADDRESS
-
-            ''' <summary>
-            ''' This is your domain name, typically your ISP (poolxxxx-verizon.net, 2wire.att.net, etc...)
-            ''' </summary>
-            ''' <remarks></remarks>
-            <MarshalAs(UnmanagedType.LPWStr), Browsable(True)>
-            Public DnsSuffix As String
-
-            ''' <summary>
-            ''' This is always the friendly name of the hardware instance of the network adapter.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <MarshalAs(UnmanagedType.LPWStr), Browsable(True)>
-            Public Description As String
-
-            ''' <summary>
-            ''' Friendly name of the network connection (e.g. Ethernet 2, Wifi 1, etc..)
-            ''' </summary>
-            ''' <remarks></remarks>
-            <MarshalAs(UnmanagedType.LPWStr), Browsable(True)>
-            Public FriendlyName As String
-
-            ''' <summary>
-            ''' The adapter's MAC address.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Browsable(True)>
-            Public PhysicalAddress As MACADDRESS
-
-            ''' <summary>
-            ''' The length of the adapter's MAC address.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Browsable(True)>
-            Public PhysicalAddressLength As UInteger
-
-            ''' <summary>
-            ''' The adapter's capabilities and flags.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Browsable(True)>
-            Public Flags As IPAdapterAddressesFlags
-
-            ''' <summary>
-            ''' The maximum transmission unit of the connection.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Browsable(True)>
-            Public Mtu As Integer
-
-            ''' <summary>
-            ''' The adapter interface type.  Typically either 'ETHERNET_CSMACD' for
-            ''' wired adapters and 'IEEE80211' for wifi adapters.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Browsable(True)>
-            Public IfType As IFTYPE
-
-            ''' <summary>
-            ''' The current operational status (up/down) of the device.
-            ''' </summary>
-            ''' <remarks></remarks>
-            <Browsable(True)>
-            Public OperStatus As IF_OPER_STATUS
-
-            <Browsable(True)>
-            Public Ipv6IfIndex As UInteger
-
-            <MarshalAs(UnmanagedType.ByValArray, ArraySubType:=UnmanagedType.U4, SizeConst:=16)>
-            Public ZoneIndices() As UInteger
-
-            <Browsable(True)>
-            Public FirstPrefix As LPIP_ADAPTER_PREFIX
-
-            <Browsable(True)>
-            Public TransmitLinkSpeed As ULong
-
-            <Browsable(True)>
-            Public ReceiveLinkSpeed As ULong
-
-            <Browsable(True)>
-            Public FirstWinsServerAddress As LPADAPTER_MULTICAST_ADDRESS
-
-            <Browsable(True)>
-            Public FirstGatewayAddress As LPADAPTER_MULTICAST_ADDRESS
-
-            <Browsable(True)>
-            Public Ipv4Metric As UInteger
-
-            <Browsable(True)>
-            Public Ipv6Metric As UInteger
-
-            <Browsable(True)>
-            Public Luid As LUID
-
-            <Browsable(True)>
-            Public Dhcp4Server As SOCKET_ADDRESS
-
-            <Browsable(True)>
-            Public CompartmentId As UInt32
-
-            <Browsable(True)>
-            Public NetworkGuid As Guid
-
-            <Browsable(True)>
-            Public ConnectionType As NET_IF_CONNECTION_TYPE
-
-            <Browsable(True)>
-            Public TunnelType As TUNNEL_TYPE
-
-            <Browsable(True)>
-            Public Dhcpv6Server As SOCKET_ADDRESS
-
-            <MarshalAs(UnmanagedType.ByValArray, ArraySubType:=UnmanagedType.U1, SizeConst:=MAX_DHCPV6_DUID_LENGTH)>
-            Public Dhcpv6ClientDuid As Byte()
-
-            <Browsable(True)>
-            Public Dhcpv6ClientDuidLength As UInteger
-
-            <Browsable(True)>
-            Public Dhcpv6Iaid As UInteger
-
-            <Browsable(True)>
-            Public FirstDnsSuffix As LPIP_ADAPTER_DNS_SUFFIX
-
-            Public Overrides Function ToString() As String
-                Return FriendlyName
-            End Function
-
-        End Structure
+        <MarshalAs(UnmanagedType.Struct), Browsable(True)>
+        Public Header As IP_ADAPTER_HEADER_UNION
 
         ''' <summary>
-        ''' Creatively marshaled pointerized structure for the IP_ADAPTER_ADDRESSES structure.
+        ''' Pointer to the next IP_ADAPTER_ADDRESSES structure.
         ''' </summary>
         ''' <remarks></remarks>
-        <StructLayout(LayoutKind.Sequential), TypeConverter(GetType(ExpandableObjectConverter))>
+        Public [Next] As LPIP_ADAPTER_ADDRESSES
+
+        ''' <summary>
+        ''' The GUID name of the adapter.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <MarshalAs(UnmanagedType.LPStr), Browsable(True)>
+        Public AdapterName As String
+
+        ''' <summary>
+        ''' What most people think of as their IP address is stored here, in a chain of addresses.
+        ''' The element in the structure typically refers to an IPv6 address,
+        ''' while the next one in the chain (FirstUnicastAddress.Next) referers to
+        ''' your IPv4 address.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Browsable(True)>
+        Public FirstUnicastAddress As LPADAPTER_UNICAST_ADDRESS
+
+
+        ''' <summary>
+        ''' First anycast address
+        ''' </summary>
+        <Browsable(True)>
+        Public FirstAnycastAddress As LPADAPTER_MULTICAST_ADDRESS
+
+        ''' <summary>
+        ''' First multicast address
+        ''' </summary>
+        <Browsable(True)>
+        Public FirstMulticastAddress As LPADAPTER_MULTICAST_ADDRESS
+
+        ''' <summary>
+        ''' For DNS server address
+        ''' </summary>
+        <Browsable(True)>
+        Public FirstDnsServerAddress As LPADAPTER_MULTICAST_ADDRESS
+
+        ''' <summary>
+        ''' This is your domain name, typically your ISP (poolxxxx-verizon.net, 2wire.att.net, etc...)
+        ''' </summary>
+        ''' <remarks></remarks>
+        <MarshalAs(UnmanagedType.LPWStr), Browsable(True)>
+        Public DnsSuffix As String
+
+        ''' <summary>
+        ''' This is always the friendly name of the hardware instance of the network adapter.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <MarshalAs(UnmanagedType.LPWStr), Browsable(True)>
+        Public Description As String
+
+        ''' <summary>
+        ''' Friendly name of the network connection (e.g. Ethernet 2, Wifi 1, etc..)
+        ''' </summary>
+        ''' <remarks></remarks>
+        <MarshalAs(UnmanagedType.LPWStr), Browsable(True)>
+        Public FriendlyName As String
+
+        ''' <summary>
+        ''' The adapter's MAC address.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Browsable(True)>
+        Public PhysicalAddress As MACADDRESS
+
+        ''' <summary>
+        ''' The length of the adapter's MAC address.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Browsable(True)>
+        Public PhysicalAddressLength As UInteger
+
+        ''' <summary>
+        ''' The adapter's capabilities and flags.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Browsable(True)>
+        Public Flags As IPAdapterAddressesFlags
+
+        ''' <summary>
+        ''' The maximum transmission unit of the connection.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Browsable(True)>
+        Public Mtu As Integer
+
+        ''' <summary>
+        ''' The adapter interface type.  Typically either 'ETHERNET_CSMACD' for
+        ''' wired adapters and 'IEEE80211' for wifi adapters.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Browsable(True)>
+        Public IfType As IFTYPE
+
+        ''' <summary>
+        ''' The current operational status (up/down) of the device.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Browsable(True)>
+        Public OperStatus As IF_OPER_STATUS
+
+        ''' <summary>
+        ''' Ipv6 Interface Index
+        ''' </summary>
+        <Browsable(True)>
+        Public Ipv6IfIndex As UInteger
+
+
+        ''' <summary>
+        ''' Zone indices
+        ''' </summary>
+        <MarshalAs(UnmanagedType.ByValArray, ArraySubType:=UnmanagedType.U4, SizeConst:=16)>
+        Public ZoneIndices() As UInteger
+
+        ''' <summary>
+        ''' First <see cref="LPIP_ADAPTER_PREFIX"/>
+        ''' </summary>
+        <Browsable(True)>
+        Public FirstPrefix As LPIP_ADAPTER_PREFIX
+
+        ''' <summary>
+        ''' Transmit link speed
+        ''' </summary>
+        <Browsable(True)>
+        Public TransmitLinkSpeed As ULong
+
+        ''' <summary>
+        ''' Receive link speed
+        ''' </summary>
+        <Browsable(True)>
+        Public ReceiveLinkSpeed As ULong
+
+
+        ''' <summary>
+        ''' First WINS server address
+        ''' </summary>
+        <Browsable(True)>
+        Public FirstWinsServerAddress As LPADAPTER_MULTICAST_ADDRESS
+
+        ''' <summary>
+        ''' First gateway address
+        ''' </summary>
+        <Browsable(True)>
+        Public FirstGatewayAddress As LPADAPTER_MULTICAST_ADDRESS
+
+        ''' <summary>
+        ''' Ipv4 Metric
+        ''' </summary>
+        <Browsable(True)>
+        Public Ipv4Metric As UInteger
+
+        ''' <summary>
+        ''' Ipv6 Metric
+        ''' </summary>
+        <Browsable(True)>
+        Public Ipv6Metric As UInteger
+
+        ''' <summary>
+        ''' LUID
+        ''' </summary>
+        <Browsable(True)>
+        Public Luid As LUID
+
+        ''' <summary>
+        ''' DHCP v4 server
+        ''' </summary>
+        <Browsable(True)>
+        Public Dhcp4Server As SOCKET_ADDRESS
+
+        ''' <summary>
+        ''' Compartment ID
+        ''' </summary>
+        <Browsable(True)>
+        Public CompartmentId As UInt32
+
+        ''' <summary>
+        ''' Network GUID
+        ''' </summary>
+        <Browsable(True)>
+        Public NetworkGuid As Guid
+
+        ''' <summary>
+        ''' Connection type
+        ''' </summary>
+        <Browsable(True)>
+        Public ConnectionType As NET_IF_CONNECTION_TYPE
+
+        ''' <summary>
+        ''' Tunnel type
+        ''' </summary>
+        <Browsable(True)>
+        Public TunnelType As TUNNEL_TYPE
+
+        ''' <summary>
+        ''' DHCP v6 server
+        ''' </summary>
+        <Browsable(True)>
+        Public Dhcpv6Server As SOCKET_ADDRESS
+
+        ''' <summary>
+        ''' DHCP v6 Client DUID
+        ''' </summary>
+        <MarshalAs(UnmanagedType.ByValArray, ArraySubType:=UnmanagedType.U1, SizeConst:=MAX_DHCPV6_DUID_LENGTH)>
+        Public Dhcpv6ClientDuid As Byte()
+
+        ''' <summary>
+        ''' DHCP v6 DUID Length
+        ''' </summary>
+        <Browsable(True)>
+        Public Dhcpv6ClientDuidLength As UInteger
+
+        ''' <summary>
+        ''' DHCP v6 AIID
+        ''' </summary>
+        <Browsable(True)>
+        Public Dhcpv6Iaid As UInteger
+
+        ''' <summary>
+        ''' First DNS suffix
+        ''' </summary>
+        <Browsable(True)>
+        Public FirstDnsSuffix As LPIP_ADAPTER_DNS_SUFFIX
+
+        ''' <summary>
+        ''' Returns the adapter's friendly name.
+        ''' </summary>
+        ''' <returns></returns>
+        Public Overrides Function ToString() As String
+            Return FriendlyName
+        End Function
+
+    End Structure
+
+    ''' <summary>
+    ''' Creatively marshaled pointerized structure for the IP_ADAPTER_ADDRESSES structure.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <StructLayout(LayoutKind.Sequential), TypeConverter(GetType(ExpandableObjectConverter))>
         Public Structure LPIP_ADAPTER_ADDRESSES
             Public Handle As MemPtr
 
@@ -2294,6 +2439,10 @@ Namespace Network
 
 #Region "Adapter Enumeration Result"
 
+
+        ''' <summary>
+        ''' Adapter enumeration result
+        ''' </summary>
         Public Enum ADAPTER_ENUM_RESULT
             ''' <summary>
             ''' Success
@@ -2335,14 +2484,21 @@ Namespace Network
 
 #End Region
 
+    Public Module IfDefApi
+
+        '' A lot of creative marshaling is used here.
+
+        Public Const MAX_ADAPTER_ADDRESS_LENGTH = 8
+        Public Const MAX_DHCPV6_DUID_LENGTH = 130
+
 #Region "Functions"
 
         Declare Function GetAdaptersAddresses Lib "Iphlpapi.dll" _
-        (Family As AfENUM,
-         Flags As GAA_FLAGS,
-         Reserved As IntPtr,
-         Addresses As LPIP_ADAPTER_ADDRESSES,
-         ByRef SizePointer As UInteger) As ADAPTER_ENUM_RESULT
+            (Family As AfENUM,
+             Flags As GAA_FLAGS,
+             Reserved As IntPtr,
+             Addresses As LPIP_ADAPTER_ADDRESSES,
+             ByRef SizePointer As UInteger) As ADAPTER_ENUM_RESULT
 
         ''' <summary>
         ''' Retrieves a linked, unmanaged structure array of IP_ADAPTER_ADDRESSES, enumerating all network interfaces on the system.
@@ -2353,7 +2509,7 @@ Namespace Network
         ''' <param name="noRelease">Specifies that the memory will not be released after usage (this is a typical scenario).</param>
         ''' <returns>A linked, unmanaged structure array of IP_ADAPTER_ADDRESSES.</returns>
         ''' <remarks></remarks>
-        Function GetAdapters(Optional ByRef origPtr As MemPtr = Nothing, Optional ByVal noRelease As Boolean = True) As IP_ADAPTER_ADDRESSES()
+        Friend Function GetAdapters(Optional ByRef origPtr As MemPtr = Nothing, Optional ByVal noRelease As Boolean = True) As IP_ADAPTER_ADDRESSES()
             Dim lpadapt As New LPIP_ADAPTER_ADDRESSES
             Dim adapt As IP_ADAPTER_ADDRESSES
 

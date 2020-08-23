@@ -69,7 +69,7 @@ Namespace Memory
         ''' <summary>
         ''' Gets the system page size.
         ''' </summary>
-        Public Shared ReadOnly SystemPageSize = SystemInfo.SystemInfo.dwPageSize
+        Public Shared ReadOnly SystemPageSize = SystemInformation.SystemInfo.dwPageSize
 
         ''' <summary>
         ''' Sets the global behavior for attempting to parse string input for content.
@@ -95,7 +95,7 @@ Namespace Memory
         ''' <summary>
         ''' represents the default amount by which to extend the buffer in buffering mode.
         ''' </summary>
-        Private _bufferExtend As Long = SystemInfo.SystemInfo.dwPageSize
+        Private _bufferExtend As Long = SystemInformation.SystemInfo.dwPageSize
 
         ''' <summary>
         ''' Represents a value indicating that buffering mode is active.
@@ -2204,7 +2204,7 @@ Namespace Memory
                 virtLen = len
             End If
 
-            If _MemType = MemAllocType.Network AndAlso _bufferExtend > Int32.MaxValue Then _bufferExtend = SystemInfo.SystemInfo.dwPageSize
+            If _MemType = MemAllocType.Network AndAlso _bufferExtend > Int32.MaxValue Then _bufferExtend = SystemInformation.SystemInfo.dwPageSize
 
             Recommit = actualLen
 
@@ -2222,7 +2222,7 @@ Namespace Memory
                 CleanupBuffer = ReAlloc(_bufferExtend)
 
                 If _AutoDouble Then
-                    _bufferExtend = SystemInfo.SystemInfo.dwPageSize
+                    _bufferExtend = SystemInformation.SystemInfo.dwPageSize
                 End If
 
                 Exit Function

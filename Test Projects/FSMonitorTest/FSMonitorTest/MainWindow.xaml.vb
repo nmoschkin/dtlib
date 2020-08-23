@@ -7,7 +7,7 @@ Imports System.Collections.ObjectModel
 Imports DataTools.Strings
 Imports DataTools.Interop.Native
 Imports DataTools.Interop
-Imports DataTools.SystemInfo
+Imports DataTools.SystemInformation
 
 '' VB example demonstates FSMonitor object.
 

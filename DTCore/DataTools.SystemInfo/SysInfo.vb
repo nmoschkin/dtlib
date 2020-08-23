@@ -16,7 +16,7 @@ Imports System.ComponentModel
 Imports DataTools.Memory
 Imports DataTools.Strings
 
-Namespace SystemInfo
+Namespace SystemInformation
 
 #Region "Enumerations"
 
@@ -31,6 +31,9 @@ Namespace SystemInfo
         Max = 3
     End Enum
 
+    ''' <summary>
+    ''' Processor architecture type.
+    ''' </summary>
     Public Enum ArchitectureType As Short
 
         ''' <summary>
@@ -598,94 +601,308 @@ Namespace SystemInfo
 
     End Structure
 
+
+    ''' <summary>
+    ''' Operating system version information
+    ''' </summary>
     <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
     Public Structure OSVERSIONINFO
+
+        ''' <summary>
+        ''' Size of this structure
+        ''' </summary>
         Public OSVersionInfoSize As Integer
+
+        ''' <summary>
+        ''' Major version
+        ''' </summary>
         Public MajorVersion As Integer
+
+        ''' <summary>
+        ''' Minor version
+        ''' </summary>
         Public MinorVersion As Integer
+
+        ''' <summary>
+        ''' Build number
+        ''' </summary>
         Public BuildNumber As Integer
+
+        ''' <summary>
+        ''' Platform ID
+        ''' </summary>
         Public PlatformId As Integer
 
+        ''' <summary>
+        ''' CSD Version
+        ''' </summary>
         <MarshalAs(UnmanagedType.ByValTStr, SizeConst:=128)>
         Public CSDVersion As String
 
     End Structure
 
+
+    ''' <summary>
+    ''' Logical processor relationship 
+    ''' </summary>
     Public Enum LOGICAL_PROCESSOR_RELATIONSHIP
+
+        ''' <summary>
+        ''' Processor core
+        ''' </summary>
         RelationProcessorCore
+
+
+        ''' <summary>
+        ''' Numa Node
+        ''' </summary>
         RelationNumaNode
+
+        ''' <summary>
+        ''' Cache
+        ''' </summary>
         RelationCache
+
+        ''' <summary>
+        ''' Processor Package
+        ''' </summary>
         RelationProcessorPackage
+
+        ''' <summary>
+        ''' Processor Group
+        ''' </summary>
         RelationGroup
+
+        ''' <summary>
+        ''' All
+        ''' </summary>
         RelationAll = &HFFFF
     End Enum
 
+    ''' <summary>
+    ''' Processor cache type
+    ''' </summary>
     Public Enum PROCESSOR_CACHE_TYPE
+
+        ''' <summary>
+        ''' Unified
+        ''' </summary>
         CacheUnified
+
+        ''' <summary>
+        ''' Instruction
+        ''' </summary>
         CacheInstruction
+
+        ''' <summary>
+        ''' Data
+        ''' </summary>
         CacheData
+
+
+        ''' <summary>
+        ''' Trace
+        ''' </summary>
         CacheTrace
     End Enum
 
+    ''' <summary>
+    ''' Cache descriptor
+    ''' </summary>
     <StructLayout(LayoutKind.Sequential)>
     Public Structure CACHE_DESCRIPTOR
+        ''' <summary>
+        ''' Level
+        ''' </summary>
         Public Level As Byte
+
+        ''' <summary>
+        ''' Associativity
+        ''' </summary>
         Public Associativity As Byte
+
+        ''' <summary>
+        ''' Line size
+        ''' </summary>
         Public LineSize As Short
+
+        ''' <summary>
+        ''' Size
+        ''' </summary>
         Public Size As Integer
+
+        ''' <summary>
+        ''' Type
+        ''' </summary>
         Public Type As PROCESSOR_CACHE_TYPE
     End Structure
 
+
+    ''' <summary>
+    ''' Logical processor information stucture.  Contains information about a logical processor on the local machine.
+    ''' </summary>
     <StructLayout(LayoutKind.Explicit)>
     Public Structure SYSTEM_LOGICAL_PROCESSOR_INFORMATION
+
+        ''' <summary>
+        ''' Processor mask
+        ''' </summary>
         <FieldOffset(0)>
         Public ProcessorMask As Long
+
+        ''' <summary>
+        ''' Processor relationship (entity kind)
+        ''' </summary>
 
         <FieldOffset(8)>
         Public Relationship As LOGICAL_PROCESSOR_RELATIONSHIP
 
+        ''' <summary>
+        ''' Flags
+        ''' </summary>
         <FieldOffset(12)>
         Public Flags As Byte
 
+        ''' <summary>
+        ''' Node number
+        ''' </summary>
         <FieldOffset(12)>
         Public NodeNumber As Integer
 
+
+        ''' <summary>
+        ''' Cache descriptor
+        ''' </summary>
         <FieldOffset(12)>
         Public CacheDescriptor As CACHE_DESCRIPTOR
 
+        ''' <summary>
+        ''' Reserved 1
+        ''' </summary>
         <FieldOffset(12)>
         Public Reserved1 As Long
 
+        ''' <summary>
+        ''' Reserved 2
+        ''' </summary>
         <FieldOffset(24)>
         Public Reserved2 As Long
 
     End Structure
 
+
+    ''' <summary>
+    ''' System information.
+    ''' </summary>
     <StructLayout(LayoutKind.Sequential, Pack:=1)>
     Public Structure SYSTEM_INFO
+
+        ''' <summary>
+        ''' Processor Architecture Type enumeration value.
+        ''' </summary>
         Public wProcessorArchitecture As ArchitectureType
+
+        ''' <summary>
+        ''' Reserved
+        ''' </summary>
         Public wReserved As Short
+
+        ''' <summary>
+        ''' System memory page size
+        ''' </summary>
         Public dwPageSize As Integer
+
+        ''' <summary>
+        ''' Minimum allowed application memory address
+        ''' </summary>
         Public lpMinimumApplicationAddress As UIntPtr
+
+        ''' <summary>
+        ''' Maximum allowed application memory address
+        ''' </summary>
         Public lpMaximumApplicationAddress As UIntPtr
+
+        ''' <summary>
+        ''' Active processor mask
+        ''' </summary>
         Public dwActiveProcessorMask As Integer
+
+        ''' <summary>
+        ''' Number of processors on the local machine
+        ''' </summary>
         Public dwNumberOfProcessors As Integer
+
+        ''' <summary>
+        ''' Processor type
+        ''' </summary>
         Public dwProcessorType As Integer
+
+        ''' <summary>
+        ''' Allocation granularity
+        ''' </summary>
         Public dwAllocationGranularity As Integer
+
+        ''' <summary>
+        ''' Processor level
+        ''' </summary>
         Public wProcessorLevel As Short
+
+        ''' <summary>
+        ''' Processor revision
+        ''' </summary>
         Public wProcessorRevision As Short
     End Structure
 
+    ''' <summary>
+    ''' MEMORYSTATUSEX structure
+    ''' </summary>
     <StructLayout(LayoutKind.Sequential)>
     Public Structure MEMORYSTATUSEX
+
+        ''' <summary>
+        ''' Length of this structure
+        ''' </summary>
         Public dwLength As Integer
+
+        ''' <summary>
+        ''' Memory load
+        ''' </summary>
         Public dwMemoryLoad As Integer
+
+        ''' <summary>
+        ''' Total physical memory on the machine
+        ''' </summary>
         Public ullTotalPhys As ULong
+
+        ''' <summary>
+        ''' Total available memroy on the machine
+        ''' </summary>
         Public ullAvailPhys As ULong
+
+        ''' <summary>
+        ''' Total paging file capacity
+        ''' </summary>
         Public ullTotalPageFile As ULong
+
+        ''' <summary>
+        ''' Available paging file capacity
+        ''' </summary>
         Public ullAvailPageFile As ULong
+
+        ''' <summary>
+        ''' Total virtual memory 
+        ''' </summary>
         Public ullTotalVirtual As ULong
+
+        ''' <summary>
+        ''' Available virtual memory
+        ''' </summary>
         Public ullAvailVirtual As ULong
+
+
+        ''' <summary>
+        ''' Available extended virtual memory
+        ''' </summary>
         Public ullAvailExtendedVirtual As ULong
     End Structure
 
@@ -828,8 +1045,10 @@ Namespace SystemInfo
 
 #Region "System Info Initialization"
 
-    <HideModuleName>
-    Public Module SysInfoInit
+    ''' <summary>
+    ''' System information.
+    ''' </summary>
+    Public Module SysInfo
 
         Friend Declare Unicode Function IsWindowsXPOrGreater Lib "kernel32.dll" () As <MarshalAs(UnmanagedType.Bool)> Boolean
         Friend Declare Unicode Function IsWindowsXPSP1OrGreater Lib "kernel32.dll" () As <MarshalAs(UnmanagedType.Bool)> Boolean

@@ -16,7 +16,7 @@ Imports System.Runtime.InteropServices
 Imports System.Security
 Imports System.Security.Permissions
 Imports System.Security.Principal
-Imports DataTools.SystemInfo
+Imports DataTools.SystemInformation
 Imports DataTools.Memory
 Imports DataTools.Interop.Native
 Imports DataTools.Interop.Disk

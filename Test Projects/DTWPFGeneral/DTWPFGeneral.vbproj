@@ -193,6 +193,10 @@
       <Project>{254ad7b9-4120-47b3-a8f5-23548d22a93f}</Project>
       <Name>DTCore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\DTExtended\DTExtended.vbproj">
+      <Project>{acda3789-0159-457f-84d6-664f712b0349}</Project>
+      <Name>DTExtended</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\DTInterop\DTInterop.vbproj">
       <Project>{fbe303a8-9852-49b1-811e-3d118b948e31}</Project>
       <Name>DTInterop</Name>

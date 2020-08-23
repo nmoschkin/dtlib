@@ -16,7 +16,7 @@
 Imports DataTools.Interop.Native
 Imports System.Runtime.InteropServices
 Imports DataTools.Memory
-Imports DataTools.SystemInfo
+
 
 Namespace Network
 
@@ -153,12 +153,893 @@ Namespace Network
     ''' User privilege levels.
     ''' </summary>
     ''' <remarks></remarks>
-    Public Enum UserPrivilege
+    Public Enum UserPrivilegeLevel
+
+        ''' <summary>
+        ''' Guest user
+        ''' </summary>
         Guest
+
+        ''' <summary>
+        ''' Normal user
+        ''' </summary>
         User
+
+        ''' <summary>
+        ''' Administrator
+        ''' </summary>
         Administrator
     End Enum
 
+
+    ''' <summary>
+    ''' Windows API SERVER_INFO_100 structure.  Name and platform Id for a computer.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <StructLayout(LayoutKind.Sequential)>
+    Public Structure ServerInfo100
+
+        ''' <summary>
+        ''' Platform Id
+        ''' </summary>
+        Public PlatformId As Integer
+
+        ''' <summary>
+        ''' Name 
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Name As String
+
+        ''' <summary>
+        ''' Returns <see cref="Name"/>
+        ''' </summary>
+        ''' <returns></returns>
+        Public Overrides Function ToString() As String
+            Return Name
+        End Function
+
+    End Structure
+
+    ''' <summary>
+    ''' Windows Networking SID Types.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <Flags()>
+    Public Enum SidUsage
+        ''' <summary>
+        ''' A user SID.
+        ''' </summary>
+        ''' <remarks></remarks>
+        SidTypeUser = 1
+
+        ''' <summary>
+        ''' A group SID.
+        ''' </summary>
+        ''' <remarks></remarks>
+        SidTypeGroup
+
+        ''' <summary>
+        ''' A domain SID.
+        ''' </summary>
+        ''' <remarks></remarks>
+        SidTypeDomain
+
+        ''' <summary>
+        ''' An alias SID.
+        ''' </summary>
+        ''' <remarks></remarks>
+        SidTypeAlias
+
+        ''' <summary>
+        ''' A SID for a well-known group.
+        ''' </summary>
+        ''' <remarks></remarks>
+        SidTypeWellKnownGroup
+
+        ''' <summary>
+        ''' A SID for a deleted account.
+        ''' </summary>
+        ''' <remarks></remarks>
+        SidTypeDeletedAccount
+
+        ''' <summary>
+        ''' A SID that is not valid.
+        ''' </summary>
+        ''' <remarks></remarks>
+        SidTypeInvalid
+
+        ''' <summary>
+        ''' A SID of unknown type.
+        ''' </summary>
+        ''' <remarks></remarks>
+        SidTypeUnknown
+
+        ''' <summary>
+        ''' A SID for a computer.
+        ''' </summary>
+        ''' <remarks></remarks>
+        SidTypeComputer
+
+        ''' <summary>
+        ''' A mandatory integrity label SID.
+        ''' </summary>
+        ''' <remarks></remarks>
+        SidTypeLabel
+    End Enum
+
+    ''' <summary>
+    ''' Windows Networking server/computer types.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <Flags()>
+    Public Enum ServerTypes
+        ''' <summary>
+        ''' A workstation.
+        ''' </summary>
+        ''' <remarks></remarks>
+        Workstation = &H1
+
+        ''' <summary>
+        ''' A server.
+        ''' </summary>
+        ''' <remarks></remarks>
+        Server = &H2
+
+        ''' <summary>
+        ''' A server running with Microsoft SQL Server.
+        ''' </summary>
+        ''' <remarks></remarks>
+        SqlServer = &H4
+
+        ''' <summary>
+        ''' A primary domain controller.
+        ''' </summary>
+        ''' <remarks></remarks>
+        DomainController = &H8
+
+        ''' <summary>
+        ''' A backup domain controller.
+        ''' </summary>
+        ''' <remarks></remarks>
+        BackupDomainController = &H10
+
+        ''' <summary>
+        ''' A server running the Timesource service.
+        ''' </summary>
+        ''' <remarks></remarks>
+        TimeSource = &H20
+
+        ''' <summary>
+        ''' A server running the Apple Filing Protocol (AFP) file service.
+        ''' </summary>
+        ''' <remarks></remarks>
+        AFPServer = &H40
+
+        ''' <summary>
+        ''' A Novell server.
+        ''' </summary>
+        ''' <remarks></remarks>
+        Novell = &H80
+
+        ''' <summary>
+        ''' A LAN Manager 2.x domain member.
+        ''' </summary>
+        ''' <remarks></remarks>
+        DomainMember = &H100
+
+        ''' <summary>
+        ''' A server that shares a print queue.
+        ''' </summary>
+        ''' <remarks></remarks>
+        PrintQueueServer = &H200
+
+        ''' <summary>
+        ''' A server that runs a dial-in service.
+        ''' </summary>
+        ''' <remarks></remarks>
+        DialInServer = &H400
+
+        ''' <summary>
+        ''' A Xenix or Unix server.
+        ''' </summary>
+        ''' <remarks></remarks>
+        XenixServer = &H800
+
+        ''' <summary>
+        ''' A workstation or server.
+        ''' </summary>
+        ''' <remarks></remarks>
+        WindowsNT = &H1000
+
+        ''' <summary>
+        ''' A computer that runs Windows for Workgroups.
+        ''' </summary>
+        ''' <remarks></remarks>
+        WindowsForWorkgroups = &H2000
+
+        ''' <summary>
+        ''' A server that runs the Microsoft File and Print for NetWare service.
+        ''' </summary>
+        ''' <remarks></remarks>
+        NetwareFilePrintServer = &H4000
+
+        ''' <summary>
+        ''' Any server that is not a domain controller.
+        ''' </summary>
+        ''' <remarks></remarks>
+        NTServer = &H8000
+
+        ''' <summary>
+        ''' A computer that can run the browser service.
+        ''' </summary>
+        ''' <remarks></remarks>
+        PotentialBrowser = &H10000
+
+        ''' <summary>
+        ''' A server running a browser service as backup.
+        ''' </summary>
+        ''' <remarks></remarks>
+        BackupBrowser = &H20000
+
+        ''' <summary>
+        ''' A server running the master browser service.
+        ''' </summary>
+        ''' <remarks></remarks>
+        MasterBrowser = &H40000
+
+        ''' <summary>
+        ''' A server running the domain master browser.
+        ''' </summary>
+        ''' <remarks></remarks>
+        DomainMasterBrowser = &H80000
+
+        ''' <summary>
+        ''' A computer that runs OSF.
+        ''' </summary>
+        ''' <remarks></remarks>
+        OSFServer = &H100000
+
+        ''' <summary>
+        ''' A computer that runs VMS.
+        ''' </summary>
+        ''' <remarks></remarks>
+        VMSServer = &H200000
+
+        ''' <summary>
+        ''' A computer that runs Windows.
+        ''' </summary>
+        ''' <remarks></remarks>
+        Windows = &H400000
+
+        ''' <summary>
+        ''' A server that is the root of a DFS tree.
+        ''' </summary>
+        ''' <remarks></remarks>
+        DFSRootServer = &H800000
+
+        ''' <summary>
+        ''' A server cluster available in the domain.
+        ''' </summary>
+        ''' <remarks></remarks>
+        NTServerCluster = &H1000000
+
+        ''' <summary>
+        ''' A server that runs the Terminal Server service.
+        ''' </summary>
+        ''' <remarks></remarks>
+        TerminalServer = &H2000000
+
+        ''' <summary>
+        ''' Cluster virtual servers available in the domain.
+        ''' </summary>
+        ''' <remarks></remarks>
+        NTVSServerCluster = &H4000000
+
+        ''' <summary>
+        ''' A server that runs the DCE Directory and Security Services or equivalent.
+        ''' </summary>
+        ''' <remarks></remarks>
+        DCEServer = &H10000000
+
+        ''' <summary>
+        ''' A server that is returned by an alternate transport.
+        ''' </summary>
+        ''' <remarks></remarks>
+        AlternateTransport = &H20000000
+
+        ''' <summary>
+        ''' A server that is maintained by the browser.
+        ''' </summary>
+        ''' <remarks></remarks>
+        LocalListOnly = &H40000000
+
+        ''' <summary>
+        ''' A primary domain.
+        ''' </summary>
+        ''' <remarks></remarks>
+        DomainEnum = &H80000000I
+    End Enum
+
+
+    ''' <summary>
+    ''' Windows API SERVER_INFO_101 structure.  Contains extended, vital information
+    ''' about a computer on the network.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <StructLayout(LayoutKind.Sequential)>
+    Public Structure ServerInfo101
+
+
+
+        ''' <summary>
+        ''' Platform ID
+        ''' </summary>
+        Public PlatformId As Integer
+
+
+        ''' <summary>
+        ''' Server Name
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Name As String
+
+        ''' <summary>
+        ''' Server software version Major number
+        ''' </summary>
+        Public VersionMajor As Integer
+        ''' <summary>
+        ''' Server software version Minor number
+        ''' </summary>
+        Public VersionMinor As Integer
+
+        ''' <summary>
+        ''' Server type
+        ''' </summary>
+        Public Type As ServerTypes
+
+        ''' <summary>
+        ''' Comments
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Comment As String
+
+        ''' <summary>
+        ''' Returns the server name
+        ''' </summary>
+        ''' <returns></returns>
+        Public Overrides Function ToString() As String
+            Return Name
+        End Function
+    End Structure
+
+    ''' <summary>
+    ''' Windows API NET_DISPLAY_MACHINE structure.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <StructLayout(LayoutKind.Sequential)>
+    Public Structure NetDisplayMachine
+
+
+        ''' <summary>
+        ''' Server name
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Name As String
+
+        ''' <summary>
+        ''' Comments
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Comment As String
+
+        ''' <summary>
+        ''' Flags
+        ''' </summary>
+        Public Flags As Integer
+
+        ''' <summary>
+        ''' User ID
+        ''' </summary>
+        Public UserId As Integer
+
+        ''' <summary>
+        ''' Next Index
+        ''' </summary>
+        Public NextIndex As Integer
+
+        ''' <summary>
+        ''' Returns Name
+        ''' </summary>
+        ''' <returns></returns>
+        Public Overrides Function ToString() As String
+            Return Name
+        End Function
+    End Structure
+
+    ''' <summary>
+    ''' Windows API LOCALGROUP_INFO_1 structure.  Basic local group information.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <StructLayout(LayoutKind.Sequential)>
+    Public Structure LocalGroupInfo1
+
+        ''' <summary>
+        ''' Group name
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Name As String
+
+        ''' <summary>
+        ''' Comments
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Comment As String
+
+        Public Overrides Function ToString() As String
+            Return Name
+        End Function
+    End Structure
+
+    ''' <summary>
+    ''' Windows API GROUP_INFO_0 structure.  Returns only the group name.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <StructLayout(LayoutKind.Sequential)>
+    Public Structure GroupInfo0
+
+        ''' <summary>
+        ''' Group name
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Name As String
+
+        Public Overrides Function ToString() As String
+            Return Name
+        End Function
+    End Structure
+
+    ''' <summary>
+    ''' Windows API GROUP_INFO_1 structure.  Basic group information and attributes.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <StructLayout(LayoutKind.Sequential)>
+    Public Structure GroupInfo1
+
+        ''' <summary>
+        ''' Group name
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Name As String
+
+        ''' <summary>
+        ''' Comments
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Comment As String
+
+        ''' <summary>
+        ''' Group Id
+        ''' </summary>
+        Public GroupId As IntPtr
+
+        ''' <summary>
+        ''' Attributes
+        ''' </summary>
+        Public Attributes As Integer
+
+        Public Overrides Function ToString() As String
+            Return Name
+        End Function
+    End Structure
+
+    ''' <summary>
+    ''' Windows API GROUP_INFO_2 structure.  Basic group information and attributes.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <StructLayout(LayoutKind.Sequential)>
+    Public Structure GroupInfo2
+
+        ''' <summary>
+        ''' Group name
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Name As String
+
+        ''' <summary>
+        ''' Comments
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Comment As String
+
+        ''' <summary>
+        ''' Group ID
+        ''' </summary>
+        Public GroupId As Integer
+
+        ''' <summary>
+        ''' Attributes
+        ''' </summary>
+        Public Attributes As Integer
+
+        Public Overrides Function ToString() As String
+            Return Name
+        End Function
+    End Structure
+
+    ''' <summary>
+    ''' Windows API GROUP_INFO_3 structure.  Basic group information and attributes.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <StructLayout(LayoutKind.Sequential)>
+    Public Structure GroupInfo3
+
+        ''' <summary>
+        ''' Group name
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Name As String
+
+        ''' <summary>
+        ''' Comments
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Comment As String
+
+        ''' <summary>
+        ''' Group ID
+        ''' </summary>
+        Public GroupId As IntPtr
+
+        ''' <summary>
+        ''' Attributes
+        ''' </summary>
+        Public Attributes As Integer
+
+        Public Overrides Function ToString() As String
+            Return Name
+        End Function
+    End Structure
+
+    ''' <summary>
+    ''' Windows API USER_INFO_1 structure.  A moderately verbose report
+    ''' version of users on a system.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <StructLayout(LayoutKind.Sequential)>
+    Public Structure UserInfo1
+
+        ''' <summary>
+        ''' Username
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Name As String
+
+        ''' <summary>
+        ''' Password (security permitting)
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Password As String
+
+        ''' <summary>
+        ''' Password age
+        ''' </summary>
+        Public PasswordAge As FriendlySeconds
+
+        ''' <summary>
+        ''' User privilege
+        ''' </summary>
+        Public Priv As UserPrivilegeLevel
+
+        ''' <summary>
+        ''' The full path to the user's home directory
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public HomeDir As String
+
+        ''' <summary>
+        ''' Comments
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Commant As String
+
+        ''' <summary>
+        ''' Flags
+        ''' </summary>
+        Public Flags As Integer
+
+        ''' <summary>
+        ''' Script path
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public ScriptPath As String
+
+        Public Overrides Function ToString() As String
+            Return Name
+        End Function
+    End Structure
+
+    ''' <summary>
+    ''' Windows API USER_INFO_11 structure.  A very verbose 
+    ''' report version of users on a system.
+    ''' </summary>
+    ''' <remarks></remarks>
+    <StructLayout(LayoutKind.Sequential)>
+    Public Structure UserInfo11
+        'LPWSTR usri11_name;
+        '  LPWSTR usri11_comment;
+        '  LPWSTR usri11_usr_comment;
+        '  LPWSTR usri11_full_name;
+
+        ''' <summary>
+        ''' Username
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Name As String
+
+        ''' <summary>
+        ''' Comments
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Comment As String
+
+        ''' <summary>
+        ''' User comments
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public UserComment As String
+
+        ''' <summary>
+        ''' User's full name
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public FullName As String
+
+        ''' <summary>
+        ''' User privileges
+        ''' </summary>
+        Public Priv As UserPrivilegeLevel
+
+        ''' <summary>
+        ''' Server access authorization flags
+        ''' </summary>
+        Public AuthFlags As AuthFlags
+
+        ''' <summary>
+        ''' Password age 
+        ''' </summary>
+        Public PasswordAge As FriendlySeconds
+
+        ''' <summary>
+        ''' Full path to the user's home directory
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public HomeDir As String
+
+        ''' <summary>
+        ''' Params
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Parms As String
+
+        ''' <summary>
+        ''' Last logon time/date
+        ''' </summary>
+        Public LastLogon As FriendlyUnixTime
+
+        ''' <summary>
+        ''' Last logout time/date
+        ''' </summary>
+        Public LastLogout As FriendlyUnixTime
+
+        ''' <summary>
+        ''' Number of invalid password attempts
+        ''' </summary>
+        Public BadPwCount As Integer
+
+        ''' <summary>
+        ''' Total number of logons
+        ''' </summary>
+        Public NumLogons As Integer
+
+        ''' <summary>
+        ''' Logon server
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public LogonServer As String
+
+        ''' <summary>
+        ''' Country code
+        ''' </summary>
+        Public CountryCode As Integer
+
+        ''' <summary>
+        ''' Workstations
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Workstations As String
+
+        ''' <summary>
+        ''' Maximum allowed storage for user
+        ''' </summary>
+        Public MaxStorage As Integer
+
+        ''' <summary>
+        ''' Units per week
+        ''' </summary>
+        Public UnitsPerWeek As Integer
+
+        ''' <summary>
+        ''' Logon hours
+        ''' </summary>
+        Public LogonHours As MemPtr
+
+        ''' <summary>
+        ''' Code page
+        ''' </summary>
+        Public CodePage As Integer
+
+        Public Overrides Function ToString() As String
+            Return FullName
+        End Function
+
+    End Structure
+
+    ''' <summary>
+    ''' Windows 8+ Identity Structure for Windows Logon
+    ''' </summary>
+    ''' <remarks></remarks>
+    <StructLayout(LayoutKind.Sequential)>
+    Public Structure UserInfo24
+
+        ''' <summary>
+        ''' Is an internet identity / Microsoft account
+        ''' </summary>
+        <MarshalAs(UnmanagedType.Bool)>
+        Public InternetIdentity As Boolean
+
+        ''' <summary>
+        ''' Flags
+        ''' </summary>
+        Public Flags As Integer
+
+        ''' <summary>
+        ''' Internet provider name
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public InternetProviderName As String
+
+        ''' <summary>
+        ''' Internet principle username
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public InternetPrincipalName As String
+
+        Public UserSid As IntPtr
+
+        Public Overrides Function ToString() As String
+            Return InternetPrincipalName
+        End Function
+    End Structure
+
+    ''' <summary>
+    ''' Network API status result enum
+    ''' </summary>
+    <Flags>
+    Public Enum NET_API_STATUS As UInteger
+
+        ''' <summary>
+        ''' Success
+        ''' </summary>
+        NERR_Success = 0
+
+        ''' <summary>
+        ''' Invalid computer
+        ''' </summary>
+        NERR_InvalidComputer = 2351
+
+
+        ''' <summary>
+        ''' Not primary user
+        ''' </summary>
+        NERR_NotPrimary = 2226
+
+        ''' <summary>
+        ''' Special Group Operation exception
+        ''' </summary>
+        NERR_SpeGroupOp = 2234
+
+        ''' <summary>
+        ''' Last Admin cannot be deleted error
+        ''' </summary>
+        NERR_LastAdmin = 2452
+
+        ''' <summary>
+        ''' Bad Password
+        ''' </summary>
+        NERR_BadPassword = 2203
+
+        ''' <summary>
+        ''' Password too short
+        ''' </summary>
+        NERR_PasswordTooShort = 2245
+
+        ''' <summary>
+        ''' User not found
+        ''' </summary>
+        NERR_UserNotFound = 2221
+
+        ''' <summary>
+        ''' Access denied
+        ''' </summary>
+        ERROR_ACCESS_DENIED = 5
+
+        ''' <summary>
+        ''' Out of memory
+        ''' </summary>
+        ERROR_NOT_ENOUGH_MEMORY = 8
+
+        ''' <summary>
+        ''' Invalid parameters
+        ''' </summary>
+        ERROR_INVALID_PARAMETER = 87
+
+        ''' <summary>
+        ''' Invalid name
+        ''' </summary>
+        ERROR_INVALID_NAME = 123
+
+        ''' <summary>
+        ''' Invalid level
+        ''' </summary>
+        ERROR_INVALID_LEVEL = 124
+
+        ''' <summary>
+        ''' Session credential conflict
+        ''' </summary>
+        ERROR_SESSION_CREDENTIAL_CONFLICT = 1219
+    End Enum
+
+    ''' <summary>
+    ''' UserGroup0 structure
+    ''' </summary>
+    <StructLayout(LayoutKind.Sequential)>
+    Public Structure UserGroup0
+
+        ''' <summary>
+        ''' User group name
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Name As String
+    End Structure
+
+    ''' <summary>
+    ''' UserLocalGroup1 structure
+    ''' </summary>
+    <StructLayout(LayoutKind.Sequential)>
+    Public Structure UserLocalGroup1
+        ''' <summary>
+        ''' Sid
+        ''' </summary>
+        Public Sid As IntPtr
+
+        ''' <summary>
+        ''' Sid usage type
+        ''' </summary>
+        Public SidUsage As SidUsage
+
+        ''' <summary>
+        ''' Group name
+        ''' </summary>
+        <MarshalAs(UnmanagedType.LPWStr)>
+        Public Name As String
+    End Structure
+
+
+
+
+    ''' <summary>
+    ''' Network Information static class
+    ''' </summary>
     Public Module NetInfoApi
 
         Declare Unicode Function GetUserNameEx Lib "Secur32.dll" Alias "GetUserNameExW" (NameFormat As ExtendedNameFormat,
@@ -171,602 +1052,6 @@ Namespace Network
 
         Declare Unicode Function GetUserName Lib "advapi32.dll" Alias "GetUserNameW" (lpNameBuffer As IntPtr,
                                                                                     ByRef lpnSize As Integer) As <MarshalAs(UnmanagedType.Bool)> Boolean
-
-        Public Function CurrentUserFullName(Optional type As ExtendedNameFormat = ExtendedNameFormat.NameDisplay)
-
-            Dim lps As MemPtr
-            Dim cb As Integer = 10240
-
-            lps.SetLength(10240)
-            lps.ZeroMemory()
-            If GetUserNameEx(type, lps.Handle, cb) Then
-                CurrentUserFullName = lps.ToString
-            Else
-                CurrentUserFullName = Nothing
-            End If
-
-            lps.Free()
-        End Function
-
-        Public Function CurrentUserName() As String
-
-            Dim lps As MemPtr
-            Dim cb As Integer = 10240
-
-            lps.SetLength(10240)
-            lps.ZeroMemory()
-            If GetUserName(lps.Handle, cb) Then
-                CurrentUserName = lps.ToString
-            Else
-                CurrentUserName = Nothing
-            End If
-
-            lps.Free()
-
-        End Function
-
-        ''' <summary>
-        ''' Windows API SERVER_INFO_100 structure.  Name and platform Id for a computer.
-        ''' </summary>
-        ''' <remarks></remarks>
-        <StructLayout(LayoutKind.Sequential)>
-        Public Structure ServerInfo100
-
-            Public PlatformId As Integer
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Name As String
-
-            Public Overrides Function ToString() As String
-                Return Name
-            End Function
-
-        End Structure
-
-        ''' <summary>
-        ''' Windows Networking SID Types.
-        ''' </summary>
-        ''' <remarks></remarks>
-        <Flags()>
-        Public Enum SidUsage
-            ''' <summary>
-            ''' A user SID.
-            ''' </summary>
-            ''' <remarks></remarks>
-            SidTypeUser = 1
-
-            ''' <summary>
-            ''' A group SID.
-            ''' </summary>
-            ''' <remarks></remarks>
-            SidTypeGroup
-
-            ''' <summary>
-            ''' A domain SID.
-            ''' </summary>
-            ''' <remarks></remarks>
-            SidTypeDomain
-
-            ''' <summary>
-            ''' An alias SID.
-            ''' </summary>
-            ''' <remarks></remarks>
-            SidTypeAlias
-
-            ''' <summary>
-            ''' A SID for a well-known group.
-            ''' </summary>
-            ''' <remarks></remarks>
-            SidTypeWellKnownGroup
-
-            ''' <summary>
-            ''' A SID for a deleted account.
-            ''' </summary>
-            ''' <remarks></remarks>
-            SidTypeDeletedAccount
-
-            ''' <summary>
-            ''' A SID that is not valid.
-            ''' </summary>
-            ''' <remarks></remarks>
-            SidTypeInvalid
-
-            ''' <summary>
-            ''' A SID of unknown type.
-            ''' </summary>
-            ''' <remarks></remarks>
-            SidTypeUnknown
-
-            ''' <summary>
-            ''' A SID for a computer.
-            ''' </summary>
-            ''' <remarks></remarks>
-            SidTypeComputer
-
-            ''' <summary>
-            ''' A mandatory integrity label SID.
-            ''' </summary>
-            ''' <remarks></remarks>
-            SidTypeLabel
-        End Enum
-
-        ''' <summary>
-        ''' Windows Networking server/computer types.
-        ''' </summary>
-        ''' <remarks></remarks>
-        <Flags()>
-        Public Enum ServerTypes
-            ''' <summary>
-            ''' A workstation.
-            ''' </summary>
-            ''' <remarks></remarks>
-            Workstation = &H1
-
-            ''' <summary>
-            ''' A server.
-            ''' </summary>
-            ''' <remarks></remarks>
-            Server = &H2
-
-            ''' <summary>
-            ''' A server running with Microsoft SQL Server.
-            ''' </summary>
-            ''' <remarks></remarks>
-            SqlServer = &H4
-
-            ''' <summary>
-            ''' A primary domain controller.
-            ''' </summary>
-            ''' <remarks></remarks>
-            DomainController = &H8
-
-            ''' <summary>
-            ''' A backup domain controller.
-            ''' </summary>
-            ''' <remarks></remarks>
-            BackupDomainController = &H10
-
-            ''' <summary>
-            ''' A server running the Timesource service.
-            ''' </summary>
-            ''' <remarks></remarks>
-            TimeSource = &H20
-
-            ''' <summary>
-            ''' A server running the Apple Filing Protocol (AFP) file service.
-            ''' </summary>
-            ''' <remarks></remarks>
-            AFPServer = &H40
-
-            ''' <summary>
-            ''' A Novell server.
-            ''' </summary>
-            ''' <remarks></remarks>
-            Novell = &H80
-
-            ''' <summary>
-            ''' A LAN Manager 2.x domain member.
-            ''' </summary>
-            ''' <remarks></remarks>
-            DomainMember = &H100
-
-            ''' <summary>
-            ''' A server that shares a print queue.
-            ''' </summary>
-            ''' <remarks></remarks>
-            PrintQueueServer = &H200
-
-            ''' <summary>
-            ''' A server that runs a dial-in service.
-            ''' </summary>
-            ''' <remarks></remarks>
-            DialInServer = &H400
-
-            ''' <summary>
-            ''' A Xenix or Unix server.
-            ''' </summary>
-            ''' <remarks></remarks>
-            XenixServer = &H800
-
-            ''' <summary>
-            ''' A workstation or server.
-            ''' </summary>
-            ''' <remarks></remarks>
-            WindowsNT = &H1000
-
-            ''' <summary>
-            ''' A computer that runs Windows for Workgroups.
-            ''' </summary>
-            ''' <remarks></remarks>
-            WindowsForWorkgroups = &H2000
-
-            ''' <summary>
-            ''' A server that runs the Microsoft File and Print for NetWare service.
-            ''' </summary>
-            ''' <remarks></remarks>
-            NetwareFilePrintServer = &H4000
-
-            ''' <summary>
-            ''' Any server that is not a domain controller.
-            ''' </summary>
-            ''' <remarks></remarks>
-            NTServer = &H8000
-
-            ''' <summary>
-            ''' A computer that can run the browser service.
-            ''' </summary>
-            ''' <remarks></remarks>
-            PotentialBrowser = &H10000
-
-            ''' <summary>
-            ''' A server running a browser service as backup.
-            ''' </summary>
-            ''' <remarks></remarks>
-            BackupBrowser = &H20000
-
-            ''' <summary>
-            ''' A server running the master browser service.
-            ''' </summary>
-            ''' <remarks></remarks>
-            MasterBrowser = &H40000
-
-            ''' <summary>
-            ''' A server running the domain master browser.
-            ''' </summary>
-            ''' <remarks></remarks>
-            DomainMasterBrowser = &H80000
-
-            ''' <summary>
-            ''' A computer that runs OSF.
-            ''' </summary>
-            ''' <remarks></remarks>
-            OSFServer = &H100000
-
-            ''' <summary>
-            ''' A computer that runs VMS.
-            ''' </summary>
-            ''' <remarks></remarks>
-            VMSServer = &H200000
-
-            ''' <summary>
-            ''' A computer that runs Windows.
-            ''' </summary>
-            ''' <remarks></remarks>
-            Windows = &H400000
-
-            ''' <summary>
-            ''' A server that is the root of a DFS tree.
-            ''' </summary>
-            ''' <remarks></remarks>
-            DFSRootServer = &H800000
-
-            ''' <summary>
-            ''' A server cluster available in the domain.
-            ''' </summary>
-            ''' <remarks></remarks>
-            NTServerCluster = &H1000000
-
-            ''' <summary>
-            ''' A server that runs the Terminal Server service.
-            ''' </summary>
-            ''' <remarks></remarks>
-            TerminalServer = &H2000000
-
-            ''' <summary>
-            ''' Cluster virtual servers available in the domain.
-            ''' </summary>
-            ''' <remarks></remarks>
-            NTVSServerCluster = &H4000000
-
-            ''' <summary>
-            ''' A server that runs the DCE Directory and Security Services or equivalent.
-            ''' </summary>
-            ''' <remarks></remarks>
-            DCEServer = &H10000000
-
-            ''' <summary>
-            ''' A server that is returned by an alternate transport.
-            ''' </summary>
-            ''' <remarks></remarks>
-            AlternateTransport = &H20000000
-
-            ''' <summary>
-            ''' A server that is maintained by the browser.
-            ''' </summary>
-            ''' <remarks></remarks>
-            LocalListOnly = &H40000000
-
-            ''' <summary>
-            ''' A primary domain.
-            ''' </summary>
-            ''' <remarks></remarks>
-            DomainEnum = &H80000000I
-        End Enum
-
-
-        ''' <summary>
-        ''' Windows API SERVER_INFO_101 structure.  Contains extended, vital information
-        ''' about a computer on the network.
-        ''' </summary>
-        ''' <remarks></remarks>
-        <StructLayout(LayoutKind.Sequential)>
-        Public Structure ServerInfo101
-
-            Public PlatformId As Integer
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Name As String
-            Public VersionMajor As Integer
-            Public VersionMinor As Integer
-            Public Type As ServerTypes
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Comment As String
-
-            Public Overrides Function ToString() As String
-                Return Name
-            End Function
-        End Structure
-
-        ''' <summary>
-        ''' Windows API NET_DISPLAY_MACHINE structure.
-        ''' </summary>
-        ''' <remarks></remarks>
-        <StructLayout(LayoutKind.Sequential)>
-        Public Structure NetDisplayMachine
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Name As String
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Comment As String
-
-            Public Flags As Integer
-            Public UserId As Integer
-            Public NextIndex As Integer
-
-            Public Overrides Function ToString() As String
-                Return Name
-            End Function
-        End Structure
-
-        ''' <summary>
-        ''' Windows API LOCALGROUP_INFO_1 structure.  Basic local group information.
-        ''' </summary>
-        ''' <remarks></remarks>
-        <StructLayout(LayoutKind.Sequential)>
-        Public Structure LocalGroupInfo1
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Name As String
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Comment As String
-
-            Public Overrides Function ToString() As String
-                Return Name
-            End Function
-        End Structure
-
-        ''' <summary>
-        ''' Windows API GROUP_INFO_0 structure.  Returns only the group name.
-        ''' </summary>
-        ''' <remarks></remarks>
-        <StructLayout(LayoutKind.Sequential)>
-        Public Structure GroupInfo0
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Name As String
-
-            Public Overrides Function ToString() As String
-                Return Name
-            End Function
-        End Structure
-
-        ''' <summary>
-        ''' Windows API GROUP_INFO_1 structure.  Basic group information and attributes.
-        ''' </summary>
-        ''' <remarks></remarks>
-        <StructLayout(LayoutKind.Sequential)>
-        Public Structure GroupInfo1
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Name As String
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Comment As String
-
-            Public GroupId As IntPtr
-            Public Attributes As Integer
-
-            Public Overrides Function ToString() As String
-                Return Name
-            End Function
-        End Structure
-
-        ''' <summary>
-        ''' Windows API GROUP_INFO_2 structure.  Basic group information and attributes.
-        ''' </summary>
-        ''' <remarks></remarks>
-        <StructLayout(LayoutKind.Sequential)>
-        Public Structure GroupInfo2
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Name As String
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Comment As String
-
-            Public GroupId As Integer
-            Public Attributes As Integer
-
-            Public Overrides Function ToString() As String
-                Return Name
-            End Function
-        End Structure
-
-        ''' <summary>
-        ''' Windows API GROUP_INFO_3 structure.  Basic group information and attributes.
-        ''' </summary>
-        ''' <remarks></remarks>
-        <StructLayout(LayoutKind.Sequential)>
-        Public Structure GroupInfo3
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Name As String
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Comment As String
-
-            Public GroupId As IntPtr
-            Public Attributes As Integer
-
-            Public Overrides Function ToString() As String
-                Return Name
-            End Function
-        End Structure
-
-        ''' <summary>
-        ''' Windows API USER_INFO_1 structure.  A moderately verbose report
-        ''' version of users on a system.
-        ''' </summary>
-        ''' <remarks></remarks>
-        <StructLayout(LayoutKind.Sequential)>
-        Public Structure UserInfo1
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Name As String
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Password As String
-
-            Public PasswordAge As FriendlySeconds
-
-            Public Priv As UserPrivilege
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public HomeDir As String
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Commant As String
-
-            Public Flags As Integer
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public ScriptPath As String
-
-            Public Overrides Function ToString() As String
-                Return Name
-            End Function
-        End Structure
-
-        ''' <summary>
-        ''' Windows API USER_INFO_11 structure.  A very verbose 
-        ''' report version of users on a system.
-        ''' </summary>
-        ''' <remarks></remarks>
-        <StructLayout(LayoutKind.Sequential)>
-        Public Structure UserInfo11
-            'LPWSTR usri11_name;
-            '  LPWSTR usri11_comment;
-            '  LPWSTR usri11_usr_comment;
-            '  LPWSTR usri11_full_name;
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Name As String
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Comment As String
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public UserComment As String
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public FullName As String
-
-            Public Priv As UserPrivilege
-
-            Public AuthFlags As AuthFlags
-
-            Public PasswordAge As FriendlySeconds
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public HomeDir As String
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Parms As String
-
-            Public LastLogon As FriendlyUnixTime
-
-            Public LastLogout As FriendlyUnixTime
-
-            Public BadPwCount As Integer
-
-            Public NumLogons As Integer
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public LogonServer As String
-
-            Public CountryCode As Integer
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Workstations As String
-
-            Public MaxStorage As Integer
-
-            Public UnitsPerWeek As Integer
-
-            Public LogonHours As MemPtr
-
-            Public CodePage As Integer
-
-            Public Overrides Function ToString() As String
-                Return FullName
-            End Function
-
-        End Structure
-
-        ''' <summary>
-        ''' Windows 8 Identity Structure for Windows Logon
-        ''' </summary>
-        ''' <remarks></remarks>
-        <StructLayout(LayoutKind.Sequential)>
-        Public Structure UserInfo24
-            <MarshalAs(UnmanagedType.Bool)>
-            Public InternetIdentity As Boolean
-
-            Public Flags As Integer
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public InternetProviderName As String
-
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public InternetPrincipalName As String
-
-            Public UserSid As IntPtr
-
-            Public Overrides Function ToString() As String
-                Return InternetPrincipalName
-            End Function
-        End Structure
-
-        <Flags>
-        Public Enum NET_API_STATUS As UInteger
-            NERR_Success = 0
-            NERR_InvalidComputer = 2351
-            NERR_NotPrimary = 2226
-            NERR_SpeGroupOp = 2234
-            NERR_LastAdmin = 2452
-            NERR_BadPassword = 2203
-            NERR_PasswordTooShort = 2245
-            NERR_UserNotFound = 2221
-            ERROR_ACCESS_DENIED = 5
-            ERROR_NOT_ENOUGH_MEMORY = 8
-            ERROR_INVALID_PARAMETER = 87
-            ERROR_INVALID_NAME = 123
-            ERROR_INVALID_LEVEL = 124
-            ERROR_SESSION_CREDENTIAL_CONFLICT = 1219
-        End Enum
 
         Public Declare Function NetUserGetInfo Lib "netapi32.dll" _
         (<MarshalAs(UnmanagedType.LPWStr)> servername As String,
@@ -851,20 +1136,48 @@ Namespace Network
 
 
 
-        <StructLayout(LayoutKind.Sequential)>
-        Public Structure UserGroup0
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Name As String
-        End Structure
+        ''' <summary>
+        ''' Return the current user's full display name
+        ''' </summary>
+        ''' <param name="type"></param>
+        ''' <returns></returns>
+        Public Function CurrentUserFullName(Optional type As ExtendedNameFormat = ExtendedNameFormat.NameDisplay)
 
-        <StructLayout(LayoutKind.Sequential)>
-        Public Structure UserLocalGroup1
-            Public Sid As IntPtr
-            Public SidUsage As SidUsage
+            Dim lps As MemPtr
+            Dim cb As Integer = 10240
 
-            <MarshalAs(UnmanagedType.LPWStr)>
-            Public Name As String
-        End Structure
+            lps.SetLength(10240)
+            lps.ZeroMemory()
+            If GetUserNameEx(type, lps.Handle, cb) Then
+                CurrentUserFullName = lps.ToString
+            Else
+                CurrentUserFullName = Nothing
+            End If
+
+            lps.Free()
+        End Function
+
+        ''' <summary>
+        ''' Return the username for the current user
+        ''' </summary>
+        ''' <returns></returns>
+        Public Function CurrentUserName() As String
+
+            Dim lps As MemPtr
+            Dim cb As Integer = 10240
+
+            lps.SetLength(10240)
+            lps.ZeroMemory()
+            If GetUserName(lps.Handle, cb) Then
+                CurrentUserName = lps.ToString
+            Else
+                CurrentUserName = Nothing
+            End If
+
+            lps.Free()
+
+        End Function
+
 
         ''' <summary>
         ''' Enumerates all computers visible to the specified computer on the specified domain.

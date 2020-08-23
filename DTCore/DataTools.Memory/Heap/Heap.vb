@@ -242,7 +242,7 @@ Namespace Memory
             MyBase.New(0, True)
 
             Dim i As Long = initSize
-            Dim ps = SystemInfo.SystemInfo.dwPageSize
+            Dim ps = SystemInformation.SystemInfo.dwPageSize
 
             If i < ps Then
                 i = ps
@@ -270,7 +270,7 @@ Namespace Memory
         ''' Create a new heap with an initial size of the system page size.
         ''' </summary>
         Public Sub New()
-            Me.New(SystemInfo.SystemInfo.dwPageSize, 0)
+            Me.New(SystemInformation.SystemInfo.dwPageSize, 0)
         End Sub
 
         ''' <summary>

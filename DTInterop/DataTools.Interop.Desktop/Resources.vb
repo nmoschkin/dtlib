@@ -23,6 +23,10 @@ Namespace Desktop
 
 #Region "Icons, Images and Resources"
 
+
+    ''' <summary>
+    ''' Tools for retrieving system and individual EXE/DLL resources, and converting resources to WPF format.
+    ''' </summary>
     Public Module Resources
 
 #Region "RT_GROUPS"
@@ -1103,11 +1107,15 @@ Namespace Desktop
             Return MakeDIBSection(bmp)
         End Function
 
+
         ''' <summary>
-        ''' Creates a WPF BitmapSource from an Icon.
+        ''' Creates a WPF BitmapSource from a Bitmap.
         ''' </summary>
-        ''' <param name="img"></param>
-        ''' <param name="bitPtr"></param>
+        ''' <param name="img">The <see cref="System.Drawing.Icon"/> object to convert.</param>
+        ''' <param name="bitPtr">Set this to zero.</param>
+        ''' <param name="dpiX">The X DPI to use to create the new image (default is 96.0)</param>
+        ''' <param name="dpiY">The Y DPI to use to create the new image (default is 96.0)</param>
+        ''' <param name="createOnApplicationThread"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Function MakeWPFImage(img As Icon, Optional ByRef bitPtr As IntPtr = Nothing, Optional dpiX As Double = 96.0#, Optional dpiY As Double = 96.0#, Optional createOnApplicationThread As Boolean = True) As System.Windows.Media.Imaging.BitmapSource
@@ -1117,8 +1125,11 @@ Namespace Desktop
         ''' <summary>
         ''' Creates a WPF BitmapSource from a Bitmap.
         ''' </summary>
-        ''' <param name="img"></param>
-        ''' <param name="bitPtr"></param>
+        ''' <param name="img">The <see cref="System.Drawing.Image"/> object to convert.</param>
+        ''' <param name="bitPtr">Set this to zero.</param>
+        ''' <param name="dpiX">The X DPI to use to create the new image (default is 96.0)</param>
+        ''' <param name="dpiY">The Y DPI to use to create the new image (default is 96.0)</param>
+        ''' <param name="createOnApplicationThread"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Function MakeWPFImage(img As System.Drawing.Bitmap, Optional ByRef bitPtr As IntPtr = Nothing, Optional dpiX As Double = 96.0#, Optional dpiY As Double = 96.0#, Optional createOnApplicationThread As Boolean = True) As System.Windows.Media.Imaging.BitmapSource

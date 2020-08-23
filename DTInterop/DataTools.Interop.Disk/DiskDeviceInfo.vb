@@ -17,7 +17,7 @@ Imports System.Reflection
 Imports System.Collections.ObjectModel
 Imports System.Windows.Media.Imaging
 Imports DataTools.Interop.Printers
-Imports DataTools.SystemInfo
+Imports DataTools.SystemInformation
 Imports DataTools.Interop
 
 

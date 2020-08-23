@@ -17,6 +17,7 @@ Imports DataTools.ExtendedMath.ColorMath
 
 Namespace Native
 
+
     Module MultiMon
 
         Public Const MONITORINFOF_PRIMARY = &H00000001

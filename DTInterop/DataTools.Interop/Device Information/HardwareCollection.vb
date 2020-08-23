@@ -70,7 +70,7 @@ Public Class HardwareCollection
     End Property
 
     ''' <summary>
-    ''' For hierarchical compatibility, returns the members of this collection instance.
+    ''' For the heirarchical data arrangement, returns the members of this collection instance.
     ''' </summary>
     ''' <value></value>
     ''' <returns></returns>

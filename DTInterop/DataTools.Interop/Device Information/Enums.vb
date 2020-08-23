@@ -14,6 +14,10 @@ Imports System.ComponentModel
 Imports DataTools.Interop.Native
 
 Public Module DevClassPresenting
+
+    ''' <summary>
+    ''' System device removal policy.
+    ''' </summary>
     Public Enum DeviceRemovalPolicy
 
         ''' <summary>
@@ -36,6 +40,9 @@ Public Module DevClassPresenting
 
     End Enum
 
+    ''' <summary>
+    ''' System device characteristics.
+    ''' </summary>
     Public Enum DeviceCharacteristcs
         ''' <summary>
         ''' Beep
