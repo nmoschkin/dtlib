@@ -10,6 +10,9 @@ Visit [The Wiki](https://github.com/nmoschkin/dtlib/wiki).
 
 _(See below for **important namespaces and classes**)_
 
+
+_(Click Here For The [Unabridged Namespace Map](https://github.com/nmoschkin/dtlib/wiki/NamespaceMap))_
+
 ## Individual Libraries
 
 ### __DTCore__ 
@@ -42,6 +45,8 @@ Other independent subsystems include **[Desktop and Shell](https://github.com/nm
 ## Important Namespaces and Classes
 **[Visit the Wiki](https://github.com/nmoschkin/dtlib/wiki)**
 
+**Click Here For The [Unabridged Namespace Map](NamespaceMap)**
+
  - **[DataTools.Memory Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Memory)**
    - **[Blob Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_Blob)**
    - **[MemPtr Structure](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Memory_MemPtr)**
@@ -62,14 +67,14 @@ Other independent subsystems include **[Desktop and Shell](https://github.com/nm
  - **[DataTools.Interop.Display Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Display)**
    - **[MonitorInfo Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Display_MonitorInfo)**
  - **[DataTools.Interop.Network Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Network)**
-   - **[AdapterWrap.AdaptersCollection Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Network_AdapterWrap_AdaptersCollection)**
+   - **[AdaptersCollection Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Network_AdaptersCollection)**
  - **[DataTools.Interop.Printers Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Printers)**
    - **[PrinterDeviceInfo Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Printers_PrinterDeviceInfo)**
  - **[DataTools.Interop.Usb Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Interop_Usb)**
    - **[HidDeviceInfo Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_Interop_Usb_HidDeviceInfo)**
  - **[DataTools.Strings Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_Strings)**
- - **[DataTools.SystemInfo Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_SystemInfo)**
-   - **[OSVERSIONINFOEX Structure](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_SystemInfo_OSVERSIONINFOEX)**
+ - **[DataTools.SystemInfo Namespace](https://github.com/nmoschkin/dtlib/wiki/N_DataTools_SystemInformation)**
+   - **[SysInfo Class](https://github.com/nmoschkin/dtlib/wiki/T_DataTools_SystemInformation_SysInfo)**
 
 
 
