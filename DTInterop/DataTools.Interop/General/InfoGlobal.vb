@@ -109,8 +109,46 @@ Public Module DevEnumPublic
     ''' Enumerate COM Ports
     ''' </summary>
     ''' <returns></returns>
+    Public Function EnumBluetoothRadios() As BluetoothDeviceInfo()
+
+
+        Dim bth = _internalEnumBluetoothRadios()
+
+
+
+
+        Dim p = _internalEnumerateDevices(Of BluetoothDeviceInfo)(BluetoothApi.GUID_BTHPORT_DEVICE_INTERFACE, ClassDevFlags.DeviceInterface Or ClassDevFlags.Present)
+
+
+
+        If p IsNot Nothing AndAlso p.Count > 0 Then
+            For Each x In p
+                If String.IsNullOrEmpty(x.FriendlyName) Then Continue For
+            Next
+
+
+        End If
+
+        If p Is Nothing Then Return Nothing
+
+        Array.Sort(p, New Comparison(Of DeviceInfo)(
+                   Function(x As DeviceInfo, y As DeviceInfo) As Integer
+                       If x.FriendlyName IsNot Nothing AndAlso y.FriendlyName IsNot Nothing Then
+                           Return String.Compare(x.FriendlyName, y.FriendlyName)
+                       Else
+                           Return String.Compare(x.Description, y.Description)
+                       End If
+                   End Function))
+
+        Return p
+    End Function
+
+    ''' <summary>
+    ''' Enumerate COM Ports
+    ''' </summary>
+    ''' <returns></returns>
     Public Function EnumComPorts() As DeviceInfo()
-        Dim p = _internalEnumerateDevices(Of PrinterDeviceInfo)(GUID_DEVINTERFACE_COMPORT, ClassDevFlags.DeviceInterface Or ClassDevFlags.Present)
+        Dim p = _internalEnumerateDevices(Of DeviceInfo)(GUID_DEVINTERFACE_COMPORT, ClassDevFlags.DeviceInterface Or ClassDevFlags.Present)
 
         If p IsNot Nothing AndAlso p.Count > 0 Then
             For Each x In p

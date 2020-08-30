@@ -1,8 +1,11 @@
 ﻿Imports DataTools.Interop.Network
+Imports DataTools.Interop
 Imports DataTools.Memory
 Imports System.ComponentModel
 Imports System.Windows.Interop
 Imports System.Collections.ObjectModel
+
+
 
 Public Class IPWindow
 
@@ -115,6 +118,10 @@ Public Class IPWindow
         'mm.Free()
 
         InitializeComponent()
+
+
+        Dim bth = EnumBluetoothRadios()
+
 
         'Dim bl As SafePtr = System.Text.UTF8Encoding.UTF8.GetBytes("Hello World")
 
