@@ -120,8 +120,11 @@ Public Class IPWindow
         InitializeComponent()
 
 
-        Dim bth = EnumBluetoothRadios()
+        Dim bthRadio = EnumBluetoothRadios()
 
+        Dim bthDev = EnumBluetoothDevices()
+
+        'BluetoothDeviceInfo.ShowBluetoothSettings()
 
         'Dim bl As SafePtr = System.Text.UTF8Encoding.UTF8.GetBytes("Hello World")
 

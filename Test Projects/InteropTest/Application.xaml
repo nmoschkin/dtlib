@@ -78,10 +78,14 @@
                                     <TextBlock Style="{StaticResource Content}"
                                                        Text="{Binding DeviceInfo.Description}" />
 
-
                                     <TextBlock Style="{StaticResource Heading}" Text="Device Install Date:" />
                                     <TextBlock Style="{StaticResource Content}"
                                                        Text="{Binding DeviceInfo.InstallDate}" />
+
+
+                                    <TextBlock Style="{StaticResource Heading}" Text="Bus-Reported Device Description:" />
+                                    <TextBlock Style="{StaticResource Content}"
+                                                       Text="{Binding DeviceInfo.BusReportedDeviceDesc}" />
 
                                     <TextBlock Style="{StaticResource Heading}" Text="Bus Type:" />
                                     <TextBlock Style="{StaticResource Content}"
@@ -193,6 +197,10 @@
                                     <TextBlock Style="{StaticResource Heading}" Text="Device Install Date:" />
                                     <TextBlock Style="{StaticResource Content}"
                                                        Text="{Binding InstallDate}" />
+
+                                    <TextBlock Style="{StaticResource Heading}" Text="Bus-Reported Device Description:" />
+                                    <TextBlock Style="{StaticResource Content}"
+                                                       Text="{Binding BusReportedDeviceDesc}" />
 
                                     <TextBlock Style="{StaticResource Heading}" Text="Bus Type:" />
                                     <TextBlock Style="{StaticResource Content}"

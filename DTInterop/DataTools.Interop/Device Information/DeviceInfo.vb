@@ -43,6 +43,7 @@ Public Class DeviceInfo
     Protected _PDOName As String
     Protected _Manufacturer As String
     Protected _ModelId As Guid
+    Protected _BusReportedDeviceDesc As String
     Protected _ClassName As String
 
     Protected _DeviceInterfaceClassGuid As Guid
@@ -455,6 +456,20 @@ Public Class DeviceInfo
             _ModelId = value
         End Set
     End Property
+
+    ''' <summary>
+    ''' Get the Bus-Reported device description.
+    ''' </summary>
+    ''' <returns></returns>
+    Public Overridable Property BusReportedDeviceDesc As String
+        Get
+            Return _BusReportedDeviceDesc
+        End Get
+        Set(value As String)
+            _BusReportedDeviceDesc = value
+        End Set
+    End Property
+
 
     ''' <summary>
     ''' Gets the device class name.

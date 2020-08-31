@@ -352,46 +352,6 @@ Namespace Native
         Public Const BTH_MAX_PIN_SIZE As UShort = (16)
         Public Const BTH_LINK_KEY_LENGTH As UShort = (16)
 
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
-        Public Structure BTH_MFG_INFO
-
-            Private Shared Manufacturers As Dictionary(Of UShort, String) = New Dictionary(Of UShort, String)
-
-            Private _val As UShort
-
-            Public ReadOnly Property Value As UShort
-                Get
-                    Return _val
-                End Get
-            End Property
-
-            Public ReadOnly Property Name As String
-                Get
-                    Return ToString()
-                End Get
-            End Property
-
-            Friend Sub New(name As String, value As UShort)
-                _val = value
-                If Not Manufacturers.ContainsKey(value) Then Manufacturers.Add(value, name)
-            End Sub
-
-            Public Overrides Function ToString() As String
-                If Manufacturers.ContainsKey(_val) Then Return String.Format("{0}: {1}", _val, Manufacturers(_val)) Else Return _val.ToString()
-            End Function
-
-            Public Shared Widening Operator CType(val1 As BTH_MFG_INFO) As UShort
-                Return val1._val
-            End Operator
-
-            Public Shared Narrowing Operator CType(val1 As UShort) As BTH_MFG_INFO
-                Dim b As BTH_MFG_INFO
-                b._val = val1
-
-                Return b
-            End Operator
-
-        End Structure
 
         '' Manufacturers
         Public ReadOnly BTH_MFG_ERICSSON As BTH_MFG_INFO = New BTH_MFG_INFO("Ericsson", (0))
@@ -485,23 +445,26 @@ Namespace Native
         Public Const COD_SERVICE_BIT_OFFSET As Byte = (8 * 1 + 5)
 
 
-        Public Const COD_FORMAT_MASK As ULong = (&H3)
-        Public Const COD_MINOR_MASK As ULong = (&HFC)
-        Public Const COD_MAJOR_MASK As ULong = (&H1F00)
-        Public Const COD_SERVICE_MASK As ULong = (&HFFE000)
+        Public Const COD_FORMAT_MASK As UInteger = (&H3)
+        Public Const COD_MINOR_MASK As UInteger = (&HFC)
+        Public Const COD_MAJOR_MASK As UInteger = (&H1F00)
+        Public Const COD_SERVICE_MASK As UInteger = (&HFFE000)
 
-        Public Const COD_VERSION As ULong = (&H0)
+        Public Const COD_VERSION As UInteger = (&H0)
 
-        Public Const COD_SERVICE_LIMITED As ULong = (&H1)
-        Public Const COD_SERVICE_POSITIONING As ULong = (&H8)
-        Public Const COD_SERVICE_NETWORKING As ULong = (&H10)
-        Public Const COD_SERVICE_RENDERING As ULong = (&H20)
-        Public Const COD_SERVICE_CAPTURING As ULong = (&H40)
-        Public Const COD_SERVICE_OBJECT_XFER As ULong = (&H80)
-        Public Const COD_SERVICE_AUDIO As ULong = (&H100)
-        Public Const COD_SERVICE_TELEPHONY As ULong = (&H200)
-        Public Const COD_SERVICE_INFORMATION As ULong = (&H400)
-        Public Function COD_SERVICE_VALID_MASK() As ULong
+        Public Const COD_SERVICE_LIMITED As UInteger = (&H1)
+        Public Const COD_SERVICE_POSITIONING As UInteger = (&H8)
+        Public Const COD_SERVICE_NETWORKING As UInteger = (&H10)
+        Public Const COD_SERVICE_RENDERING As UInteger = (&H20)
+        Public Const COD_SERVICE_CAPTURING As UInteger = (&H40)
+        Public Const COD_SERVICE_OBJECT_XFER As UInteger = (&H80)
+        Public Const COD_SERVICE_AUDIO As UInteger = (&H100)
+        Public Const COD_SERVICE_TELEPHONY As UInteger = (&H200)
+        Public Const COD_SERVICE_INFORMATION As UInteger = (&H400)
+
+
+
+        Public Function COD_SERVICE_VALID_MASK() As UInteger
 
             Return (COD_SERVICE_LIMITED Or
                 COD_SERVICE_POSITIONING Or
@@ -522,89 +485,89 @@ Namespace Native
         ''
         '' Major class codes
         ''
-        Public Const COD_MAJOR_MISCELLANEOUS As ULong = (&H0)
-        Public Const COD_MAJOR_COMPUTER As ULong = (&H1)
-        Public Const COD_MAJOR_PHONE As ULong = (&H2)
-        Public Const COD_MAJOR_LAN_ACCESS As ULong = (&H3)
-        Public Const COD_MAJOR_AUDIO As ULong = (&H4)
-        Public Const COD_MAJOR_PERIPHERAL As ULong = (&H5)
-        Public Const COD_MAJOR_IMAGING As ULong = (&H6)
-        Public Const COD_MAJOR_WEARABLE As ULong = (&H7)
-        Public Const COD_MAJOR_TOY As ULong = (&H8)
-        Public Const COD_MAJOR_HEALTH As ULong = (&H9)
-        Public Const COD_MAJOR_UNCLASSIFIED As ULong = (&H1F)
+        Public Const COD_MAJOR_MISCELLANEOUS As UInteger = (&H0)
+        Public Const COD_MAJOR_COMPUTER As UInteger = (&H1)
+        Public Const COD_MAJOR_PHONE As UInteger = (&H2)
+        Public Const COD_MAJOR_LAN_ACCESS As UInteger = (&H3)
+        Public Const COD_MAJOR_AUDIO As UInteger = (&H4)
+        Public Const COD_MAJOR_PERIPHERAL As UInteger = (&H5)
+        Public Const COD_MAJOR_IMAGING As UInteger = (&H6)
+        Public Const COD_MAJOR_WEARABLE As UInteger = (&H7)
+        Public Const COD_MAJOR_TOY As UInteger = (&H8)
+        Public Const COD_MAJOR_HEALTH As UInteger = (&H9)
+        Public Const COD_MAJOR_UNCLASSIFIED As UInteger = (&H1F)
 
         ''
         '' Minor class codes specific to each major class
         ''
-        Public Const COD_COMPUTER_MINOR_UNCLASSIFIED As ULong = (&H0)
-        Public Const COD_COMPUTER_MINOR_DESKTOP As ULong = (&H1)
-        Public Const COD_COMPUTER_MINOR_SERVER As ULong = (&H2)
-        Public Const COD_COMPUTER_MINOR_LAPTOP As ULong = (&H3)
-        Public Const COD_COMPUTER_MINOR_HANDHELD As ULong = (&H4)
-        Public Const COD_COMPUTER_MINOR_PALM As ULong = (&H5)
-        Public Const COD_COMPUTER_MINOR_WEARABLE As ULong = (&H6)
+        Public Const COD_COMPUTER_MINOR_UNCLASSIFIED As UInteger = (&H0)
+        Public Const COD_COMPUTER_MINOR_DESKTOP As UInteger = (&H1)
+        Public Const COD_COMPUTER_MINOR_SERVER As UInteger = (&H2)
+        Public Const COD_COMPUTER_MINOR_LAPTOP As UInteger = (&H3)
+        Public Const COD_COMPUTER_MINOR_HANDHELD As UInteger = (&H4)
+        Public Const COD_COMPUTER_MINOR_PALM As UInteger = (&H5)
+        Public Const COD_COMPUTER_MINOR_WEARABLE As UInteger = (&H6)
 
-        Public Const COD_PHONE_MINOR_UNCLASSIFIED As ULong = (&H0)
-        Public Const COD_PHONE_MINOR_CELLULAR As ULong = (&H1)
-        Public Const COD_PHONE_MINOR_CORDLESS As ULong = (&H2)
-        Public Const COD_PHONE_MINOR_SMART As ULong = (&H3)
-        Public Const COD_PHONE_MINOR_WIRED_MODEM As ULong = (&H4)
+        Public Const COD_PHONE_MINOR_UNCLASSIFIED As UInteger = (&H0)
+        Public Const COD_PHONE_MINOR_CELLULAR As UInteger = (&H1)
+        Public Const COD_PHONE_MINOR_CORDLESS As UInteger = (&H2)
+        Public Const COD_PHONE_MINOR_SMART As UInteger = (&H3)
+        Public Const COD_PHONE_MINOR_WIRED_MODEM As UInteger = (&H4)
 
-        Public Const COD_AUDIO_MINOR_UNCLASSIFIED As ULong = (&H0)
-        Public Const COD_AUDIO_MINOR_HEADSET As ULong = (&H1)
-        Public Const COD_AUDIO_MINOR_HANDS_FREE As ULong = (&H2)
-        Public Const COD_AUDIO_MINOR_HEADSET_HANDS_FREE As ULong = (&H3)
-        Public Const COD_AUDIO_MINOR_MICROPHONE As ULong = (&H4)
-        Public Const COD_AUDIO_MINOR_LOUDSPEAKER As ULong = (&H5)
-        Public Const COD_AUDIO_MINOR_HEADPHONES As ULong = (&H6)
-        Public Const COD_AUDIO_MINOR_PORTABLE_AUDIO As ULong = (&H7)
-        Public Const COD_AUDIO_MINOR_CAR_AUDIO As ULong = (&H8)
-        Public Const COD_AUDIO_MINOR_SET_TOP_BOX As ULong = (&H9)
-        Public Const COD_AUDIO_MINOR_HIFI_AUDIO As ULong = (&HA)
-        Public Const COD_AUDIO_MINOR_VCR As ULong = (&HB)
-        Public Const COD_AUDIO_MINOR_VIDEO_CAMERA As ULong = (&HC)
-        Public Const COD_AUDIO_MINOR_CAMCORDER As ULong = (&HD)
-        Public Const COD_AUDIO_MINOR_VIDEO_MONITOR As ULong = (&HE)
-        Public Const COD_AUDIO_MINOR_VIDEO_DISPLAY_LOUDSPEAKER As ULong = (&HF)
-        Public Const COD_AUDIO_MINOR_VIDEO_DISPLAY_CONFERENCING As ULong = (&H10)
-        '' Public Const COD_AUDIO_MINOR_RESERVED As ULong = (&H11)
-        Public Const COD_AUDIO_MINOR_GAMING_TOY As ULong = (&H12)
+        Public Const COD_AUDIO_MINOR_UNCLASSIFIED As UInteger = (&H0)
+        Public Const COD_AUDIO_MINOR_HEADSET As UInteger = (&H1)
+        Public Const COD_AUDIO_MINOR_HANDS_FREE As UInteger = (&H2)
+        Public Const COD_AUDIO_MINOR_HEADSET_HANDS_FREE As UInteger = (&H3)
+        Public Const COD_AUDIO_MINOR_MICROPHONE As UInteger = (&H4)
+        Public Const COD_AUDIO_MINOR_LOUDSPEAKER As UInteger = (&H5)
+        Public Const COD_AUDIO_MINOR_HEADPHONES As UInteger = (&H6)
+        Public Const COD_AUDIO_MINOR_PORTABLE_AUDIO As UInteger = (&H7)
+        Public Const COD_AUDIO_MINOR_CAR_AUDIO As UInteger = (&H8)
+        Public Const COD_AUDIO_MINOR_SET_TOP_BOX As UInteger = (&H9)
+        Public Const COD_AUDIO_MINOR_HIFI_AUDIO As UInteger = (&HA)
+        Public Const COD_AUDIO_MINOR_VCR As UInteger = (&HB)
+        Public Const COD_AUDIO_MINOR_VIDEO_CAMERA As UInteger = (&HC)
+        Public Const COD_AUDIO_MINOR_CAMCORDER As UInteger = (&HD)
+        Public Const COD_AUDIO_MINOR_VIDEO_MONITOR As UInteger = (&HE)
+        Public Const COD_AUDIO_MINOR_VIDEO_DISPLAY_LOUDSPEAKER As UInteger = (&HF)
+        Public Const COD_AUDIO_MINOR_VIDEO_DISPLAY_CONFERENCING As UInteger = (&H10)
+        '' Public Const COD_AUDIO_MINOR_RESERVED As UInteger = (&H11)
+        Public Const COD_AUDIO_MINOR_GAMING_TOY As UInteger = (&H12)
 
-        Public Const COD_PERIPHERAL_MINOR_KEYBOARD_MASK As ULong = (&H10)
-        Public Const COD_PERIPHERAL_MINOR_POINTER_MASK As ULong = (&H20)
+        Public Const COD_PERIPHERAL_MINOR_KEYBOARD_MASK As UInteger = (&H10)
+        Public Const COD_PERIPHERAL_MINOR_POINTER_MASK As UInteger = (&H20)
 
-        Public Const COD_PERIPHERAL_MINOR_NO_CATEGORY As ULong = (&H0)
-        Public Const COD_PERIPHERAL_MINOR_JOYSTICK As ULong = (&H1)
-        Public Const COD_PERIPHERAL_MINOR_GAMEPAD As ULong = (&H2)
-        Public Const COD_PERIPHERAL_MINOR_REMOTE_CONTROL As ULong = (&H3)
-        Public Const COD_PERIPHERAL_MINOR_SENSING As ULong = (&H4)
+        Public Const COD_PERIPHERAL_MINOR_NO_CATEGORY As UInteger = (&H0)
+        Public Const COD_PERIPHERAL_MINOR_JOYSTICK As UInteger = (&H1)
+        Public Const COD_PERIPHERAL_MINOR_GAMEPAD As UInteger = (&H2)
+        Public Const COD_PERIPHERAL_MINOR_REMOTE_CONTROL As UInteger = (&H3)
+        Public Const COD_PERIPHERAL_MINOR_SENSING As UInteger = (&H4)
 
-        Public Const COD_IMAGING_MINOR_DISPLAY_MASK As ULong = (&H4)
-        Public Const COD_IMAGING_MINOR_CAMERA_MASK As ULong = (&H8)
-        Public Const COD_IMAGING_MINOR_SCANNER_MASK As ULong = (&H10)
-        Public Const COD_IMAGING_MINOR_PRINTER_MASK As ULong = (&H20)
+        Public Const COD_IMAGING_MINOR_DISPLAY_MASK As UInteger = (&H4)
+        Public Const COD_IMAGING_MINOR_CAMERA_MASK As UInteger = (&H8)
+        Public Const COD_IMAGING_MINOR_SCANNER_MASK As UInteger = (&H10)
+        Public Const COD_IMAGING_MINOR_PRINTER_MASK As UInteger = (&H20)
 
-        Public Const COD_WEARABLE_MINOR_WRIST_WATCH As ULong = (&H1)
-        Public Const COD_WEARABLE_MINOR_PAGER As ULong = (&H2)
-        Public Const COD_WEARABLE_MINOR_JACKET As ULong = (&H3)
-        Public Const COD_WEARABLE_MINOR_HELMET As ULong = (&H4)
-        Public Const COD_WEARABLE_MINOR_GLASSES As ULong = (&H5)
+        Public Const COD_WEARABLE_MINOR_WRIST_WATCH As UInteger = (&H1)
+        Public Const COD_WEARABLE_MINOR_PAGER As UInteger = (&H2)
+        Public Const COD_WEARABLE_MINOR_JACKET As UInteger = (&H3)
+        Public Const COD_WEARABLE_MINOR_HELMET As UInteger = (&H4)
+        Public Const COD_WEARABLE_MINOR_GLASSES As UInteger = (&H5)
 
-        Public Const COD_TOY_MINOR_ROBOT As ULong = (&H1)
-        Public Const COD_TOY_MINOR_VEHICLE As ULong = (&H2)
-        Public Const COD_TOY_MINOR_DOLL_ACTION_FIGURE As ULong = (&H3)
-        Public Const COD_TOY_MINOR_CONTROLLER As ULong = (&H4)
-        Public Const COD_TOY_MINOR_GAME As ULong = (&H5)
+        Public Const COD_TOY_MINOR_ROBOT As UInteger = (&H1)
+        Public Const COD_TOY_MINOR_VEHICLE As UInteger = (&H2)
+        Public Const COD_TOY_MINOR_DOLL_ACTION_FIGURE As UInteger = (&H3)
+        Public Const COD_TOY_MINOR_CONTROLLER As UInteger = (&H4)
+        Public Const COD_TOY_MINOR_GAME As UInteger = (&H5)
 
-        Public Const COD_HEALTH_MINOR_BLOOD_PRESSURE_MONITOR As ULong = (&H1)
-        Public Const COD_HEALTH_MINOR_THERMOMETER As ULong = (&H2)
-        Public Const COD_HEALTH_MINOR_WEIGHING_SCALE As ULong = (&H3)
-        Public Const COD_HEALTH_MINOR_GLUCOSE_METER As ULong = (&H4)
-        Public Const COD_HEALTH_MINOR_PULSE_OXIMETER As ULong = (&H5)
-        Public Const COD_HEALTH_MINOR_HEART_PULSE_MONITOR As ULong = (&H6)
-        Public Const COD_HEALTH_MINOR_HEALTH_DATA_DISPLAY As ULong = (&H7)
-        Public Const COD_HEALTH_MINOR_STEP_COUNTER As ULong = (&H8)
+        Public Const COD_HEALTH_MINOR_BLOOD_PRESSURE_MONITOR As UInteger = (&H1)
+        Public Const COD_HEALTH_MINOR_THERMOMETER As UInteger = (&H2)
+        Public Const COD_HEALTH_MINOR_WEIGHING_SCALE As UInteger = (&H3)
+        Public Const COD_HEALTH_MINOR_GLUCOSE_METER As UInteger = (&H4)
+        Public Const COD_HEALTH_MINOR_PULSE_OXIMETER As UInteger = (&H5)
+        Public Const COD_HEALTH_MINOR_HEART_PULSE_MONITOR As UInteger = (&H6)
+        Public Const COD_HEALTH_MINOR_HEALTH_DATA_DISPLAY As UInteger = (&H7)
+        Public Const COD_HEALTH_MINOR_STEP_COUNTER As UInteger = (&H8)
 
         ''
         '' Cannot use GET_COD_MINOR for this b/c it is embedded in a different manner
@@ -613,30 +576,173 @@ Namespace Native
 
         Public Const COD_LAN_ACCESS_BIT_OFFSET As Byte = 5
 
-        Public Const COD_LAN_MINOR_MASK As ULong = (&H1C)
-        Public Const COD_LAN_ACCESS_MASK As ULong = (&HE0)
+        Public Const COD_LAN_MINOR_MASK As UInteger = (&H1C)
+        Public Const COD_LAN_ACCESS_MASK As UInteger = (&HE0)
 
-        Public Function GET_COD_LAN_MINOR(_cod As ULong) As ULong
+        Public Function GET_COD_LAN_MINOR(_cod As UInteger) As UInteger
             Return (((_cod) And COD_LAN_MINOR_MASK) >> COD_MINOR_BIT_OFFSET)
         End Function
 
-        Public Function GET_COD_LAN_ACCESS(_cod As ULong) As ULong
+        Public Function GET_COD_LAN_ACCESS(_cod As UInteger) As UInteger
             Return (((_cod) And COD_LAN_ACCESS_MASK) >> COD_LAN_ACCESS_BIT_OFFSET)
         End Function
 
         ''
         '' LAN access percent usage subcodes
         ''
-        Public Const COD_LAN_MINOR_UNCLASSIFIED As ULong = (&H0)
+        Public Const COD_LAN_MINOR_UNCLASSIFIED As UInteger = (&H0)
 
-        Public Const COD_LAN_ACCESS_0_USED As ULong = (&H0)
-        Public Const COD_LAN_ACCESS_17_USED As ULong = (&H1)
-        Public Const COD_LAN_ACCESS_33_USED As ULong = (&H2)
-        Public Const COD_LAN_ACCESS_50_USED As ULong = (&H3)
-        Public Const COD_LAN_ACCESS_67_USED As ULong = (&H4)
-        Public Const COD_LAN_ACCESS_83_USED As ULong = (&H5)
-        Public Const COD_LAN_ACCESS_99_USED As ULong = (&H6)
-        Public Const COD_LAN_ACCESS_FULL As ULong = (&H7)
+        Public Const COD_LAN_ACCESS_0_USED As UInteger = (&H0)
+        Public Const COD_LAN_ACCESS_17_USED As UInteger = (&H1)
+        Public Const COD_LAN_ACCESS_33_USED As UInteger = (&H2)
+        Public Const COD_LAN_ACCESS_50_USED As UInteger = (&H3)
+        Public Const COD_LAN_ACCESS_67_USED As UInteger = (&H4)
+        Public Const COD_LAN_ACCESS_83_USED As UInteger = (&H5)
+        Public Const COD_LAN_ACCESS_99_USED As UInteger = (&H6)
+        Public Const COD_LAN_ACCESS_FULL As UInteger = (&H7)
+
+        Public Sub ParseClass(classId As UInteger, ByRef service As UShort, ByRef major As UShort, ByRef minor As UShort)
+
+
+            minor = (classId And COD_MINOR_MASK) >> COD_MINOR_BIT_OFFSET
+            major = (classId And COD_MAJOR_MASK) >> COD_MAJOR_BIT_OFFSET
+
+            service = (classId And COD_SERVICE_MASK) >> COD_SERVICE_BIT_OFFSET
+
+        End Sub
+
+
+        Public Function PrintMinorClass(major As UShort, minor As UShort) As String
+
+
+            Dim sb As New List(Of String)
+
+            If ((major = COD_MAJOR_COMPUTER) And (minor = COD_COMPUTER_MINOR_UNCLASSIFIED)) Then sb.Add("UNCLASSIFIED")
+            If ((major = COD_MAJOR_COMPUTER) And (minor = COD_COMPUTER_MINOR_DESKTOP)) Then sb.Add("DESKTOP")
+            If ((major = COD_MAJOR_COMPUTER) And (minor = COD_COMPUTER_MINOR_SERVER)) Then sb.Add("SERVER")
+            If ((major = COD_MAJOR_COMPUTER) And (minor = COD_COMPUTER_MINOR_LAPTOP)) Then sb.Add("LAPTOP")
+            If ((major = COD_MAJOR_COMPUTER) And (minor = COD_COMPUTER_MINOR_HANDHELD)) Then sb.Add("HANDHELD")
+            If ((major = COD_MAJOR_COMPUTER) And (minor = COD_COMPUTER_MINOR_PALM)) Then sb.Add("PALM")
+            If ((major = COD_MAJOR_COMPUTER) And (minor = COD_COMPUTER_MINOR_WEARABLE)) Then sb.Add("WEARABLE")
+
+            If ((major = COD_MAJOR_PHONE) And (minor = COD_PHONE_MINOR_UNCLASSIFIED)) Then sb.Add("UNCLASSIFIED")
+            If ((major = COD_MAJOR_PHONE) And (minor = COD_PHONE_MINOR_CELLULAR)) Then sb.Add("CELLULAR")
+            If ((major = COD_MAJOR_PHONE) And (minor = COD_PHONE_MINOR_CORDLESS)) Then sb.Add("CORDLESS")
+            If ((major = COD_MAJOR_PHONE) And (minor = COD_PHONE_MINOR_SMART)) Then sb.Add("SMART")
+            If ((major = COD_MAJOR_PHONE) And (minor = COD_PHONE_MINOR_WIRED_MODEM)) Then sb.Add("WIRED_MODEM")
+
+            If ((major = COD_MAJOR_AUDIO) And (minor = COD_AUDIO_MINOR_UNCLASSIFIED)) Then sb.Add("UNCLASSIFIED")
+            If ((major = COD_MAJOR_AUDIO) And (minor = COD_AUDIO_MINOR_HEADSET)) Then sb.Add("HEADSET")
+            If ((major = COD_MAJOR_AUDIO) And (minor = COD_AUDIO_MINOR_HANDS_FREE)) Then sb.Add("HANDS_FREE")
+            If ((major = COD_MAJOR_AUDIO) And (minor = COD_AUDIO_MINOR_HEADSET_HANDS_FREE)) Then sb.Add("HEADSET_HANDS_FREE")
+            If ((major = COD_MAJOR_AUDIO) And (minor = COD_AUDIO_MINOR_MICROPHONE)) Then sb.Add("MICROPHONE")
+            If ((major = COD_MAJOR_AUDIO) And (minor = COD_AUDIO_MINOR_LOUDSPEAKER)) Then sb.Add("LOUDSPEAKER")
+            If ((major = COD_MAJOR_AUDIO) And (minor = COD_AUDIO_MINOR_HEADPHONES)) Then sb.Add("HEADPHONES")
+            If ((major = COD_MAJOR_AUDIO) And (minor = COD_AUDIO_MINOR_PORTABLE_AUDIO)) Then sb.Add("PORTABLE_AUDIO")
+            If ((major = COD_MAJOR_AUDIO) And (minor = COD_AUDIO_MINOR_CAR_AUDIO)) Then sb.Add("CAR_AUDIO")
+            If ((major = COD_MAJOR_AUDIO) And (minor = COD_AUDIO_MINOR_SET_TOP_BOX)) Then sb.Add("SET_TOP_BOX")
+            If ((major = COD_MAJOR_AUDIO) And (minor = COD_AUDIO_MINOR_HIFI_AUDIO)) Then sb.Add("HIFI_AUDIO")
+            If ((major = COD_MAJOR_AUDIO) And (minor = COD_AUDIO_MINOR_VCR)) Then sb.Add("VCR")
+            If ((major = COD_MAJOR_AUDIO) And (minor = COD_AUDIO_MINOR_VIDEO_CAMERA)) Then sb.Add("VIDEO_CAMERA")
+            If ((major = COD_MAJOR_AUDIO) And (minor = COD_AUDIO_MINOR_CAMCORDER)) Then sb.Add("CAMCORDER")
+            If ((major = COD_MAJOR_AUDIO) And (minor = COD_AUDIO_MINOR_VIDEO_MONITOR)) Then sb.Add("VIDEO_MONITOR")
+            If ((major = COD_MAJOR_AUDIO) And (minor = COD_AUDIO_MINOR_VIDEO_DISPLAY_LOUDSPEAKER)) Then sb.Add("VIDEO_DISPLAY_LOUDSPEAKER")
+            If ((major = COD_MAJOR_AUDIO) And (minor = COD_AUDIO_MINOR_VIDEO_DISPLAY_CONFERENCING)) Then sb.Add("VIDEO_DISPLAY_CONFERENCING")
+            If ((major = COD_MAJOR_AUDIO) And (minor = COD_AUDIO_MINOR_GAMING_TOY)) Then sb.Add("GAMING_TOY")
+
+            If ((major = COD_MAJOR_PERIPHERAL) And (minor = COD_PERIPHERAL_MINOR_KEYBOARD_MASK)) Then sb.Add("KEYBOARD_MASK")
+            If ((major = COD_MAJOR_PERIPHERAL) And (minor = COD_PERIPHERAL_MINOR_POINTER_MASK)) Then sb.Add("POINTER_MASK")
+
+            If ((major = COD_MAJOR_PERIPHERAL) And (minor = COD_PERIPHERAL_MINOR_NO_CATEGORY)) Then sb.Add("NO_CATEGORY")
+            If ((major = COD_MAJOR_PERIPHERAL) And (minor = COD_PERIPHERAL_MINOR_JOYSTICK)) Then sb.Add("JOYSTICK")
+            If ((major = COD_MAJOR_PERIPHERAL) And (minor = COD_PERIPHERAL_MINOR_GAMEPAD)) Then sb.Add("GAMEPAD")
+            If ((major = COD_MAJOR_PERIPHERAL) And (minor = COD_PERIPHERAL_MINOR_REMOTE_CONTROL)) Then sb.Add("REMOTE_CONTROL")
+            If ((major = COD_MAJOR_PERIPHERAL) And (minor = COD_PERIPHERAL_MINOR_SENSING)) Then sb.Add("SENSING")
+
+            If ((major = COD_MAJOR_IMAGING) And (minor = COD_IMAGING_MINOR_DISPLAY_MASK)) Then sb.Add("DISPLAY_MASK")
+            If ((major = COD_MAJOR_IMAGING) And (minor = COD_IMAGING_MINOR_CAMERA_MASK)) Then sb.Add("CAMERA_MASK")
+            If ((major = COD_MAJOR_IMAGING) And (minor = COD_IMAGING_MINOR_SCANNER_MASK)) Then sb.Add("SCANNER_MASK")
+            If ((major = COD_MAJOR_IMAGING) And (minor = COD_IMAGING_MINOR_PRINTER_MASK)) Then sb.Add("PRINTER_MASK")
+
+            If ((major = COD_MAJOR_WEARABLE) And (minor = COD_WEARABLE_MINOR_WRIST_WATCH)) Then sb.Add("WRIST_WATCH")
+            If ((major = COD_MAJOR_WEARABLE) And (minor = COD_WEARABLE_MINOR_PAGER)) Then sb.Add("PAGER")
+            If ((major = COD_MAJOR_WEARABLE) And (minor = COD_WEARABLE_MINOR_JACKET)) Then sb.Add("JACKET")
+            If ((major = COD_MAJOR_WEARABLE) And (minor = COD_WEARABLE_MINOR_HELMET)) Then sb.Add("HELMET")
+            If ((major = COD_MAJOR_WEARABLE) And (minor = COD_WEARABLE_MINOR_GLASSES)) Then sb.Add("GLASSES")
+
+            If ((major = COD_MAJOR_TOY) And (minor = COD_TOY_MINOR_ROBOT)) Then sb.Add("ROBOT")
+            If ((major = COD_MAJOR_TOY) And (minor = COD_TOY_MINOR_VEHICLE)) Then sb.Add("VEHICLE")
+            If ((major = COD_MAJOR_TOY) And (minor = COD_TOY_MINOR_DOLL_ACTION_FIGURE)) Then sb.Add("DOLL_ACTION_FIGURE")
+            If ((major = COD_MAJOR_TOY) And (minor = COD_TOY_MINOR_CONTROLLER)) Then sb.Add("CONTROLLER")
+            If ((major = COD_MAJOR_TOY) And (minor = COD_TOY_MINOR_GAME)) Then sb.Add("GAME")
+
+            If ((major = COD_MAJOR_HEALTH) And (minor = COD_HEALTH_MINOR_BLOOD_PRESSURE_MONITOR)) Then sb.Add("BLOOD_PRESSURE_MONITOR")
+            If ((major = COD_MAJOR_HEALTH) And (minor = COD_HEALTH_MINOR_THERMOMETER)) Then sb.Add("THERMOMETER")
+            If ((major = COD_MAJOR_HEALTH) And (minor = COD_HEALTH_MINOR_WEIGHING_SCALE)) Then sb.Add("WEIGHING_SCALE")
+            If ((major = COD_MAJOR_HEALTH) And (minor = COD_HEALTH_MINOR_GLUCOSE_METER)) Then sb.Add("GLUCOSE_METER")
+            If ((major = COD_MAJOR_HEALTH) And (minor = COD_HEALTH_MINOR_PULSE_OXIMETER)) Then sb.Add("PULSE_OXIMETER")
+            If ((major = COD_MAJOR_HEALTH) And (minor = COD_HEALTH_MINOR_HEART_PULSE_MONITOR)) Then sb.Add("HEART_PULSE_MONITOR")
+            If ((major = COD_MAJOR_HEALTH) And (minor = COD_HEALTH_MINOR_HEALTH_DATA_DISPLAY)) Then sb.Add("HEALTH_DATA_DISPLAY")
+            If ((major = COD_MAJOR_HEALTH) And (minor = COD_HEALTH_MINOR_STEP_COUNTER)) Then sb.Add("STEP_COUNTER")
+
+            For i = 0 To sb.Count - 1
+                sb(i) = TitleCase(sb(i))
+            Next
+
+            Return String.Join(", ", sb)
+
+        End Function
+
+        Public Function PrintMajorClass(major As UShort) As String
+
+            Dim sb As New List(Of String)
+
+            ''
+            '' Major class codes
+            ''
+            If (major = COD_MAJOR_MISCELLANEOUS) Then sb.Add("MISCELLANEOUS")
+            If (major = COD_MAJOR_COMPUTER) Then sb.Add("COMPUTER")
+            If (major = COD_MAJOR_PHONE) Then sb.Add("PHONE")
+            If (major = COD_MAJOR_LAN_ACCESS) Then sb.Add("LAN_ACCESS")
+            If (major = COD_MAJOR_AUDIO) Then sb.Add("AUDIO")
+            If (major = COD_MAJOR_PERIPHERAL) Then sb.Add("PERIPHERAL")
+            If (major = COD_MAJOR_IMAGING) Then sb.Add("IMAGING")
+            If (major = COD_MAJOR_WEARABLE) Then sb.Add("WEARABLE")
+            If (major = COD_MAJOR_TOY) Then sb.Add("TOY")
+            If (major = COD_MAJOR_HEALTH) Then sb.Add("HEALTH")
+            If (major = COD_MAJOR_UNCLASSIFIED) Then sb.Add("UNCLASSIFIED")
+
+            For i = 0 To sb.Count - 1
+                sb(i) = TitleCase(sb(i))
+            Next
+
+            Return String.Join(", ", sb)
+
+        End Function
+
+        Public Function PrintServiceClass(service As UShort) As String
+
+            Dim sb As New List(Of String)
+
+            If (service And COD_SERVICE_LIMITED) Then sb.Add("LIMITED")
+            If (service And COD_SERVICE_POSITIONING) Then sb.Add("POSITIONING")
+            If (service And COD_SERVICE_NETWORKING) Then sb.Add("NETWORKING")
+            If (service And COD_SERVICE_RENDERING) Then sb.Add("RENDERING")
+            If (service And COD_SERVICE_CAPTURING) Then sb.Add("CAPTURING")
+            If (service And COD_SERVICE_OBJECT_XFER) Then sb.Add("OBJECT_XFER")
+            If (service And COD_SERVICE_AUDIO) Then sb.Add("AUDIO")
+            If (service And COD_SERVICE_TELEPHONY) Then sb.Add("TELEPHONY")
+            If (service And COD_SERVICE_INFORMATION) Then sb.Add("INFORMATION")
+
+            For i = 0 To sb.Count - 1
+                sb(i) = TitleCase(sb(i))
+            Next
+
+            Return String.Join(", ", sb)
+
+        End Function
+
+
 
         ''
         '' Extended Inquiry Response (EIR) defines.
@@ -832,7 +938,7 @@ Namespace Native
 
         ' '' >= SP1+KB942567
 
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_ADDR
             Public Address As ULong
 
@@ -870,7 +976,7 @@ Namespace Native
 
 
 
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_COD
             Public Value As ULong
 
@@ -905,7 +1011,7 @@ Namespace Native
         End Structure
 
 
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_DEVICE_INFO
             ''
             '' Combination BDIF_Xxx flags
@@ -934,7 +1040,7 @@ Namespace Native
         '' Buffer associated with GUID_BLUETOOTH_RADIO_IN_RANGE
         ''
 
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_RADIO_IN_RANGE
             ''
             '' Information about the remote radio
@@ -956,7 +1062,7 @@ Namespace Native
         ''
         '' Buffer associated with GUID_BLUETOOTH_L2CAP_EVENT
         ''
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_L2CAP_EVENT_INFO
             ''
             '' Remote radio address which the L2CAP event is associated with
@@ -999,7 +1105,7 @@ Namespace Native
         ''
         '' Buffer associated with GUID_BLUETOOTH_HCI_EVENT
         ''
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_HCI_EVENT_INFO
             ''
             '' Remote radio address which the HCI event is associated with
@@ -1727,7 +1833,7 @@ Namespace Native
 
         End Structure
 
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure PBTH_DEVICE_INFO_LIST
             Friend _ptr As MemPtr
 
@@ -1797,7 +1903,7 @@ Namespace Native
 
         End Structure
 
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_RADIO_INFO
             ''
             '' Supported LMP features of the radio.  Use LMP_XXX() to extract
@@ -1822,7 +1928,7 @@ Namespace Native
 
         End Structure
 
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_LOCAL_RADIO_INFO
             ''
             '' Local BTH_ADDR, class of defice, And radio name
@@ -1948,13 +2054,13 @@ Namespace Native
             SDP_ST_UUID128 = &H430
         End Enum
 
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure SdpAttributeRange
             Public minAttribute As UShort
             Public maxAttribute As UShort
         End Structure
 
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_SDP_CONNECT
             ''
             '' Address of the remote SDP server.  Cannot be the local radio.
@@ -1983,7 +2089,7 @@ Namespace Native
 
         End Structure
 
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_SDP_DISCONNECT
             ''
             '' hConnection returned by BTH_SDP_CONNECT
@@ -1993,7 +2099,7 @@ Namespace Native
         End Structure
 
 
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_SDP_RECORD
             ''
             '' Combination of SERVICE_SECURITY_XXX flags
@@ -2054,7 +2160,7 @@ Namespace Native
 
         End Structure
 
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_SDP_SERVICE_SEARCH_REQUEST
             ''
             '' Handle returned by the connect request Or HANDLE_SDP_LOCAL
@@ -2069,7 +2175,7 @@ Namespace Native
 
         End Structure
 
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_SDP_ATTRIBUTE_SEARCH_REQUEST
             ''
             '' Handle returned by the connect request Or HANDLE_SDP_LOCAL
@@ -2128,7 +2234,7 @@ Namespace Native
 
         End Structure
 
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_SDP_SERVICE_ATTRIBUTE_SEARCH_REQUEST
             ''
             '' Handle returned by the connect request Or HANDLE_SDP_LOCAL
@@ -2189,7 +2295,7 @@ Namespace Native
 
         End Structure
 
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_SDP_STREAM_RESPONSE
             ''
             '' The required buffer size (Not including the first 2 ULONG_PTRs of this
@@ -2234,7 +2340,7 @@ Namespace Native
         ''
         '' Vendor specific HCI command header
         ''
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_COMMAND_HEADER
 
             ''
@@ -2253,7 +2359,7 @@ Namespace Native
         ''
         '' Vendor Specific Command structure
         ''
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_VENDOR_SPECIFIC_COMMAND
             ''
             '' Manufacturer ID
@@ -2322,7 +2428,7 @@ Namespace Native
         ''
         '' Structure of patterns
         ''
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_VENDOR_PATTERN
             ''
             '' Pattern Offset in the event structure excluding EVENT header
@@ -2373,7 +2479,7 @@ Namespace Native
         ''
         ''The buffer associated with GUID_BLUETOOTH_HCI_VENDOR_EVENT
         ''
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_VENDOR_EVENT_INFO
             ''
             ''Local radio address with which the event Is associated.
@@ -2431,6 +2537,7 @@ Namespace Native
         Public Const BTH_HOST_FEATURE_SCO_HCI As ULong = (&H8)
         Public Const BTH_HOST_FEATURE_SCO_HCIBYPASS As ULong = (&H10)
 
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BTH_HOST_FEATURE_MASK
             ''
             '' Mask of supported features. 
@@ -2444,7 +2551,31 @@ Namespace Native
             Public Reserved2 As ULong
         End Structure
 
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
+        Public Structure BLUETOOTH_DEVICE_SEARCH_PARAMS
+            Public dwSize As UInteger
 
+            <MarshalAs(UnmanagedType.Bool)>
+            Public fReturnAuthenticated As Boolean
+
+            <MarshalAs(UnmanagedType.Bool)>
+            Public fReturnRemembered As Boolean
+
+            <MarshalAs(UnmanagedType.Bool)>
+            Public fReturnUnknown As Boolean
+
+            <MarshalAs(UnmanagedType.Bool)>
+            Public fReturnConnected As Boolean
+
+            <MarshalAs(UnmanagedType.Bool)>
+            Public fIssueInquiry As Boolean
+
+            Public cTimeoutMultiplier As Byte
+
+            Public hRadio As IntPtr
+        End Structure
+
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
         Public Structure BLUETOOTH_FIND_RADIO_PARAMS
             Public dwSize As UInteger
         End Structure
@@ -2461,80 +2592,97 @@ Namespace Native
         Public Const BLUETOOTH_DEVICE_NAME_SIZE = (256)
 
 
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
-        Public Structure BLUETOOTH_ADDRESS
-            <MarshalAs(UnmanagedType.ByValArray, SizeConst:=8)>
-            Public rgBytes As Byte()
-
-            Public Overrides Function ToString() As String
-
-                ToString = ""
-                For i = 7 To 0 Step -1
-                    If (ToString <> "") Then ToString &= ":"
-                    ToString &= rgBytes(i).ToString("X2")
-                Next
-
-            End Function
-
-            Public Shared Narrowing Operator CType(val1 As ULong) As BLUETOOTH_ADDRESS
-                Dim bt As BLUETOOTH_ADDRESS
-                bt.rgBytes = BitConverter.GetBytes(val1)
-
-                Return bt
-            End Operator
-
-            Public Shared Narrowing Operator CType(val1 As BLUETOOTH_ADDRESS) As ULong
-                Return BitConverter.ToUInt64(val1.rgBytes, 0)
-            End Operator
-
-        End Structure
-
-        <StructLayout(LayoutKind.Sequential, Pack:=1, CharSet:=CharSet.Unicode)>
-        Public Structure BLUETOOTH_RADIO_INFO
-            Public dwSize As ULong '' Size, In bytes, Of this entire data Structure
-
-            Public address As BLUETOOTH_ADDRESS '' Address Of the local radio
-
-            <MarshalAs(UnmanagedType.ByValTStr, SizeConst:=BLUETOOTH_MAX_NAME_SIZE)>
-            Public szName As String
-
-            Public ulClassofDevice As UInteger  '' Class of device for the local radio
-
-            Public lmpSubVersion As UShort                    '' lmpSubversion, manufacturer specifc.
-            Public manufacturer As BTH_MFG_INFO                        '' Manufacturer Of the radio, BTH_MFG_Xxx value.  For the most up to date
-            '' list, goto the Bluetooth specification website And get the Bluetooth
-            '' assigned numbers document.
-        End Structure
-
-
         Public Declare Unicode Function BluetoothFindFirstRadio Lib "bluetoothapis.dll" _
             (ByRef pbtfrp As BLUETOOTH_FIND_RADIO_PARAMS, <Out> ByRef phradio As IntPtr) As IntPtr
 
-
-        '        BOOL BluetoothFindNextRadio(
-        '  HBLUETOOTH_RADIO_FIND hFind,
-        '  HANDLE                *phRadio
-        ');
-
         Public Declare Unicode Function BluetoothFindNextRadio Lib "bluetoothapis.dll" _
-            (hFind As IntPtr, ByRef phRadio As IntPtr) As Boolean
-
-
-        '        BOOL BluetoothFindRadioClose(
-        '  HBLUETOOTH_RADIO_FIND hFind
-        ');
+            (hFind As IntPtr, <Out> ByRef phRadio As IntPtr) As Boolean
 
         Public Declare Unicode Function BluetoothFindRadioClose Lib "bluetoothapis.dll" _
             (hFind As IntPtr) As Boolean
 
-        '        DWORD BluetoothGetRadioInfo(
-        '  HANDLE                hRadio,
-        '  PBLUETOOTH_RADIO_INFO pRadioInfo
-        ');
+
+        Public Declare Unicode Function BluetoothFindFirstDevice Lib "bluetoothapis.dll" _
+            (pbtdsp As BLUETOOTH_DEVICE_SEARCH_PARAMS, ByRef pbtdi As BLUETOOTH_DEVICE_INFO) As IntPtr
+
+        Public Declare Unicode Function BluetoothFindNextDevice Lib "bluetoothapis.dll" _
+            (hFind As IntPtr, ByRef pbtdi As BLUETOOTH_DEVICE_INFO) As Boolean
+
+        Public Declare Unicode Function BluetoothFindDeviceClose Lib "bluetoothapis.dll" _
+            (hFind As IntPtr) As Boolean
 
 
         Public Declare Unicode Function BluetoothGetRadioInfo Lib "bluetoothapis.dll" _
             (hRadio As IntPtr, ByRef pRadioInfo As BLUETOOTH_RADIO_INFO) As UInteger
+
+
+        Public Function _internalEnumBluetoothDevices() As BLUETOOTH_DEVICE_INFO()
+            Dim bl As New List(Of BLUETOOTH_DEVICE_INFO)
+
+            Dim hDevice As IntPtr
+            Dim hRadio As IntPtr
+            Dim hFind As IntPtr
+
+            Dim radFind As IntPtr
+            Dim radParams As BLUETOOTH_FIND_RADIO_PARAMS
+
+            Dim params As BLUETOOTH_DEVICE_SEARCH_PARAMS
+            Dim brInfo As BLUETOOTH_DEVICE_INFO
+
+            Dim fr As Boolean
+            Dim frad As Boolean
+
+            radParams.dwSize = 4
+            radFind = BluetoothFindFirstRadio(radParams, hRadio)
+
+            If (radFind = 0) Then Return Nothing
+
+            Do
+
+                params.dwSize = Marshal.SizeOf(Of BLUETOOTH_DEVICE_SEARCH_PARAMS)
+
+                params.fReturnRemembered = True
+                params.fReturnAuthenticated = True
+                params.fReturnConnected = True
+                params.fReturnUnknown = True
+                params.cTimeoutMultiplier = 2
+                params.hRadio = hRadio
+
+                brInfo = New BLUETOOTH_DEVICE_INFO()
+                brInfo.dwSize = Marshal.SizeOf(Of BLUETOOTH_DEVICE_INFO)
+
+                hFind = BluetoothFindFirstDevice(params, brInfo)
+
+                If (hFind = 0) Then
+                    CloseHandle(hRadio)
+                    BluetoothFindRadioClose(radFind)
+
+                    bl.ToArray()
+                End If
+
+                bl.Add(brInfo)
+
+                Do
+
+                    brInfo = New BLUETOOTH_DEVICE_INFO()
+                    brInfo.dwSize = Marshal.SizeOf(Of BLUETOOTH_DEVICE_INFO)
+
+                    fr = BluetoothFindNextDevice(hFind, brInfo)
+                    If (fr) Then bl.Add(brInfo)
+
+                Loop While (fr = True)
+
+                BluetoothFindDeviceClose(hFind)
+
+                CloseHandle(hRadio)
+                frad = BluetoothFindNextRadio(radFind, hRadio)
+
+            Loop While (frad = True)
+
+            BluetoothFindRadioClose(radFind)
+
+            Return bl.ToArray()
+        End Function
 
         Public Function _internalEnumBluetoothRadios() As BLUETOOTH_RADIO_INFO()
             Dim bl As New List(Of BLUETOOTH_RADIO_INFO)
@@ -2569,6 +2717,121 @@ Namespace Native
             Return bl.ToArray()
         End Function
 
+
     End Module
+
+    <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
+    Public Structure BLUETOOTH_ADDRESS
+        <MarshalAs(UnmanagedType.ByValArray, SizeConst:=8)>
+        Public rgBytes As Byte()
+
+        Public Overrides Function ToString() As String
+
+            ToString = ""
+            For i = 5 To 0 Step -1
+                If (ToString <> "") Then ToString &= ":"
+                ToString &= rgBytes(i).ToString("X2")
+            Next
+
+        End Function
+
+        Public Shared Narrowing Operator CType(val1 As ULong) As BLUETOOTH_ADDRESS
+            Dim bt As BLUETOOTH_ADDRESS
+            bt.rgBytes = BitConverter.GetBytes(val1)
+
+            Return bt
+        End Operator
+
+        Public Shared Narrowing Operator CType(val1 As BLUETOOTH_ADDRESS) As ULong
+            Return BitConverter.ToUInt64(val1.rgBytes, 0)
+        End Operator
+
+    End Structure
+
+    <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
+    Public Structure BLUETOOTH_RADIO_INFO
+        Public dwSize As ULong '' Size, In bytes, Of this entire data Structure
+
+        Public address As BLUETOOTH_ADDRESS '' Address Of the local radio
+
+        <MarshalAs(UnmanagedType.ByValTStr, SizeConst:=BLUETOOTH_MAX_NAME_SIZE)>
+        Public szName As String
+
+        Public ulClassofDevice As UInteger '' Class of device for the local radio
+
+        Public lmpSubVersion As UShort                    '' lmpSubversion, manufacturer specifc.
+        Public manufacturer As BTH_MFG_INFO                        '' Manufacturer Of the radio, BTH_MFG_Xxx value.  For the most up to date
+        '' list, goto the Bluetooth specification website And get the Bluetooth
+        '' assigned numbers document.
+    End Structure
+
+    <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
+    Public Structure BLUETOOTH_DEVICE_INFO
+        Public dwSize As Long
+
+        Public Address As BLUETOOTH_ADDRESS
+
+        Public ulClassofDevice As UInteger
+
+        <MarshalAs(UnmanagedType.Bool)>
+        Public fConnected As Boolean
+
+        <MarshalAs(UnmanagedType.Bool)>
+        Public fRemembered As Boolean
+
+        <MarshalAs(UnmanagedType.Bool)>
+        Public fAuthenticated As Boolean
+
+        <MarshalAs(UnmanagedType.Struct)>
+        Public stLastSeen As SYSTEMTIME
+
+        <MarshalAs(UnmanagedType.Struct)>
+        Public stLastUsed As SYSTEMTIME
+
+        <MarshalAs(UnmanagedType.ByValTStr, SizeConst:=BLUETOOTH_MAX_NAME_SIZE)>
+        Public szName As String
+    End Structure
+
+    <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
+    Public Structure BTH_MFG_INFO
+
+        Private Shared Manufacturers As Dictionary(Of UShort, String) = New Dictionary(Of UShort, String)
+
+        Private _val As UShort
+
+        Public ReadOnly Property Value As UShort
+            Get
+                Return _val
+            End Get
+        End Property
+
+        Public ReadOnly Property Name As String
+            Get
+                Return ToString()
+            End Get
+        End Property
+
+        Friend Sub New(name As String, value As UShort)
+            _val = value
+            If Not Manufacturers.ContainsKey(value) Then Manufacturers.Add(value, name)
+        End Sub
+
+        Public Overrides Function ToString() As String
+            If Manufacturers.ContainsKey(_val) Then Return String.Format("{0}: {1}", _val, Manufacturers(_val)) Else Return _val.ToString()
+        End Function
+
+        Public Shared Widening Operator CType(val1 As BTH_MFG_INFO) As UShort
+            Return val1._val
+        End Operator
+
+        Public Shared Narrowing Operator CType(val1 As UShort) As BTH_MFG_INFO
+            Dim b As BTH_MFG_INFO
+            b._val = val1
+
+            Return b
+        End Operator
+
+    End Structure
+
 
 End Namespace

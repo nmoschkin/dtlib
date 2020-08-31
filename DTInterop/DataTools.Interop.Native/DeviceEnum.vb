@@ -1391,6 +1391,36 @@ Namespace Native
 
                     If cbSize > 0 Then devOut.Manufacturer = mm.ToString
                 End If
+
+                '' Model
+
+                sb.AppendLine("Property BusReportedDeviceDesc (string)")
+                cbSize = 0
+                SetupDiGetDeviceProperty(hDev,
+                devInfo,
+                DEVPKEY_Device_BusReportedDeviceDesc,
+                DEVPROP_TYPE_STRING,
+                0,
+                0UI,
+                cbSize,
+                0)
+
+                If cbSize > 0 Then
+                    mm.Length = cbSize
+                    mm.ZeroMemory()
+
+                    SetupDiGetDeviceProperty(hDev,
+                    devInfo,
+                    DEVPKEY_Device_BusReportedDeviceDesc,
+                    DEVPROP_TYPE_STRING,
+                    mm,
+                    cbSize,
+                    cbSize,
+                    0)
+
+                    If cbSize > 0 Then devOut.BusReportedDeviceDesc = mm.ToString
+                End If
+
                 '' ModelId
 
                 sb.AppendLine("Property ModelId")

@@ -1278,6 +1278,17 @@ Namespace Native
         MaskValid = &HFF
     End Enum
 
+
+    Public Enum SHOPType
+
+        SHOP_PRINTERNAME = &H1 '' lpObject points To a printer friendly name
+
+        SHOP_FILEPATH = &H2 '' lpObject points To a fully qualified path+file name
+
+        SHOP_VOLUMEGUID = &H4 '' lpObject points To a Volume GUID
+
+    End Enum
+
     Public Enum ShellItemAttributeOptions
         ' if multiple items and the attirbutes together.
         [And] = &H1
@@ -2796,6 +2807,11 @@ Namespace Native
 
         <DllImport("shell32.dll", CharSet:=CharSet.Unicode, SetLastError:=True)>
         Public Function SHParseDisplayName(pszName As IntPtr, pbc As IntPtr, <Out> ByRef ppidl As IntPtr, sfgaoIn As ShellFileGetAttributesOptions, ByRef psfgaoOut As ShellFileGetAttributesOptions) As HResult
+        End Function
+
+
+        <DllImport("shell32.dll", CharSet:=CharSet.Unicode, SetLastError:=True)>
+        Public Function SHObjectProperties(hwnd As IntPtr, shopObjectType As SHOPType, pszObjectName As String, pszPropertyPage As String) As Boolean
         End Function
 
 
