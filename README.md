@@ -78,15 +78,14 @@ Other independent subsystems include **[Desktop and Shell](https://github.com/nm
 
 
 
-## Temporarily Out Of Service Libraries
+## Other Libraries
 
 ### __DTMath__
 
 DTMath is an extended miscellaneous mathemetics library, including working with polar coordinates and an extensive color space math calculation library. 
-This module is a bit outdated and some parts that were unfinished will probably never be finished or will be done a different way, so components may be added or removed
-from this library, in the near future.
+
   
 ### __DTExtended__
 
-DTExtended is a collection of advanced modules including __UnitConverter__ and __BinarySearcher__.  This project is actually do for an intense overhaul as many of its features have become obsoleted or outdated, as well.
+DTExtended is a collection of advanced modules including __UnitConverter__ and __BinarySearcher__.
   
