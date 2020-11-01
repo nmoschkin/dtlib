@@ -6,6 +6,8 @@
 
 An extensive memory and hardware abstraction and wrapper library featuring a number of unique and useful classes and structures built in **Visual Basic .NET** and **[CIL](https://en.wikipedia.org/wiki/Common_Intermediate_Language)** for native Windows operating systems.
 
+_**Note:** Run these projects with elevated permission, and native to your platform. If you are on a 64-bit machine, compile with the 64-bit configuration._
+
 Visit [The Wiki](https://github.com/nmoschkin/dtlib/wiki).
 
 _(See below for **important namespaces and classes**)_
@@ -78,15 +80,14 @@ Other independent subsystems include **[Desktop and Shell](https://github.com/nm
 
 
 
-## Temporarily Out Of Service Libraries
+## Other Libraries
 
 ### __DTMath__
 
 DTMath is an extended miscellaneous mathemetics library, including working with polar coordinates and an extensive color space math calculation library. 
-This module is a bit outdated and some parts that were unfinished will probably never be finished or will be done a different way, so components may be added or removed
-from this library, in the near future.
+
   
 ### __DTExtended__
 
-DTExtended is a collection of advanced modules including __UnitConverter__ and __BinarySearcher__.  This project is actually do for an intense overhaul as many of its features have become obsoleted or outdated, as well.
+DTExtended is a collection of advanced modules including __UnitConverter__ and __BinarySearcher__.
   
