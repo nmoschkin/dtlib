@@ -1,4 +1,6 @@
-﻿Interface IDeviceInfo
+﻿Imports DataTools.Interop.Native
+
+Interface IDeviceInfo
 
     ''' <summary>
     ''' Gets the device instance id which can be passed to RunDLL property sheet functions.

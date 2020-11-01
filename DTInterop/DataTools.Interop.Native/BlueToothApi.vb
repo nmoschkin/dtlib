@@ -13,6 +13,7 @@
 
 Imports System.Runtime.InteropServices
 Imports DataTools.Memory
+Imports DataTools.Strings
 
 Namespace Native
 
@@ -2619,7 +2620,7 @@ Namespace Native
         Public Function _internalEnumBluetoothDevices() As BLUETOOTH_DEVICE_INFO()
             Dim bl As New List(Of BLUETOOTH_DEVICE_INFO)
 
-            Dim hDevice As IntPtr
+            'Dim hDevice As IntPtr
             Dim hRadio As IntPtr
             Dim hFind As IntPtr
 
@@ -2728,6 +2729,7 @@ Namespace Native
         Public Overrides Function ToString() As String
 
             ToString = ""
+            If rgBytes Is Nothing OrElse rgBytes.Length < 5 Then Return ""
             For i = 5 To 0 Step -1
                 If (ToString <> "") Then ToString &= ":"
                 ToString &= rgBytes(i).ToString("X2")

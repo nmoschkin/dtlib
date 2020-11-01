@@ -13,6 +13,7 @@
 Imports System.Runtime.InteropServices
 Imports DataTools.Memory
 Imports Microsoft.VisualStudio.OLE.Interop
+Imports DataTools.Strings.TextTools
 
 Namespace Native
 

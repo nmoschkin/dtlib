@@ -492,6 +492,8 @@ Namespace Desktop
         ''' </summary>
         ''' <param name="ext"></param>
         Public Sub New(ext As String)
+            If (String.IsNullOrEmpty(ext)) Then Return
+
             If ext.Chars(0) <> "."c Then _Ext = "." & ext.ToLower Else _Ext = ext.ToLower
             OnPropertyChanged("Extension")
         End Sub
@@ -534,6 +536,7 @@ Namespace Desktop
         ''' <param name="assoc">Optional array of previously-enumerated IAssocHandlers.</param>
         ''' <param name="size">The default icon size.</param>
         ''' <returns></returns>
+        <CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification:="<Pending>")>
         Public Function Populate(Optional assoc() As IAssocHandler = Nothing, Optional size As StandardIcons = StandardIcons.Icon48) As Boolean
             If assoc Is Nothing Then assoc = EnumFileHandlers(_Ext)
             If assoc Is Nothing Then Return False

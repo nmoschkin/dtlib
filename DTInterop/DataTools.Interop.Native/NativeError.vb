@@ -32,7 +32,7 @@ Namespace Native
         ''' <param name="syserror">Format code to pass. GetLastError is used as by default.</param>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Function FormatLastError(Optional syserror As Integer = 0) As String
+        Public Function FormatLastError(Optional syserror As UInteger = 0) As String
 
             Dim err As UInteger = If(syserror = 0, GetLastError, syserror),
                         serr As String = Nothing

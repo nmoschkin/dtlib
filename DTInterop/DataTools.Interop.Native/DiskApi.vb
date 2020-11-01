@@ -21,6 +21,7 @@ Imports DataTools.Memory
 Imports DataTools.Interop.Native
 Imports DataTools.Interop.Disk
 Imports DataTools.Memory.Internal
+Imports DataTools.Strings
 
 Namespace Native
 

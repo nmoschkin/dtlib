@@ -50,7 +50,7 @@ Public Class HardwareCollection
     ''' <remarks></remarks>
     Public ReadOnly Property Description As String
         Get
-            Return GetEnumDescription(DeviceClass)
+            Return DataTools.Interop.Native.Utility.GetEnumDescription(DeviceClass)
         End Get
     End Property
 

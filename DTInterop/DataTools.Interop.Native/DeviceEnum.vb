@@ -22,6 +22,7 @@ Imports DataTools.Interop.Network
 Imports DataTools.Interop.Display
 Imports DataTools.Interop.Printers
 Imports DataTools.Interop.Usb
+Imports DataTools.Strings
 
 Namespace Native
     ''' <summary>
@@ -500,6 +501,7 @@ Namespace Native
                 Dim storageDeviceNumber As New STORAGE_DEVICE_NUMBER
 
                 info = EnumerateDevices(Of DiskDeviceInfo)(DiskClass)
+                If info Is Nothing OrElse info.Count = 0 Then Return {}
 
                 For Each inf In info
 

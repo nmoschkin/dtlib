@@ -19,6 +19,7 @@ Imports System.Windows.Media.Imaging
 Imports DataTools.Interop.Printers
 Imports DataTools.SystemInformation
 Imports DataTools.Interop.Desktop
+Imports DataTools.Strings
 
 
 Namespace Usb
@@ -393,7 +394,7 @@ Namespace Usb
         ''' <remarks></remarks>
         Public ReadOnly Property HidUsageDescription As String
             Get
-                Return GetEnumDescription(_HidPage)
+                Return Utility.GetEnumDescription(_HidPage)
             End Get
         End Property
 
@@ -421,13 +422,18 @@ Namespace Usb
                 If i >= 0 Then
                     v = BatchParse(hw.Substring(i), ":")
                     If v.Length > 1 Then
-                        If UShort.TryParse(v(1).Replace("_U", ""), Globalization.NumberStyles.AllowHexSpecifier, Globalization.CultureInfo.CurrentCulture.NumberFormat, _HidPage) Then
+
+                        Dim hp As UShort
+
+                        If UShort.TryParse(v(1).Replace("_U", ""), Globalization.NumberStyles.AllowHexSpecifier, Globalization.CultureInfo.CurrentCulture.NumberFormat, hp) Then
+                            _HidPage = hp
 
                             If _HidPage > &HFF Then
                                 _HidPage = HidUsagePage.Reserved
 
                                 If v.Length > 2 Then
-                                    If UShort.TryParse(v(1).Replace("_U", ""), Globalization.NumberStyles.AllowHexSpecifier, Globalization.CultureInfo.CurrentCulture.NumberFormat, _HidPage) Then
+                                    If UShort.TryParse(v(1).Replace("_U", ""), Globalization.NumberStyles.AllowHexSpecifier, Globalization.CultureInfo.CurrentCulture.NumberFormat, hp) Then
+                                        _HidPage = hp
                                         If _HidPage > &HFF Then _HidPage = HidUsagePage.Reserved
                                     End If
                                 End If

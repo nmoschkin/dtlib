@@ -3,26 +3,89 @@
 ''
 '' Module: Resources.
 ''         Tools for grabbing resources from EXE and DLL modules.
-'' 
+''
 '' Copyright (C) 2011-2020 Nathan Moschkin
 '' All Rights Reserved
 ''
-'' Licensed Under the Microsoft Public License   
+'' Licensed Under the Microsoft Public License
 '' ************************************************* ''
 
-
-Imports System.Runtime.InteropServices
-Imports DataTools.Memory
 Imports System.Drawing
 Imports System.IO
-Imports DataTools.Interop.Native
-Imports DataTools.Memory.Internal
+Imports System.Runtime.InteropServices
 Imports DataTools.ExtendedMath.ColorMath
+Imports DataTools.Interop.Native
+Imports DataTools.Memory
+Imports DataTools.Memory.Internal
+Imports DataTools.Strings
 
 Namespace Desktop
 
 #Region "Icons, Images and Resources"
 
+    ''' <summary>
+    ''' Flags to be used with LoadLibraryEx
+    ''' </summary>
+    ''' <remarks></remarks>
+    <Flags>
+    Public Enum LoadLibraryExFlags
+
+        ''' <summary>
+        '''  If this value is used, and the executable module is a DLL, the system does not call DllMain for process and thread initialization and termination. Also, the system does not load additional executable modules that are referenced by the specified module.
+        ''' </summary>
+        DONT_RESOLVE_DLL_REFERENCES = &H1
+
+        ''' <summary>
+        '''  If this value is used, the system does not check OnlineAppLocker rules or apply OnlineSoftware Restriction Policies for the DLL. This action applies only to the DLL being loaded and not to its dependencies. This value is recommended for use in setup programs that must run extracted DLLs during installation.
+        ''' </summary>
+        LOAD_IGNORE_CODE_AUTHZ_LEVEL = &H10
+
+        ''' <summary>
+        '''  If this value is used, the system maps the file into the calling process's virtual address space as if it were a data file. Nothing is done to execute or prepare to execute the mapped file. Therefore, you cannot call functions like GetModuleFileName, GetModuleHandle or GetProcAddress with this DLL. Using this value causes writes to read-only memory to raise an access violation. Use this flag when you want to load a DLL only to extract messages or resources from it.
+        ''' </summary>
+        LOAD_LIBRARY_AS_DATAFILE = &H2
+
+        ''' <summary>
+        '''  Similar to LOAD_LIBRARY_AS_DATAFILE, except that the DLL file is opened with exclusive write access for the calling process. Other processes cannot open the DLL file for write access while it is in use. However, the DLL can still be opened by other processes.
+        ''' </summary>
+        LOAD_LIBRARY_AS_DATAFILE_EXCLUSIVE = &H40
+
+        ''' <summary>
+        '''  If this value is used, the system maps the file into the process's virtual address space as an image file. However, the loader does not load the static imports or perform the other usual initialization steps. Use this flag when you want to load a DLL only to extract messages or resources from it. If forced integrity checking is desired for the loaded file then LOAD_LIBRARY_AS_IMAGE is recommended instead.
+        ''' </summary>
+        LOAD_LIBRARY_AS_IMAGE_RESOURCE = &H20
+
+        ''' <summary>
+        '''  If this value is used, the application's installation directory is searched for the DLL and its dependencies. Directories in the standard search path are not searched. This value cannot be combined with LOAD_WITH_ALTERED_SEARCH_PATH.
+        ''' </summary>
+        LOAD_LIBRARY_SEARCH_APPLICATION_DIR = &H200
+
+        ''' <summary>
+        '''  This value is a combination of LOAD_LIBRARY_SEARCH_APPLICATION_DIR, LOAD_LIBRARY_SEARCH_SYSTEM32, and LOAD_LIBRARY_SEARCH_USER_DIRS. Directories in the standard search path are not searched. This value cannot be combined with LOAD_WITH_ALTERED_SEARCH_PATH.
+        ''' </summary>
+        LOAD_LIBRARY_SEARCH_DEFAULT_DIRS = &H1000
+
+        ''' <summary>
+        '''  If this value is used, the directory that contains the DLL is temporarily added to the beginning of the list of directories that are searched for the DLL's dependencies. Directories in the standard search path are not searched.
+        ''' </summary>
+        LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR = &H100
+
+        ''' <summary>
+        '''  If this value is used, %windows%\system32 is searched for the DLL and its dependencies. Directories in the standard search path are not searched. This value cannot be combined with LOAD_WITH_ALTERED_SEARCH_PATH.
+        ''' </summary>
+        LOAD_LIBRARY_SEARCH_SYSTEM32 = &H800
+
+        ''' <summary>
+        '''  If this value is used, directories added using the AddDllDirectory or the SetDllDirectory function are searched for the DLL and its dependencies. If more than one directory has been added, the order in which the directories are searched is unspecified. Directories in the standard search path are not searched. This value cannot be combined with LOAD_WITH_ALTERED_SEARCH_PATH.
+        ''' </summary>
+        LOAD_LIBRARY_SEARCH_USER_DIRS = &H400
+
+        ''' <summary>
+        '''  If this value is used and lpFileName specifies an absolute path, the system uses the alternate file search strategy discussed in the Remarks section to find associated executable modules that the specified module causes to be loaded. If this value is used and lpFileName specifies a relative path, the behavior is undefined.
+        ''' </summary>
+        LOAD_WITH_ALTERED_SEARCH_PATH = &H8
+
+    End Enum
 
     ''' <summary>
     ''' Tools for retrieving system and individual EXE/DLL resources, and converting resources to WPF format.
@@ -56,70 +119,6 @@ Namespace Desktop
 #End Region
 
         Declare Function ExtractAssociatedIconEx Lib "shell32.dll" Alias "ExtractAssociatedIconExW" (hInst As IntPtr, <MarshalAs(UnmanagedType.LPTStr)> lpIconPath As String, ByRef lpiIconIndex As Integer, ByRef lpiIconId As Integer) As IntPtr
-
-        ''' <summary>
-        ''' Flags to be used with LoadLibraryEx
-        ''' </summary>
-        ''' <remarks></remarks>
-        <Flags>
-        Public Enum LoadLibraryExFlags
-
-            ''' <summary>
-            '''  If this value is used, and the executable module is a DLL, the system does not call DllMain for process and thread initialization and termination. Also, the system does not load additional executable modules that are referenced by the specified module.
-            ''' </summary>
-            DONT_RESOLVE_DLL_REFERENCES = &H1
-
-            ''' <summary>
-            '''  If this value is used, the system does not check OnlineAppLocker rules or apply OnlineSoftware Restriction Policies for the DLL. This action applies only to the DLL being loaded and not to its dependencies. This value is recommended for use in setup programs that must run extracted DLLs during installation.
-            ''' </summary>
-            LOAD_IGNORE_CODE_AUTHZ_LEVEL = &H10
-
-            ''' <summary>
-            '''  If this value is used, the system maps the file into the calling process's virtual address space as if it were a data file. Nothing is done to execute or prepare to execute the mapped file. Therefore, you cannot call functions like GetModuleFileName, GetModuleHandle or GetProcAddress with this DLL. Using this value causes writes to read-only memory to raise an access violation. Use this flag when you want to load a DLL only to extract messages or resources from it.
-            ''' </summary>
-            LOAD_LIBRARY_AS_DATAFILE = &H2
-
-            ''' <summary>
-            '''  Similar to LOAD_LIBRARY_AS_DATAFILE, except that the DLL file is opened with exclusive write access for the calling process. Other processes cannot open the DLL file for write access while it is in use. However, the DLL can still be opened by other processes.
-            ''' </summary>
-            LOAD_LIBRARY_AS_DATAFILE_EXCLUSIVE = &H40
-
-            ''' <summary>
-            '''  If this value is used, the system maps the file into the process's virtual address space as an image file. However, the loader does not load the static imports or perform the other usual initialization steps. Use this flag when you want to load a DLL only to extract messages or resources from it. If forced integrity checking is desired for the loaded file then LOAD_LIBRARY_AS_IMAGE is recommended instead.
-            ''' </summary>
-            LOAD_LIBRARY_AS_IMAGE_RESOURCE = &H20
-
-            ''' <summary>
-            '''  If this value is used, the application's installation directory is searched for the DLL and its dependencies. Directories in the standard search path are not searched. This value cannot be combined with LOAD_WITH_ALTERED_SEARCH_PATH.
-            ''' </summary>
-            LOAD_LIBRARY_SEARCH_APPLICATION_DIR = &H200
-
-            ''' <summary>
-            '''  This value is a combination of LOAD_LIBRARY_SEARCH_APPLICATION_DIR, LOAD_LIBRARY_SEARCH_SYSTEM32, and LOAD_LIBRARY_SEARCH_USER_DIRS. Directories in the standard search path are not searched. This value cannot be combined with LOAD_WITH_ALTERED_SEARCH_PATH.
-            ''' </summary>
-            LOAD_LIBRARY_SEARCH_DEFAULT_DIRS = &H1000
-
-            ''' <summary>
-            '''  If this value is used, the directory that contains the DLL is temporarily added to the beginning of the list of directories that are searched for the DLL's dependencies. Directories in the standard search path are not searched.
-            ''' </summary>
-            LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR = &H100
-
-            ''' <summary>
-            '''  If this value is used, %windows%\system32 is searched for the DLL and its dependencies. Directories in the standard search path are not searched. This value cannot be combined with LOAD_WITH_ALTERED_SEARCH_PATH.
-            ''' </summary>
-            LOAD_LIBRARY_SEARCH_SYSTEM32 = &H800
-
-            ''' <summary>
-            '''  If this value is used, directories added using the AddDllDirectory or the SetDllDirectory function are searched for the DLL and its dependencies. If more than one directory has been added, the order in which the directories are searched is unspecified. Directories in the standard search path are not searched. This value cannot be combined with LOAD_WITH_ALTERED_SEARCH_PATH.
-            ''' </summary>
-            LOAD_LIBRARY_SEARCH_USER_DIRS = &H400
-
-            ''' <summary>
-            '''  If this value is used and lpFileName specifies an absolute path, the system uses the alternate file search strategy discussed in the Remarks section to find associated executable modules that the specified module causes to be loaded. If this value is used and lpFileName specifies a relative path, the behavior is undefined.
-            ''' </summary>
-            LOAD_WITH_ALTERED_SEARCH_PATH = &H8
-
-        End Enum
 
         Declare Unicode Function LoadString Lib "user32" Alias "LoadStringW" _
     (hInstance As IntPtr, uID As Integer, lpBuffer As MemPtr, nBufferMax As Integer) As Integer
@@ -245,10 +244,40 @@ Namespace Desktop
         End Class
 
         ''' <summary>
+        ''' Private icon WPFLibrary cache.
+        ''' </summary>
+        ''' <remarks></remarks>
+        Private WPFLibCache As New Dictionary(Of String, Windows.Media.Imaging.BitmapSource)
+
+        ''' <summary>
+        ''' Add an icon to the WPFLibrary cache.
+        ''' </summary>
+        ''' <param name="resId">The entire icon resource identifier, including filename and resource number.</param>
+        ''' <param name="icn">The Icon object to add.</param>
+        ''' <remarks></remarks>
+        Public Sub AddToWPFLibCache(resId As String, icn As Windows.Media.Imaging.BitmapSource)
+            If resId Is Nothing Then Return
+            WPFLibCache.Add(resId, icn)
+        End Sub
+
+        ''' <summary>
+        ''' Lookup a WPFLibrary Icon object from the private cache.
+        ''' </summary>
+        ''' <param name="resId">The entire icon resource identifier, including filename and resource number.</param>
+        ''' <param name="icn">Variable that receives the Icon object.</param>
+        ''' <returns>True if the resource was found.</returns>
+        ''' <remarks></remarks>
+        Public Function LookupWPFLibIcon(resId As String, ByRef icn As Windows.Media.Imaging.BitmapSource) As Boolean
+            If resId Is Nothing Then Return False
+            Return WPFLibCache.TryGetValue(resId, icn)
+        End Function
+
+
+        ''' <summary>
         ''' Private icon library cache.
         ''' </summary>
         ''' <remarks></remarks>
-        Private LibCache As New List(Of KeyValuePair(Of String, Icon))
+        Private LibCache As New Dictionary(Of String, Icon)
 
         ''' <summary>
         ''' Add an icon to the library cache.
@@ -256,8 +285,9 @@ Namespace Desktop
         ''' <param name="resId">The entire icon resource identifier, including filename and resource number.</param>
         ''' <param name="icn">The Icon object to add.</param>
         ''' <remarks></remarks>
-        Private Sub AddToLibCache(resId As String, icn As Icon)
-            LibCache.Add(New KeyValuePair(Of String, Icon)(resId, icn))
+        Public Sub AddToLibCache(resId As String, icn As Icon)
+            If resId Is Nothing Then Return
+            LibCache.Add(resId, icn)
         End Sub
 
         ''' <summary>
@@ -267,22 +297,16 @@ Namespace Desktop
         ''' <param name="icn">Variable that receives the Icon object.</param>
         ''' <returns>True if the resource was found.</returns>
         ''' <remarks></remarks>
-        Private Function LookupLibIcon(resId As String, ByRef icn As Icon) As Boolean
-            icn = Nothing
-            For Each kv In LibCache
-                If kv.Key = resId Then
-                    LookupLibIcon = True
-                    icn = kv.Value
-                End If
-            Next
-            LookupLibIcon = False
+        Public Function LookupLibIcon(resId As String, ByRef icn As Icon) As Boolean
+            If resId Is Nothing Then Return False
+            Return LibCache.TryGetValue(resId, icn)
         End Function
 
         ''' <summary>
         ''' Clear the private library cache.
         ''' </summary>
         ''' <remarks></remarks>
-        Private Sub ClearLibCache()
+        Public Sub ClearLibCache()
             LibCache.Clear()
             GC.Collect(0)
         End Sub
@@ -570,7 +594,6 @@ Namespace Desktop
 
             If parseIconIndex Then
                 fileName = ParseResourceFilename(fileName, iIcon)
-
             Else
                 fileName = ParseResourceFilename(fileName)
             End If
@@ -850,6 +873,33 @@ Namespace Desktop
 
         End Function
 
+        Private Function MakeKey(iIcon As Integer, shil As SystemIconSizes) As String
+            Return $"{iIcon},{shil}"
+        End Function
+
+        Private Function GetIconIndex(filename As String) As Integer
+
+            Dim sgfin As ShellFileGetAttributesOptions,
+                sgfout As ShellFileGetAttributesOptions
+
+            Dim lpInfo As New SHFILEINFO,
+                x As IntPtr
+
+            Dim iFlags As Integer = 0
+            iFlags = iFlags Or SHGFI_SYSICONINDEX Or SHGFI_PIDL
+
+            Dim mm As SafePtr = filename
+
+            mm.Length += 2
+
+            SHParseDisplayName(mm.handle, IntPtr.Zero, x, sgfin, sgfout)
+            mm.Free()
+
+            SHGetItemInfo(x, 0&, lpInfo, Marshal.SizeOf(lpInfo), iFlags)
+            Marshal.FreeCoTaskMem(x)
+
+            Return lpInfo.iIcon
+        End Function
 
         ''' <summary>
         ''' Retrieves the icon for the file from the shell system image list.
@@ -860,30 +910,26 @@ Namespace Desktop
         ''' <returns>A System.Drawing.Icon image.</returns>
         ''' <remarks></remarks>
         Public Function GetFileIcon(ByVal lpFilename As String, Optional ByVal shil As SystemIconSizes = SystemIconSizes.ExtraLarge, Optional ByRef iIndex? As Integer = Nothing) As System.Drawing.Icon
-
-            Dim lpInfo As New SHFILEINFO,
-                i As IntPtr
-            Dim icn As Icon
-
             '' The shell system image list
             Dim riid As New Guid("46EB5926-582E-4017-9FDF-E8998DAA0950")
+            Dim icn As Icon = Nothing
+            Dim i As IntPtr
 
-            'iFlags = SHGFI_ICON
-            Dim iFlags As Integer = 0
-            iFlags = iFlags Or SHGFI_SYSICONINDEX
+            Dim iIcon As Integer
 
-            Dim mm As SafePtr = lpFilename
-            mm.Length += Len("A"c)
+            iIcon = If(iIndex IsNot Nothing AndAlso iIndex > 0, iIndex, GetIconIndex(lpFilename))
 
-            i = SHGetItemInfo(mm.handle, 0&, lpInfo, Marshal.SizeOf(lpInfo), iFlags)
+            If (iIcon = 0) Then Return Nothing
 
-            If lpInfo.iIcon = 0 Then
-                Return Nothing
+            Dim key = MakeKey(iIcon, shil)
+
+            If (LookupLibIcon(key, icn)) Then
+                Return icn
             End If
 
             SHGetImageList(shil, riid, i)
 
-            i = ImageList_GetIcon(i, lpInfo.iIcon, 0)
+            i = ImageList_GetIcon(i, iIcon, 0)
 
             If i <> IntPtr.Zero Then
 
@@ -891,12 +937,15 @@ Namespace Desktop
                 DestroyIcon(i)
 
                 If iIndex IsNot Nothing Then
-                    iIndex = lpInfo.iIcon
+                    iIndex = iIcon
                 End If
+
+                AddToLibCache(key, icn)
                 Return icn
             Else
                 Return Nothing
             End If
+
         End Function
 
         ''' <summary>
@@ -907,7 +956,19 @@ Namespace Desktop
         ''' <returns>A <see cref="System.Windows.Media.Imaging.BitmapSource"/> object.</returns>
         ''' <remarks></remarks>
         Public Function GetFileIconWPF(fileName As String, Optional shil As SystemIconSizes = SystemIconSizes.Large) As System.Windows.Media.Imaging.BitmapSource
-            Return MakeWPFImage(GetFileIcon(fileName, shil))
+            Dim iIcon As Integer
+
+            iIcon = GetIconIndex(fileName)
+
+            Dim bs As Windows.Media.Imaging.BitmapSource = Nothing
+            Dim key = MakeKey(iIcon, shil)
+
+            If iIcon <> 0 AndAlso Not (LookupWPFLibIcon(key, bs)) Then
+                bs = MakeWPFImage(GetFileIcon(fileName, shil, iIcon))
+                AddToWPFLibCache(key, bs)
+            End If
+
+            Return bs
         End Function
 
 
@@ -919,7 +980,7 @@ Namespace Desktop
         ''' <param name="hIml">Unused</param>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Function GetItemIconIndex(ByVal lpItemID As IntPtr, ByVal fSmall As Boolean, Optional hIml As Integer = Nothing) As Integer
+        Public Function GetItemIconIndex(ByVal lpItemID As IntPtr, ByVal fSmall As Boolean, Optional ByRef hIml As Integer? = Nothing) As Integer
 
             Dim lpInfo As New SHFILEINFO,
         i As Integer,
@@ -1107,7 +1168,6 @@ Namespace Desktop
             Return MakeDIBSection(bmp)
         End Function
 
-
         ''' <summary>
         ''' Creates a WPF BitmapSource from a Bitmap.
         ''' </summary>
@@ -1160,7 +1220,6 @@ Namespace Desktop
                          Nothing, bm.Scan0, size, BytesPerRow)
 
                 End Sub)
-
                 Else
                     bmp = System.Windows.Media.Imaging.BitmapSource.Create(
                  img.Width,
@@ -1171,8 +1230,6 @@ Namespace Desktop
                  Nothing, bm.Scan0, size, BytesPerRow)
 
                 End If
-
-
             Catch ex As Exception
 
                 If bm IsNot Nothing Then img.UnlockBits(bm)
@@ -1186,8 +1243,6 @@ Namespace Desktop
             Return bmp
 
         End Function
-
-
 
         ''' <summary>
         ''' Creates a System.Drawing.Bitmap image from a WPF source.
@@ -1218,7 +1273,6 @@ Namespace Desktop
                 bmp.UnlockBits(bm)
                 mm.Free()
             End Sub)
-
             Else
                 bmp = New System.Drawing.Bitmap(source.PixelWidth, source.PixelHeight, System.Drawing.Imaging.PixelFormat.Format32bppArgb)
                 mm.Alloc(bmp.Width * bmp.Height * 4)
@@ -1356,8 +1410,6 @@ Namespace Desktop
             Return n
 
         End Function
-
-
 
         ''' <summary>
         ''' Converts a 32 bit icon into a 32 bit Argb transparent bitmap.

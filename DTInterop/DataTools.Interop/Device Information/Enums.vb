@@ -12,6 +12,7 @@
 
 Imports System.ComponentModel
 Imports DataTools.Interop.Native
+Imports DataTools.Strings
 
 Public Module DevClassPresenting
 

@@ -30,7 +30,7 @@ Imports Microsoft.Win32
 
 Imports DataTools.Memory
 Imports System.Linq.Expressions
-
+Imports DataTools.Interop.My.Resources
 
 Namespace Native
 
@@ -2125,6 +2125,12 @@ Namespace Native
         End Function
     End Structure
 
+    <StructLayout(LayoutKind.Sequential)>
+    Public Structure SHITEMID
+        Public cb As UShort
+        Public ItemId As Guid
+    End Structure
+
 #End Region
 
 #Region "Shell COM Interfaces"
@@ -2140,7 +2146,7 @@ Namespace Native
         ' Not supported: IBindCtx.
         <PreserveSig>
         <MethodImpl(MethodImplOptions.InternalCall, MethodCodeType:=MethodCodeType.Runtime)>
-        Function BindToHandler(<[In]> pbc As IntPtr, <[In]> ByRef bhid As Guid, <[In]> ByRef riid As Guid, <Out, MarshalAs(UnmanagedType.[Interface])> ByRef ppv As IShellFolder) As HResult
+        Function BindToHandler(<[In]> pbc As IntPtr, <[In]> ByRef bhid As Guid, <[In]> ByRef riid As Guid, <Out, MarshalAs(UnmanagedType.[Interface])> ByRef ppv As Object) As HResult
 
         <MethodImpl(MethodImplOptions.InternalCall, MethodCodeType:=MethodCodeType.Runtime)>
         Sub GetParent(<MarshalAs(UnmanagedType.[Interface])> ByRef ppsi As IShellItem)
@@ -2357,14 +2363,13 @@ Namespace Native
         Sub CreateViewObject(<[In]> hwndOwner As IntPtr, <[In]> ByRef riid As Guid, ByRef ppv As IntPtr)
 
         <MethodImpl(MethodImplOptions.InternalCall, MethodCodeType:=MethodCodeType.Runtime)>
-        Sub GetAttributesOf(<[In]> cidl As UInteger, <[In]> apidl As IntPtr, <[In], Out> ByRef rgfInOut As UInteger)
-
+        Sub GetAttributesOf(<[In]> cidl As UInteger, <[In]> ByRef apidl As IntPtr, <[In], Out> ByRef rgfInOut As Integer)
 
         <MethodImpl(MethodImplOptions.InternalCall, MethodCodeType:=MethodCodeType.Runtime)>
         Sub GetUIObjectOf(<[In]> hwndOwner As IntPtr, <[In]> cidl As UInteger, <[In]> apidl As IntPtr, <[In]> ByRef riid As Guid, <[In], Out> ByRef rgfReserved As UInteger, ByRef ppv As IntPtr)
 
         <MethodImpl(MethodImplOptions.InternalCall, MethodCodeType:=MethodCodeType.Runtime)>
-        Sub GetDisplayNameOf(<[In]> ByRef pidl As IntPtr, <[In]> uFlags As UInteger, ByRef pName As IntPtr)
+        Sub GetDisplayNameOf(<[In]> pidl As IntPtr, <[In]> uFlags As ShellItemDesignNameOptions, pName As IntPtr)
 
         <MethodImpl(MethodImplOptions.InternalCall, MethodCodeType:=MethodCodeType.Runtime)>
         Sub SetNameOf(<[In]> hwnd As IntPtr, <[In]> ByRef pidl As IntPtr, <[In], MarshalAs(UnmanagedType.LPWStr)> pszName As String, <[In]> uFlags As UInteger, <Out> ppidlOut As IntPtr)
@@ -2874,6 +2879,28 @@ Namespace Native
         Public Function SHGetPathFromIDListW(pidl As IntPtr, <MarshalAs(UnmanagedType.LPWStr)> pszPath As StringBuilder) As <MarshalAs(UnmanagedType.Bool)> Boolean
         End Function
 
+        Public Enum STRRET_TYPE As UInteger
+            STRRET_WSTR = 0
+            STRRET_OFFSET = 1
+            STRRET_CSTR = 2
+        End Enum
+
+        <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
+        Public Structure STRRET
+
+            '<FieldOffset(0)>
+            Public uType As STRRET_TYPE
+
+            'Public pOleStr As IntPtr
+
+            '<FieldOffset(4), MarshalAs(UnmanagedType.LPWStr)>
+            'Public uOffset As UInteger
+
+            '<FieldOffset(4)>
+            <MarshalAs(UnmanagedType.ByValArray, SizeConst:=MAX_PATH)>
+            Public _cStr As Char()
+
+        End Structure
         <StructLayout(LayoutKind.Sequential)>
         Public Structure ShellNotifyStruct
             Public item1 As IntPtr

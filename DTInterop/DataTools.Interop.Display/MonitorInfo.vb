@@ -13,7 +13,7 @@
 Imports System.Runtime.InteropServices
 Imports System.Collections.ObjectModel
 Imports DataTools.Interop.Native
-Imports DataTools.ExtendedMath.ColorMath
+
 
 Namespace Native
 
@@ -71,7 +71,7 @@ Namespace Display
                                                                         lpfnEnum As MonitorEnumProc,
                                                                         dwData As IntPtr) As <MarshalAs(UnmanagedType.Bool)> Boolean
 
-        Private Declare Unicode Function MonitorFromPoint Lib "user32" (pt As POINTAPI, dwFlags As MultiMonFlags) As IntPtr
+        Private Declare Unicode Function MonitorFromPoint Lib "user32" (pt As POINT, dwFlags As MultiMonFlags) As IntPtr
         Private Declare Unicode Function MonitorFromRect Lib "user32" (pt As RECT, dwFlags As MultiMonFlags) As IntPtr
         Private Declare Unicode Function MonitorFromWindow Lib "user32" (hWnd As IntPtr, dwFlags As MultiMonFlags) As IntPtr
 
@@ -91,7 +91,7 @@ Namespace Display
         ''' </summary>
         ''' <param name="pt"></param>
         ''' <returns></returns>
-        Public Function GetMonitorFromPoint(pt As UniPoint, Optional flags As MultiMonFlags = MultiMonFlags.DefaultToNull) As MonitorInfo
+        Public Function GetMonitorFromPoint(pt As POINT, Optional flags As MultiMonFlags = MultiMonFlags.DefaultToNull) As MonitorInfo
             If Me.Count = 0 Then Me.Refresh()
 
             Dim h As IntPtr = MonitorFromPoint(pt, flags)
@@ -109,7 +109,7 @@ Namespace Display
         ''' </summary>
         ''' <param name="rc"></param>
         ''' <returns></returns>
-        Public Function GetMonitorFromRect(rc As UniRect, Optional flags As MultiMonFlags = MultiMonFlags.DefaultToNull) As MonitorInfo
+        Public Function GetMonitorFromRect(rc As RECT, Optional flags As MultiMonFlags = MultiMonFlags.DefaultToNull) As MonitorInfo
             If Me.Count = 0 Then Me.Refresh()
 
             Dim h As IntPtr = MonitorFromRect(rc, flags)
@@ -233,11 +233,11 @@ Namespace Display
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public ReadOnly Property MonitorBounds As UniRect
+        Public ReadOnly Property MonitorBounds As RECT
             Get
 
                 With _data.rcMonitor
-                    Return New UniRect(.left, .top, (.right - .left), (.bottom - .top))
+                    Return New RECT(.left, .top, (.right - .left), (.bottom - .top))
                 End With
             End Get
         End Property
@@ -248,11 +248,11 @@ Namespace Display
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public ReadOnly Property WorkBounds As UniRect
+        Public ReadOnly Property WorkBounds As RECT
             Get
 
                 With _data.rcWork
-                    Return New UniRect(.left, .top, (.right - .left), (.bottom - .top))
+                    Return New RECT(.left, .top, (.right - .left), (.bottom - .top))
                 End With
             End Get
         End Property

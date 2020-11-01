@@ -23,6 +23,7 @@ Imports System.Reflection
 Imports System.Runtime.InteropServices
 Imports System.ComponentModel
 Imports System.Runtime.ConstrainedExecution
+Imports DataTools.Strings
 
 Imports DataTools.ExtendedMath.ColorMath
 Imports System.Collections.ObjectModel

@@ -18,6 +18,7 @@ Imports DataTools.Memory
 Imports System.ComponentModel
 Imports System.Collections.ObjectModel
 Imports DataTools.Interop.Desktop
+Imports DataTools.Strings
 
 Namespace Network
 

@@ -135,7 +135,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataTools.Interop.Desktop\Assoc.vb" />
+    <Compile Include="DataTools.Interop.Desktop\DirectoryObject.vb" />
     <Compile Include="DataTools.Interop.Desktop\FileObject.vb" />
+    <Compile Include="DataTools.Interop.Desktop\FontResource.vb" />
+    <Compile Include="DataTools.Interop.Desktop\ISimpleShellItem.vb" />
     <Compile Include="DataTools.Interop.Desktop\Resources.vb" />
     <Compile Include="DataTools.Interop.Disk\PartitionInfo.vb" />
     <Compile Include="DataTools.Interop.Display\MonitorInfo.vb" />

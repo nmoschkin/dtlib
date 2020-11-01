@@ -598,13 +598,25 @@ Namespace ColorMath
             Dim t As String
             Dim l() As Integer
 
-            Dim flip As Boolean = False
+            Dim flip As Boolean = False,
+                alf As Boolean = False
 
             '' if this is a straight integer value, we can return a new color right away.
-            Dim x As Boolean = Integer.TryParse(value.Trim, i)
+            Dim x As Boolean = Integer.TryParse(value.Trim.Trim("#"), Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.CurrentCulture, i)
+
             If x Then
+
+                If (i = 0) Then
+                    i = &HFF000000
+                ElseIf i = &HFFF Then
+                    i = &HFFFFFFFF
+                ElseIf (i And &HFF000000) = 0 AndAlso (i And &HFFFFFF) <> 0 Then
+                    i = i Or &HFF000000
+                End If
+
                 Return New UniColor(i)
             End If
+
 
             '' on with the show!
 
@@ -619,6 +631,11 @@ Namespace ColorMath
             ElseIf value.Substring(0, 4) = "rgb(" Then
 
                 value = value.Substring(4).Replace(")", "")
+
+            ElseIf value.Substring(0, 5) = "rgba(" Then
+
+                value = value.Substring(5).Replace(")", "")
+                alf = True
 
             ElseIf value.Substring(0, 5) = "bgra(" Then
 
@@ -640,7 +657,7 @@ Namespace ColorMath
                 End If
 
                 If s.Count < 3 OrElse s.Count > 4 Then
-                    Throw New InvalidCastException("That string cannot be converted into a color")
+                    Throw New InvalidCastException($"That string '{value}' cannot be converted into a color, {s.Count} parameters found.")
                 End If
 
                 c = s.Count - 1
@@ -649,23 +666,20 @@ Namespace ColorMath
 
                 Dim b As Boolean = True
                 Dim by As Byte
+                Dim f As Single
 
                 For i = 0 To c
                     t = s(i)
                     t = t.Trim
 
-                    If Not IsHex(t, l(i)) Then
-                        If IsNumber(t) = False OrElse Byte.TryParse(t, by) = False Then
-                            b = False
-                            Exit For
-                        Else
-                            l(i) = by
-                        End If
+                    If alf AndAlso i = 3 AndAlso (Single.TryParse(t, f)) Then
+                        by = (f * 255)
+                        l(i) = by
+                    ElseIf Byte.TryParse(t, by) = True Then
+                        l(i) = by
                     Else
-                        If (l(i) > 255) OrElse (l(i) < 0) Then
-                            b = False
-                            Exit For
-                        End If
+                        b = False
+                        Exit For
                     End If
                 Next
 
@@ -676,22 +690,30 @@ Namespace ColorMath
 
                     Select Case c + 1
                         Case 3
+
                             u.A = 255
                             u.R = l(0)
                             u.G = l(1)
                             u.B = l(2)
 
                         Case 4
-                            u.A = l(0)
-                            u.R = l(1)
-                            u.G = l(2)
-                            u.B = l(3)
 
+                            If alf Then
+                                u.R = l(0)
+                                u.G = l(1)
+                                u.B = l(2)
+                                u.A = l(3)
+                            Else
+                                u.A = l(0)
+                                u.R = l(1)
+                                u.G = l(2)
+                                u.B = l(3)
+                            End If
                     End Select
 
                     Return u
                 Else
-                    Throw New InvalidCastException("That string cannot be converted into a color")
+                    Throw New InvalidCastException($"That string '{value}' cannot be converted into a color")
                 End If
 
             End If

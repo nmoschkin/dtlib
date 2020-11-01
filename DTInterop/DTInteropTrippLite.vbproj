@@ -100,134 +100,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <BaseAddress>4653056</BaseAddress>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug x86|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineDebug>true</DefineDebug>
-    <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\Debug x86\</OutputPath>
-    <DocumentationFile>DTInterop.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug x86|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineDebug>true</DefineDebug>
-    <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x64\Debug x86\</OutputPath>
-    <DefineConstants>NetVer="45"</DefineConstants>
-    <DocumentationFile>DTInterop.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug x86|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineDebug>true</DefineDebug>
-    <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x86\Debug x86\</OutputPath>
-    <DocumentationFile>DTInterop.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release x86|AnyCPU'">
-    <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\Release x86\</OutputPath>
-    <DocumentationFile>DTInterop.xml</DocumentationFile>
-    <Optimize>true</Optimize>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <DebugType>None</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release x86|x64'">
-    <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x64\Release x86\</OutputPath>
-    <DocumentationFile>DTInterop.xml</DocumentationFile>
-    <Optimize>true</Optimize>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release x86|x86'">
-    <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x86\Release x86\</OutputPath>
-    <DocumentationFile>DTInterop.xml</DocumentationFile>
-    <Optimize>true</Optimize>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug x64|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineDebug>true</DefineDebug>
-    <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\Debug x64\</OutputPath>
-    <DocumentationFile>DTInterop.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug x64|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineDebug>true</DefineDebug>
-    <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x64\Debug x64\</OutputPath>
-    <DefineConstants>NetVer="45"</DefineConstants>
-    <DocumentationFile>DTInterop.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug x64|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineDebug>true</DefineDebug>
-    <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x86\Debug x64\</OutputPath>
-    <DocumentationFile>DTInterop.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release x64|AnyCPU'">
-    <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\Release x64\</OutputPath>
-    <DocumentationFile>DTInterop.xml</DocumentationFile>
-    <Optimize>true</Optimize>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <DebugType>None</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release x64|x64'">
-    <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x64\Release x64\</OutputPath>
-    <DocumentationFile>DTInterop.xml</DocumentationFile>
-    <Optimize>true</Optimize>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release x64|x86'">
-    <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x86\Release x64\</OutputPath>
-    <DocumentationFile>DTInterop.xml</DocumentationFile>
-    <Optimize>true</Optimize>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
@@ -263,9 +135,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataTools.Interop.Desktop\Assoc.vb" />
+    <Compile Include="DataTools.Interop.Desktop\FileObject.vb" />
     <Compile Include="DataTools.Interop.Desktop\Resources.vb" />
     <Compile Include="DataTools.Interop.Disk\PartitionInfo.vb" />
     <Compile Include="DataTools.Interop.Display\MonitorInfo.vb" />
+    <Compile Include="DataTools.Interop.Native\BluetoothApi.vb" />
     <Compile Include="DataTools.Interop.Native\DeviceEnum.vb" />
     <Compile Include="DataTools.Interop.Disk\FileSystemMonitor.vb" />
     <Compile Include="DataTools.Interop.Native\Async.vb" />
@@ -273,13 +147,13 @@
     <Compile Include="DataTools.Interop.Bluetooth\BluetoothDeviceInfo.vb" />
     <Compile Include="DataTools.Interop.Disk\DiskDeviceInfo.vb" />
     <Compile Include="DataTools.Interop.Native\UsbApi.vb" />
-    <Compile Include="DataTools.Interop.Printers\PrinterDeviceInfo.vb" />
-    <Compile Include="DataTools.Interop.Printers\Printers.vb" />
     <Compile Include="DataTools.Interop\Device Information\HardwareCollection.vb" />
     <Compile Include="DataTools.Interop.Usb\HidDeviceInfo.vb" />
+    <Compile Include="DataTools.Interop.Printers\PrinterDeviceInfo.vb" />
     <Compile Include="DataTools.Interop.Network\AdapterCollection.vb" />
     <Compile Include="DataTools.Interop\Device Information\DeviceInfo.vb" />
     <Compile Include="DataTools.Interop\Device Information\Enums.vb" />
+    <Compile Include="DataTools.Interop.Printers\Printers.vb" />
     <Compile Include="DataTools.Interop.Disk\VirtualDisk.vb" />
     <Compile Include="DataTools.Interop.Network\IfDefApi.vb" />
     <Compile Include="DataTools.Interop.Usb\HidUsagePage.vb" />
@@ -293,7 +167,6 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\AssemblyInfoTLM.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
@@ -349,9 +222,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\DTCore\DTCore.vbproj">
       <Project>{254ad7b9-4120-47b3-a8f5-23548d22a93f}</Project>
       <Name>DTCore</Name>
@@ -361,6 +231,7 @@
       <Name>DTMath</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

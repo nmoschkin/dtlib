@@ -13,6 +13,7 @@ Imports DataTools.Interop.Native
 Imports System.ComponentModel
 Imports System.Reflection
 Imports DataTools.Interop.Desktop
+Imports DataTools.Strings
 
 #Region "DeviceInfo"
 
@@ -554,7 +555,7 @@ Public Class DeviceInfo
     ''' <remarks></remarks>
     Public Overridable ReadOnly Property DeviceClassDescription As String
         Get
-            Return GetEnumDescription(_DeviceClass)
+            Return Utility.GetEnumDescription(_DeviceClass)
         End Get
     End Property
 
@@ -603,7 +604,7 @@ Public Class DeviceInfo
     ''' <remarks></remarks>
     Public Overridable ReadOnly Property ClassDescription As String
         Get
-            Return GetEnumDescription(DeviceClass)
+            Return Utility.GetEnumDescription(DeviceClass)
         End Get
     End Property
 
@@ -693,22 +694,22 @@ Public Class DeviceInfo
             Select Case x(0)
                 Case "VID"
 
-                    If Not UShort.TryParse(x(1), Globalization.NumberStyles.AllowHexSpecifier, My.Application.Culture, _Vid) Then
+                    If Not UShort.TryParse(x(1), Globalization.NumberStyles.AllowHexSpecifier, System.Globalization.CultureInfo.CurrentCulture, _Vid) Then
                         _VenderId = x(1)
                     End If
 
                 Case "PID"
-                    If Not UShort.TryParse(x(1), Globalization.NumberStyles.AllowHexSpecifier, My.Application.Culture, _Pid) Then
+                    If Not UShort.TryParse(x(1), Globalization.NumberStyles.AllowHexSpecifier, System.Globalization.CultureInfo.CurrentCulture, _Pid) Then
                         _ProductId = x(1)
                     End If
 
                 Case "VEN"
-                    If Not UShort.TryParse(x(1), Globalization.NumberStyles.AllowHexSpecifier, My.Application.Culture, _Vid) Then
+                    If Not UShort.TryParse(x(1), Globalization.NumberStyles.AllowHexSpecifier, System.Globalization.CultureInfo.CurrentCulture, _Vid) Then
                         _VenderId = x(1)
                     End If
 
                 Case "DEV"
-                    If Not UShort.TryParse(x(1), Globalization.NumberStyles.AllowHexSpecifier, My.Application.Culture, _Pid) Then
+                    If Not UShort.TryParse(x(1), Globalization.NumberStyles.AllowHexSpecifier, System.Globalization.CultureInfo.CurrentCulture, _Pid) Then
                         _ProductId = x(1)
                     End If
 

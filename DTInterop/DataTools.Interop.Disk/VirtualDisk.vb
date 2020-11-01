@@ -16,6 +16,7 @@ Imports System.IO
 Imports System.Runtime.InteropServices
 Imports DataTools.Interop.Native
 Imports DataTools.Memory
+Imports DataTools.Strings
 
 Namespace Disk
 

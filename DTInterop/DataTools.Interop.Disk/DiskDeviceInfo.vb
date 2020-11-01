@@ -19,7 +19,7 @@ Imports System.Windows.Media.Imaging
 Imports DataTools.Interop.Printers
 Imports DataTools.SystemInformation
 Imports DataTools.Interop
-
+Imports DataTools.Strings
 
 Namespace Disk
 

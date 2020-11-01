@@ -18,6 +18,7 @@ Imports System.Reflection
 Imports System.Security
 Imports DataTools.Interop.Native
 Imports DataTools.Memory
+Imports DataTools.Strings
 
 Namespace Native
 

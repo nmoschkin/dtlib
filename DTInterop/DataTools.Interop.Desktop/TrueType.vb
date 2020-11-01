@@ -17,6 +17,7 @@ Imports System.Runtime.InteropServices
 Imports DataTools.Interop.Native
 Imports DataTools.Memory
 Imports System.Collections.ObjectModel
+Imports DataTools.Strings.TextTools
 
 Namespace Desktop
 

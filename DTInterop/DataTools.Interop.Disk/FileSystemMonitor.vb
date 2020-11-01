@@ -1105,7 +1105,7 @@ Namespace Disk
                     _isWatching = False
 
                     If m.LParam.ToInt32 >= 1 Then
-                        RaiseEvent MonitorClosed(Me, New MonitorClosedEventArgs(MonitorClosedState.ClosedOnError, m.LParam.ToInt32, FormatLastError(m.LParam.ToInt32)))
+                        RaiseEvent MonitorClosed(Me, New MonitorClosedEventArgs(MonitorClosedState.ClosedOnError, m.LParam.ToInt32, FormatLastError(CUInt(m.LParam.ToInt32))))
                     Else
                         RaiseEvent MonitorClosed(Me, New MonitorClosedEventArgs(MonitorClosedState.Closed))
                     End If

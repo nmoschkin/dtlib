@@ -120,9 +120,9 @@ Public Class IPWindow
         InitializeComponent()
 
 
-        Dim bthRadio = EnumBluetoothRadios()
+        'Dim bthRadio = EnumBluetoothRadios()
 
-        Dim bthDev = EnumBluetoothDevices()
+        'Dim bthDev = EnumBluetoothDevices()
 
         'BluetoothDeviceInfo.ShowBluetoothSettings()
 

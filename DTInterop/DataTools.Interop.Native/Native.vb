@@ -28,7 +28,6 @@ Imports System.Drawing
 
 Imports DataTools.Memory
 Imports DataTools.Memory.Internal
-Imports DataTools.ExtendedMath.ColorMath
 
 Namespace Native
 
@@ -2031,8 +2030,8 @@ Public Const SHIL_LAST           SHIL_SYSSMALL
         Public Structure FILEDESCRIPTOR
             Public dwFlags As UInteger
             Public clsid As Guid
-            Public sizel As SIZEAPI
-            Public pointl As POINTAPI
+            Public sizel As SIZE
+            Public pointl As POINT
             Public dwFileAttributes As UInteger
             Public ftCreationTime As FILETIME
             Public ftLastAccessTime As FILETIME
@@ -2733,7 +2732,7 @@ Public Const SHIL_LAST           SHIL_SYSSMALL
             Public lopnStyle As Integer
 
             <MarshalAs(UnmanagedType.Struct)>
-            Public lopnWidth As POINTAPI
+            Public lopnWidth As POINT
 
             Public lopnColor As Integer
         End Structure
@@ -2769,7 +2768,7 @@ Public Const SHIL_LAST           SHIL_SYSSMALL
             Public time As Integer
 
             <MarshalAs(UnmanagedType.Struct)>
-            Public pt As POINTAPI
+            Public pt As POINT
         End Structure
 
         <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)>
@@ -2852,7 +2851,7 @@ Public Const SHIL_LAST           SHIL_SYSSMALL
         Public Declare Unicode Function GetFileVersionInfoSize Lib "Version.dll" Alias "GetFileVersionInfoSizeW" (<MarshalAs(UnmanagedType.LPTStr)> lptstrFilename As String, ByVal lpdwHandle As IntPtr) As UInteger
         Public Declare Unicode Function VerQueryValue Lib "version.dll" Alias "VerQueryValueW" (pBlock As IntPtr, <MarshalAs(UnmanagedType.LPTStr)> lpSubBlock As String, ByRef lplpVoid As IntPtr, ByRef puInt As UInteger) As <MarshalAs(UnmanagedType.Bool)> Boolean
 
-        Public Declare Unicode Function GetCursorPos Lib "user32.dll" (ByRef lpPoint As POINTAPI) As <MarshalAs(UnmanagedType.Bool)> Boolean
+        Public Declare Unicode Function GetCursorPos Lib "user32.dll" (ByRef lpPoint As POINT) As <MarshalAs(UnmanagedType.Bool)> Boolean
         Public Declare Unicode Function CloseHandle Lib "kernel32.dll" (ByVal hObject As IntPtr) As <MarshalAs(UnmanagedType.Bool)> Boolean
 
 #End Region
@@ -2862,6 +2861,12 @@ Public Const SHIL_LAST           SHIL_SYSSMALL
         <DllImport("kernel32.dll", SetLastError:=True, CharSet:=CharSet.Unicode)>
         Public Function LoadLibrary(<MarshalAs(UnmanagedType.LPWStr)> ByVal lpFileName As String) As IntPtr
         End Function
+
+
+        <DllImport("kernel32.dll", SetLastError:=True, CharSet:=CharSet.Unicode)>
+        Public Function GetModuleHandle(<MarshalAs(UnmanagedType.LPWStr)> ByVal name As String) As IntPtr
+        End Function
+
 
         <DllImport("kernel32.dll", SetLastError:=True, CharSet:=CharSet.Unicode)>
         Public Function GetProcAddress(ByVal hModule As IntPtr, <MarshalAs(UnmanagedType.LPWStr)> lpProcName As String) As IntPtr
@@ -2970,7 +2975,11 @@ Public Const SHIL_LAST           SHIL_SYSSMALL
         Public Function SetWindowLongPtr(ByVal hWnd As System.IntPtr, ByVal code As Integer, ByVal value As WndProcDelegate) As WndProcDelegate
         End Function
 
+        Public Declare Unicode Function GetWindowRect Lib "user32" (ByVal hWnd As System.IntPtr, ByRef rc As RECT) As Boolean
+
         Public Declare Unicode Function GetWindowLong Lib "user32" Alias "GetWindowLongW" (ByVal hWnd As System.IntPtr, ByVal code As Integer) As IntPtr
+
+        Public Declare Unicode Function GetWindowLongPtr Lib "user32" Alias "GetWindowLongPtrW" (ByVal hWnd As System.IntPtr, ByVal code As Integer) As IntPtr
 
         Public Declare Unicode Function CreateWindowEx Lib "user32" Alias "CreateWindowExW" _
         (dwExStyle As UInteger,
@@ -3316,7 +3325,7 @@ Public Const SHIL_LAST           SHIL_SYSSMALL
 
 #Region "GDI Paint"
 
-        Public Declare Unicode Function MoveToEx Lib "gdi32" (ByVal hDC As System.IntPtr, ByVal nXOrg As Integer, ByVal nYOrg As Integer, <MarshalAs(UnmanagedType.Struct)> ByRef lppt As POINTAPI) As Integer
+        Public Declare Unicode Function MoveToEx Lib "gdi32" (ByVal hDC As System.IntPtr, ByVal nXOrg As Integer, ByVal nYOrg As Integer, <MarshalAs(UnmanagedType.Struct)> ByRef lppt As POINT) As Integer
         Public Declare Unicode Function LineTo Lib "gdi32" (ByVal hDC As System.IntPtr, ByVal x As Integer, ByVal y As Integer) As Integer
 
         Public Declare Unicode Function GdiFlush Lib "gdi32" () As Integer
@@ -3335,13 +3344,13 @@ Public Const SHIL_LAST           SHIL_SYSSMALL
         Public Declare Unicode Function TextOutW Lib "gdi32" (ByVal hDC As System.IntPtr, ByVal x As Integer, ByVal y As Integer, <MarshalAs(UnmanagedType.LPWStr)> ByRef lpString As String, ByVal nCount As Integer) As Integer
 
         Public Declare Unicode Function ExtTextOutW Lib "gdi32" (ByVal hDC As System.IntPtr, ByVal x As Integer, ByVal y As Integer, ByVal wOptions As Integer, <MarshalAs(UnmanagedType.Struct)> ByRef lpRect As RECT, <MarshalAs(UnmanagedType.LPWStr)> ByRef lpString As String, ByVal nCount As Integer, ByVal lpDx As Integer) As Integer
-        Public Declare Unicode Function GetTextExtentPoint32W Lib "gdi32" (ByVal hDC As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> ByRef lpsz As String, ByVal cbString As Integer, <MarshalAs(UnmanagedType.LPStruct)> ByRef lpSize As SIZEAPI) As Integer
+        Public Declare Unicode Function GetTextExtentPoint32W Lib "gdi32" (ByVal hDC As System.IntPtr, <MarshalAs(UnmanagedType.LPWStr)> ByRef lpsz As String, ByVal cbString As Integer, <MarshalAs(UnmanagedType.LPStruct)> ByRef lpSize As SIZE) As Integer
 
         Public Declare Ansi Function DrawTextA Lib "user32" (ByVal hDC As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> ByRef lpStr As String, ByVal nCount As Integer, <MarshalAs(UnmanagedType.Struct)> ByRef lpRect As RECT, ByVal wFormat As Integer) As Integer
         Public Declare Ansi Function TextOutA Lib "gdi32" (ByVal hDC As System.IntPtr, ByVal x As Integer, ByVal y As Integer, <MarshalAs(UnmanagedType.LPStr)> ByRef lpString As String, ByVal nCount As Integer) As Integer
 
         Public Declare Ansi Function ExtTextOutA Lib "gdi32" (ByVal hDC As System.IntPtr, ByVal x As Integer, ByVal y As Integer, ByVal wOptions As Integer, ByRef lpRect As RECT, <MarshalAs(UnmanagedType.LPStr)> ByRef lpString As String, ByVal nCount As Integer, ByVal lpDx As Integer) As Integer
-        Public Declare Ansi Function GetTextExtentPoint32A Lib "gdi32" (ByVal hDC As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> ByRef lpsz As String, ByVal cbString As Integer, <MarshalAs(UnmanagedType.Struct)> ByRef lpSize As SIZEAPI) As Integer
+        Public Declare Ansi Function GetTextExtentPoint32A Lib "gdi32" (ByVal hDC As System.IntPtr, <MarshalAs(UnmanagedType.LPStr)> ByRef lpsz As String, ByVal cbString As Integer, <MarshalAs(UnmanagedType.Struct)> ByRef lpSize As SIZE) As Integer
 
         Public Declare Unicode Function GetFontLanguageInfo Lib "gdi32" (ByVal hDC As System.IntPtr) As Integer
         Public Declare Unicode Function SetTextColor Lib "gdi32" (ByVal hDC As System.IntPtr, ByVal crColor As Integer) As Integer
@@ -3353,6 +3362,41 @@ Public Const SHIL_LAST           SHIL_SYSSMALL
         Public Declare Unicode Function BitBlt Lib "gdi32" (ByVal dest As IntPtr, ByVal x As Integer, ByVal y As Integer, ByVal cx As Integer, ByVal cy As Integer, ByVal src As IntPtr, ByVal x As Integer, ByVal y As Integer, ByVal dwROP As Integer) As Integer
 
         Public Declare Unicode Function CreateDIBSection Lib "gdi32" (hdc As IntPtr, pbmi As IntPtr, usage As UInteger, ByRef ppvBits As IntPtr, hSection As IntPtr, offset As Integer) As Integer
+
+
+        Public Structure RECT
+            Public left As Integer
+            Public top As Integer
+            Public right As Integer
+            Public bottom As Integer
+
+            Public Sub New(l As Integer, t As Integer, r As Integer, b As Integer)
+                left = l
+                top = t
+                right = r
+                bottom = b
+            End Sub
+        End Structure
+
+        Public Structure POINT
+            Public X As Integer
+            Public Y As Integer
+
+            Public Sub New(x As Integer, y As Integer)
+                Me.X = x
+                Me.Y = y
+            End Sub
+        End Structure
+
+        Public Structure SIZE
+            Public cx As Integer
+            Public cy As Integer
+
+            Public Sub New(cx As Integer, cy As Integer)
+                Me.cx = cx
+                Me.cy = cy
+            End Sub
+        End Structure
 
 #End Region
 
